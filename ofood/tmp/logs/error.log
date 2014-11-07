@@ -1,0 +1,828 @@
+2014-10-20 12:08:35 Error: [MissingControllerException] Controller class CustomerController could not be found.
+Exception Attributes: array (
+  'class' => 'CustomerController',
+  'plugin' => NULL,
+)
+Request URL: /ofood/customer
+Stack Trace:
+#0 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-10-20 12:31:58 Error: [MissingControllerException] Controller class VendorController could not be found.
+Exception Attributes: array (
+  'class' => 'VendorController',
+  'plugin' => NULL,
+)
+Request URL: /ofood/vendor.json
+Stack Trace:
+#0 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-10-20 12:43:02 Error: [MissingViewException] View file "C:\wamp\www\ofood\app\View\Vendors\rss\index.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\ofood\\app\\View\\Vendors\\rss\\index.ctp',
+)
+Request URL: /ofood/vendors/index.rss
+Stack Trace:
+#0 C:\wamp\www\ofood\lib\Cake\View\View.php(468): View->_getViewFileName(NULL)
+#1 C:\wamp\www\ofood\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#2 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#3 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#4 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-10-20 12:45:59 Error: [MissingViewException] View file "C:\wamp\www\ofood\app\View\Vendors\xml\index.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\ofood\\app\\View\\Vendors\\xml\\index.ctp',
+)
+Request URL: /ofood/vendors.xml
+Stack Trace:
+#0 C:\wamp\www\ofood\lib\Cake\View\XmlView.php(104): View->_getViewFileName(NULL)
+#1 C:\wamp\www\ofood\lib\Cake\Controller\Controller.php(954): XmlView->render(NULL, NULL)
+#2 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#3 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#4 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-10-20 12:46:14 Error: [MissingViewException] View file "C:\wamp\www\ofood\app\View\Vendors\xml\index.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\ofood\\app\\View\\Vendors\\xml\\index.ctp',
+)
+Request URL: /ofood/vendors.xml
+Stack Trace:
+#0 C:\wamp\www\ofood\lib\Cake\View\XmlView.php(104): View->_getViewFileName(NULL)
+#1 C:\wamp\www\ofood\lib\Cake\Controller\Controller.php(954): XmlView->render(NULL, NULL)
+#2 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#3 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#4 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-10-20 12:54:16 Error: [MissingViewException] View file "C:\wamp\www\ofood\app\View\Vendors\xml\index.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\ofood\\app\\View\\Vendors\\xml\\index.ctp',
+)
+Request URL: /ofood/vendors.xml
+Stack Trace:
+#0 C:\wamp\www\ofood\lib\Cake\View\XmlView.php(104): View->_getViewFileName(NULL)
+#1 C:\wamp\www\ofood\lib\Cake\Controller\Controller.php(954): XmlView->render(NULL, NULL)
+#2 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#3 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#4 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-10-20 14:36:21 Error: [MissingControllerException] Controller class MealMenuController could not be found.
+Exception Attributes: array (
+  'class' => 'MealMenuController',
+  'plugin' => NULL,
+)
+Request URL: /ofood/api/MealMenu.json
+Stack Trace:
+#0 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-10-20 17:34:36 Error: [MissingControllerException] Controller class Customers.xmlController could not be found.
+Exception Attributes: array (
+  'class' => 'Customers.xmlController',
+  'plugin' => NULL,
+)
+Request URL: /ofood/api/customers.xml
+Stack Trace:
+#0 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-10-31 15:11:57 Error: [MissingViewException] View file "C:\wamp\www\ofood\app\View\Vendors\json\index.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\ofood\\app\\View\\Vendors\\json\\index.ctp',
+)
+Request URL: /ofood/vendors.json
+Stack Trace:
+#0 C:\wamp\www\ofood\lib\Cake\View\JsonView.php(107): View->_getViewFileName(NULL)
+#1 C:\wamp\www\ofood\lib\Cake\Controller\Controller.php(954): JsonView->render(NULL, NULL)
+#2 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#3 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#4 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-10-31 15:12:19 Error: [MissingViewException] View file "C:\wamp\www\ofood\app\View\Vendors\json\view.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\wamp\\www\\ofood\\app\\View\\Vendors\\json\\view.ctp',
+)
+Request URL: /ofood/vendors/1.json
+Stack Trace:
+#0 C:\wamp\www\ofood\lib\Cake\View\JsonView.php(107): View->_getViewFileName(NULL)
+#1 C:\wamp\www\ofood\lib\Cake\Controller\Controller.php(954): JsonView->render(NULL, NULL)
+#2 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#3 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#4 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-10-31 15:12:29 Error: [MissingActionException] Action VendorsController::api_1() could not be found.
+Exception Attributes: array (
+  'controller' => 'VendorsController',
+  'action' => 'api_1',
+)
+Request URL: /ofood/api/vendors/1.json
+Stack Trace:
+#0 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#1 C:\wamp\www\ofood\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#2 C:\wamp\www\ofood\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-10-31 12:34:47 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[28000] [1045] Access denied for user \'root\'@\'localhost\' (using password: NO)',
+  'enabled' => true,
+)
+Request URL: /office/ofood/vendors/
+Stack Trace:
+#0 /home/uneekart/public_html/office/ofood/lib/Cake/Model/Datasource/DboSource.php(260): Mysql->connect()
+#1 /home/uneekart/public_html/office/ofood/lib/Cake/Model/ConnectionManager.php(105): DboSource->__construct(Array)
+#2 /home/uneekart/public_html/office/ofood/lib/Cake/Model/Model.php(3524): ConnectionManager::getDataSource('default')
+#3 /home/uneekart/public_html/office/ofood/lib/Cake/Model/Model.php(1136): Model->setDataSource('default')
+#4 /home/uneekart/public_html/office/ofood/lib/Cake/Model/Model.php(3551): Model->setSource('vendors')
+#5 /home/uneekart/public_html/office/ofood/lib/Cake/Model/Model.php(2947): Model->getDataSource()
+#6 /home/uneekart/public_html/office/ofood/lib/Cake/Model/Model.php(2919): Model->_readDataSource('all', Array)
+#7 /home/uneekart/public_html/office/ofood/lib/Cake/Controller/Component/PaginatorComponent.php(196): Model->find('all', Array)
+#8 /home/uneekart/public_html/office/ofood/app/Controller/VendorsController.php(48): PaginatorComponent->paginate()
+#9 [internal function]: VendorsController->index()
+#10 /home/uneekart/public_html/office/ofood/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(VendorsController), Array)
+#11 /home/uneekart/public_html/office/ofood/lib/Cake/Routing/Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#12 /home/uneekart/public_html/office/ofood/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#13 /home/uneekart/public_html/office/ofood/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-10-31 12:44:34 Error: [MissingControllerException] Controller class VenodorsController could not be found.
+Exception Attributes: array (
+  'class' => 'VenodorsController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/api/venodors
+Stack Trace:
+#0 /home/uneekart/public_html/office/ofood/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-10-31 12:44:39 Error: [MissingViewException] View file "/home/uneekart/public_html/office/ofood/app/View/Vendors/api_index.ctp" is missing.
+Exception Attributes: array (
+  'file' => '/home/uneekart/public_html/office/ofood/app/View/Vendors/api_index.ctp',
+)
+Request URL: /office/ofood/api/vendors
+Stack Trace:
+#0 /home/uneekart/public_html/office/ofood/lib/Cake/View/View.php(468): View->_getViewFileName(NULL)
+#1 /home/uneekart/public_html/office/ofood/lib/Cake/Controller/Controller.php(954): View->render(NULL, NULL)
+#2 /home/uneekart/public_html/office/ofood/lib/Cake/Routing/Dispatcher.php(198): Controller->render()
+#3 /home/uneekart/public_html/office/ofood/lib/Cake/Routing/Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#4 /home/uneekart/public_html/office/ofood/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-11-01 04:30:00 Error: [MissingControllerException] Controller class ApiController could not be found.
+Exception Attributes: array (
+  'class' => 'ApiController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/api/
+Stack Trace:
+#0 /home/uneekart/public_html/office/ofood/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:04:56 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/vendors
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 17:04:57 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/js/app/swt.js
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:04:57 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:05:54 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/vendors
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 17:05:54 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:11:53 Error: [MissingControllerException] Controller class UsersController could not be found.
+Exception Attributes: array (
+  'class' => 'UsersController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/users/login
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:11:54 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:24:59 Error: [MissingControllerException] Controller class UsersController could not be found.
+Exception Attributes: array (
+  'class' => 'UsersController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/users/login
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:24:59 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:36:09 Error: [MissingControllerException] Controller class UsersController could not be found.
+Exception Attributes: array (
+  'class' => 'UsersController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/users/login
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:36:09 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:36:27 Error: [MissingControllerException] Controller class UsersController could not be found.
+Exception Attributes: array (
+  'class' => 'UsersController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/users/login
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:36:28 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:36:31 Error: [MissingControllerException] Controller class UsersController could not be found.
+Exception Attributes: array (
+  'class' => 'UsersController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/users/
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:36:32 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:37:03 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render('home', NULL)
+#8 C:\wamp\www\office\ofood\Controller\PagesController.php(69): Controller->render('home')
+#9 [internal function]: PagesController->display('home')
+#10 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#11 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#12 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest))
+#13 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-11-05 17:37:03 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:38:51 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render('login', NULL)
+#8 C:\wamp\www\office\ofood\Controller\PagesController.php(69): Controller->render('login')
+#9 [internal function]: PagesController->display('login')
+#10 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(PagesController), Array)
+#11 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(191): Controller->invokeAction(Object(CakeRequest))
+#12 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest))
+#13 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-11-05 17:38:51 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 17:38:52 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:26:40 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:26:41 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:26:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:28:05 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:28:05 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:31:26 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:31:26 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:31:27 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:31:34 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:31:34 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:31:34 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:32:28 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:32:28 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:34:26 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:34:26 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:45:20 Error: [UnauthorizedException] Unauthorized
+Request URL: /office/ofood/api/vendors
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\Controller\Component\AuthComponent.php(348): BasicAuthenticate->unauthenticated(Object(CakeRequest), Object(CakeResponse))
+#1 C:\wamp\www\office\cakelib\lib\Cake\Controller\Component\AuthComponent.php(304): AuthComponent->_unauthenticated(Object(VendorsController))
+#2 [internal function]: AuthComponent->startup(Object(VendorsController))
+#3 C:\wamp\www\office\cakelib\lib\Cake\Utility\ObjectCollection.php(128): call_user_func_array(Array, Array)
+#4 [internal function]: ObjectCollection->trigger(Object(CakeEvent))
+#5 C:\wamp\www\office\cakelib\lib\Cake\Event\CakeEventManager.php(242): call_user_func(Array, Object(CakeEvent))
+#6 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(675): CakeEventManager->dispatch(Object(CakeEvent))
+#7 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(187): Controller->startupProcess()
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#9 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-11-05 20:45:22 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:45:39 Error: [UnauthorizedException] Unauthorized
+Request URL: /office/ofood/api/vendors.json
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\Controller\Component\AuthComponent.php(348): BasicAuthenticate->unauthenticated(Object(CakeRequest), Object(CakeResponse))
+#1 C:\wamp\www\office\cakelib\lib\Cake\Controller\Component\AuthComponent.php(304): AuthComponent->_unauthenticated(Object(VendorsController))
+#2 [internal function]: AuthComponent->startup(Object(VendorsController))
+#3 C:\wamp\www\office\cakelib\lib\Cake\Utility\ObjectCollection.php(128): call_user_func_array(Array, Array)
+#4 [internal function]: ObjectCollection->trigger(Object(CakeEvent))
+#5 C:\wamp\www\office\cakelib\lib\Cake\Event\CakeEventManager.php(242): call_user_func(Array, Object(CakeEvent))
+#6 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(675): CakeEventManager->dispatch(Object(CakeEvent))
+#7 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(187): Controller->startupProcess()
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#9 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-11-05 20:45:44 Error: [UnauthorizedException] Unauthorized
+Request URL: /office/ofood/api/vendors.json
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\Controller\Component\AuthComponent.php(348): BasicAuthenticate->unauthenticated(Object(CakeRequest), Object(CakeResponse))
+#1 C:\wamp\www\office\cakelib\lib\Cake\Controller\Component\AuthComponent.php(304): AuthComponent->_unauthenticated(Object(VendorsController))
+#2 [internal function]: AuthComponent->startup(Object(VendorsController))
+#3 C:\wamp\www\office\cakelib\lib\Cake\Utility\ObjectCollection.php(128): call_user_func_array(Array, Array)
+#4 [internal function]: ObjectCollection->trigger(Object(CakeEvent))
+#5 C:\wamp\www\office\cakelib\lib\Cake\Event\CakeEventManager.php(242): call_user_func(Array, Object(CakeEvent))
+#6 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(675): CakeEventManager->dispatch(Object(CakeEvent))
+#7 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(187): Controller->startupProcess()
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(VendorsController), Object(CakeRequest))
+#9 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-11-05 20:46:07 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:46:08 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:48:36 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:48:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:48:37 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:50:28 Error: [MissingHelperException] Helper class CombinatorHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CombinatorHelper',
+  'plugin' => false,
+)
+Request URL: /office/ofood/customers
+Stack Trace:
+#0 C:\wamp\www\office\cakelib\lib\Cake\View\HelperCollection.php(63): HelperCollection->load('Combinator')
+#1 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(837): HelperCollection->__isset('Combinator')
+#2 C:\wamp\www\office\ofood\View\Layouts\default.ctp(50): View->__get('Combinator')
+#3 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(948): include('C:\\wamp\\www\\off...')
+#4 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(910): View->_evaluate('C:\\wamp\\www\\off...', Array)
+#5 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(542): View->_render('C:\\wamp\\www\\off...')
+#6 C:\wamp\www\office\cakelib\lib\Cake\View\View.php(479): View->renderLayout('', 'default')
+#7 C:\wamp\www\office\cakelib\lib\Cake\Controller\Controller.php(954): View->render(NULL, NULL)
+#8 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(198): Controller->render()
+#9 C:\wamp\www\office\cakelib\lib\Cake\Routing\Dispatcher.php(165): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest))
+#10 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2014-11-05 20:50:28 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:50:29 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:51:27 Error: [MissingControllerException] Controller class OfficeController could not be found.
+Exception Attributes: array (
+  'class' => 'OfficeController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/office/ofood/js/admin/bootstrap.min.js
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:51:28 Error: [MissingControllerException] Controller class OfficeController could not be found.
+Exception Attributes: array (
+  'class' => 'OfficeController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/office/ofood/js/admin/AdminLTE/app.js
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:51:28 Error: [MissingControllerException] Controller class OfficeController could not be found.
+Exception Attributes: array (
+  'class' => 'OfficeController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/office/ofood/js/admin/AdminLTE/demo.js
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 20:51:28 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 21:03:41 Error: [MissingControllerException] Controller class OfficeController could not be found.
+Exception Attributes: array (
+  'class' => 'OfficeController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/office/ofood/admin/bootstrap.min.js
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 21:03:41 Error: [MissingControllerException] Controller class OfficeController could not be found.
+Exception Attributes: array (
+  'class' => 'OfficeController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/office/ofood/js/admin/AdminLTE/app.js
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 21:03:41 Error: [MissingControllerException] Controller class OfficeController could not be found.
+Exception Attributes: array (
+  'class' => 'OfficeController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/office/ofood/js/admin/AdminLTE/demo.js
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-11-05 21:03:41 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /office/ofood/img/avatar3.png
+Stack Trace:
+#0 C:\wamp\www\office\ofood\webroot\index.php(109): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
