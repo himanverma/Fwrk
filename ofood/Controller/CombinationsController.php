@@ -15,6 +15,29 @@ class CombinationsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator', 'Session');
+        
+        
+/*------------------------------------------ Web-Services-Start----------------------------------------*/
+        public function api_index() {
+            $combination = $this->Combination->find('all');
+            $this->set(array(
+                'data' => $combination,
+                '_serialize' => array('data')
+            ));
+        }
+        
+        public function api_view($id = null) {
+		if (!$this->Combination->exists($id)) {
+			throw new NotFoundException(__('Invalid Combination'));
+		}
+		$options = array('conditions' => array('Combination.' . $this->Combination->primaryKey => $id));
+                $this->set(array(
+                    'data' => $this->Combination->find('first', $options),
+                    '_serialize' => array('data')
+                ));
+	}
+        
+/*------------------------------------------ Web-Services-End----------------------------------------*/            
 
 /**
  * index method
