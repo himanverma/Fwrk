@@ -1,5 +1,5 @@
 package com.future.getfood;
-/*this is launching activity*/
+/*this is launching*/
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
