@@ -23,27 +23,13 @@ class CustomersController extends AppController {
         $this->Auth->allow(array('api_index'));
     }
 
-/*------------------------------------------ Web-Services-Start----------------------------------------*/
-        public function api_index() {
-            $customers = $this->Customer->find('all');
-            $this->set(array(
-                'data' => $customers,
-                '_serialize' => array('data')
-            ));
-        }
-        
-        public function api_view($id = null) {
-		if (!$this->Customer->exists($id)) {
-			throw new NotFoundException(__('Invalid Customer'));
-		}
-		$options = array('conditions' => array('Customer.' . $this->Customer->primaryKey => $id));
-                $this->set(array(
-                    'data' => $this->Customer->find('first', $options),
-                    '_serialize' => array('data')
-                ));
-	}
-        
-/*------------------------------------------ Web-Services-End----------------------------------------*/         
+    public function api_index() {
+        $customers = $this->Customer->find('all');
+        $this->set(array(
+            'data' => $customers,
+            '_serialize' => array('data')
+        ));
+    }
 
     /**
      * index method

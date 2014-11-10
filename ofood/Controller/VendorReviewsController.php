@@ -16,27 +16,13 @@ class VendorReviewsController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
         
-/*------------------------------------------ Web-Services-Start----------------------------------------*/
-        public function api_index() {
-            $vendorReview = $this->VendorReview->find('all');
+        public function api_index(){
+            $VendorReview = $this->VendorReview->find('all');
             $this->set(array(
-                'data' => $vendorReview,
+                'data' => $VendorReview,
                 '_serialize' => array('data')
             ));
         }
-        
-        public function api_view($id = null) {
-		if (!$this->VendorReview->exists($id)) {
-			throw new NotFoundException(__('Invalid VendorReview'));
-		}
-		$options = array('conditions' => array('VendorReview.' . $this->VendorReview->primaryKey => $id));
-                $this->set(array(
-                    'data' => $this->VendorReview->find('first', $options),
-                    '_serialize' => array('data')
-                ));
-	}
-        
-/*------------------------------------------ Web-Services-End----------------------------------------*/
 
 /**
  * index method

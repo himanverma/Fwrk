@@ -17,6 +17,12 @@ class CombinationsController extends AppController {
 	public $components = array('Paginator', 'Session');
         
         
+        
+        public function beforeFilter() {
+            parent::beforeFilter();
+            $this->Auth->allow(array('api_index','api_view'));
+        }
+        
 /*------------------------------------------ Web-Services-Start----------------------------------------*/
         public function api_index() {
             $combination = $this->Combination->find('all');
@@ -132,6 +138,23 @@ class CombinationsController extends AppController {
         
         
         public function generate(){
+            $this->loadModel('Recipe');
+            $this->Recipe->recursive = 0;
+            $recipes = $this->Recipe->find('all');
+            $r = array();
+            foreach ($recipes as $d){
+                $r[] = $d['Recipe']; 
+            }
+            $this->set("recipes", $r);
+            
+            $this->loadModel('Vendor');
+            $this->Vendor->recursive = 0;
+            $vendors = $this->Vendor->find('all');
+            $r = array();
+            foreach ($vendors as $d){
+                $r[] = $d['Vendor']; 
+            }
+            $this->set("vendors", $r);
             
         }
 }

@@ -16,30 +16,6 @@ class CombinationItemsController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
 
-        
-        
-/*------------------------------------------ Web-Services-Start----------------------------------------*/
-        public function api_index() {
-            $combinationitem = $this->CombinationItem->find('all');
-            $this->set(array(
-                'data' => $combinationitem,
-                '_serialize' => array('data')
-            ));
-        }
-        
-        public function api_view($id = null) {
-		if (!$this->CombinationItem->exists($id)) {
-			throw new NotFoundException(__('Invalid CombinationItem'));
-		}
-		$options = array('conditions' => array('CombinationItem.' . $this->CombinationItem->primaryKey => $id));
-                $this->set(array(
-                    'data' => $this->CombinationItem->find('first', $options),
-                    '_serialize' => array('data')
-                ));
-	}
-        
-/*------------------------------------------ Web-Services-End----------------------------------------*/     
-        
 /**
  * index method
  *

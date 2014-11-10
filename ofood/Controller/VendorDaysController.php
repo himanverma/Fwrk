@@ -16,27 +16,13 @@ class VendorDaysController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
         
-/*------------------------------------------ Web-Services-Start----------------------------------------*/
-        public function api_index() {
-            $vendorday = $this->VendorDay->find('all');
+        public function api_index(){
+            $VendorDay = $this->VendorDay->find('all');
             $this->set(array(
-                'data' => $vendorday,
+                'data' => $VendorDay,
                 '_serialize' => array('data')
             ));
         }
-        
-        public function api_view($id = null) {
-		if (!$this->VendorDay->exists($id)) {
-			throw new NotFoundException(__('Invalid VendorDay'));
-		}
-		$options = array('conditions' => array('VendorDay.' . $this->VendorDay->primaryKey => $id));
-                $this->set(array(
-                    'data' => $this->VendorDay->find('first', $options),
-                    '_serialize' => array('data')
-                ));
-	}
-        
-/*------------------------------------------ Web-Services-End----------------------------------------*/
 
 /**
  * index method
