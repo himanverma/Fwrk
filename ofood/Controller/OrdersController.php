@@ -16,30 +16,6 @@ class OrdersController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
 
-        
-/*------------------------------------------ Web-Services-Starts----------------------------------------*/
-        
-        public function api_index() {
-            $orders = $this->Order->find('all');
-            $this->set(array(
-                'data' => $orders,
-                '_serialize' => array('data')
-            ));
-        }
-        
-        public function api_view($id = null) {
-		if (!$this->Order->exists($id)) {
-			throw new NotFoundException(__('Invalid Order'));
-		}
-		$options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
-                $this->set(array(
-                    'data' => $this->Order->find('first', $options),
-                    '_serialize' => array('data')
-                ));
-	}
-
-/*------------------------------------------ Web-Services-End----------------------------------------*/        
-        
 /**
  * index method
  *

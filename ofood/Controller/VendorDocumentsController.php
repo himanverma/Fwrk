@@ -16,27 +16,13 @@ class VendorDocumentsController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
         
-/*------------------------------------------ Web-Services-Start----------------------------------------*/
-        public function api_index() {
-            $vendorDocument = $this->VendorDocument->find('all');
+        public function api_index(){
+            $VendorDocument = $this->VendorDocument->find('all');
             $this->set(array(
-                'data' => $vendorDocument,
+                'data' => $VendorDocument,
                 '_serialize' => array('data')
             ));
         }
-        
-        public function api_view($id = null) {
-		if (!$this->VendorDocument->exists($id)) {
-			throw new NotFoundException(__('Invalid VendorDocument'));
-		}
-		$options = array('conditions' => array('VendorDocument.' . $this->VendorDocument->primaryKey => $id));
-                $this->set(array(
-                    'data' => $this->VendorDocument->find('first', $options),
-                    '_serialize' => array('data')
-                ));
-	}
-        
-/*------------------------------------------ Web-Services-End----------------------------------------*/
 
 /**
  * index method

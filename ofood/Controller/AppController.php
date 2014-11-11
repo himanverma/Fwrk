@@ -38,8 +38,7 @@ class AppController extends Controller {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->rqWriter();
-        $this->Auth->logout();
-        $this->Auth->allow();
+        $this->Auth->allow(array('api_appFirstStart'));
         if ($this->request->param('prefix') == false) {
             $this->Auth->loginAction = "/";
             $this->Auth->authenticate = array(
@@ -48,8 +47,10 @@ class AppController extends Controller {
             $this->set("authUser", $this->Auth->user());
         } else {
             $this->Auth->authenticate = array(
-                'Form' 
-             );
+                'Basic' => array(
+                    'userModel' => 'Customer'
+                )
+            );
         }
     }
 

@@ -16,27 +16,13 @@ class RecipesController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
         
-/*------------------------------------------ Web-Services-Start----------------------------------------*/
-        public function api_index() {
-            $recipe = $this->Recipe->find('all');
+        public function api_index(){
+            $recipes = $this->Recipe->find('all');
             $this->set(array(
-                'data' => $recipe,
+                'data' => $recipes,
                 '_serialize' => array('data')
             ));
         }
-        
-        public function api_view($id = null) {
-		if (!$this->Recipe->exists($id)) {
-			throw new NotFoundException(__('Invalid Recipe'));
-		}
-		$options = array('conditions' => array('Recipe.' . $this->Recipe->primaryKey => $id));
-                $this->set(array(
-                    'data' => $this->Recipe->find('first', $options),
-                    '_serialize' => array('data')
-                ));
-	}
-        
-/*------------------------------------------ Web-Services-End----------------------------------------*/
 
 /**
  * index method

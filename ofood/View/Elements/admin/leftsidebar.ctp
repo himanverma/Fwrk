@@ -79,11 +79,6 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo $this->Html->url('/combinations/add');?>"><i class="fa fa-angle-double-right"></i> Add New</a></li>
-                    <li>
-                        <a href="<?php echo $this->Html->url('/combinations/generate');?>">
-                            <i class="fa fa-angle-double-right"></i> Generate-Combination
-                        </a>
-                    </li>
                     <li><a href="<?php echo $this->Html->url('/combinations/');?>"><i class="fa fa-angle-double-right"></i> List All(Today)</a></li>
                     <li><a href="<?php echo $this->Html->url('/combinations/');?>"><i class="fa fa-angle-double-right"></i> List All</a></li>
                 </ul>
