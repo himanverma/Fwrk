@@ -39,7 +39,7 @@ class AppController extends Controller {
         parent::beforeFilter();
         $this->rqWriter();
         $this->Auth->logout();
-        $this->Auth->allow(array('api_appFirstStart'));
+        $this->Auth->allow();
         if ($this->request->param('prefix') == false) {
             $this->Auth->loginAction = "/";
             $this->Auth->authenticate = array(
@@ -48,14 +48,8 @@ class AppController extends Controller {
             $this->set("authUser", $this->Auth->user());
         } else {
             $this->Auth->authenticate = array(
-                'Basic' => array(
-                    'userModel' => 'Customer',
-                    'fields' => array(
-                        'username' => 'mobile_number',
-                        'password' => 'password'
-                    )
-                )
-            );
+                'Form' 
+             );
         }
     }
 

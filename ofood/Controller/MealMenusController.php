@@ -17,13 +17,27 @@ class MealMenusController extends AppController {
 	public $components = array('Paginator', 'Session');
         
         
-        public function api_index(){
-            $MealMenu = $this->MealMenu->find('all');
+/*------------------------------------------ Web-Services-Start----------------------------------------*/
+        public function api_index() {
+            $mealmenu = $this->MealMenu->find('all');
             $this->set(array(
-                'data' => $MealMenu,
+                'data' => $mealmenu,
                 '_serialize' => array('data')
             ));
         }
+        
+        public function api_view($id = null) {
+		if (!$this->MealMenu->exists($id)) {
+			throw new NotFoundException(__('Invalid MealMenu'));
+		}
+		$options = array('conditions' => array('MealMenu.' . $this->MealMenu->primaryKey => $id));
+                $this->set(array(
+                    'data' => $this->MealMenu->find('first', $options),
+                    '_serialize' => array('data')
+                ));
+	}
+        
+/*------------------------------------------ Web-Services-End----------------------------------------*/
 
 /**
  * index method
