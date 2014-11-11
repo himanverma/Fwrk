@@ -41,7 +41,7 @@
                             <table class="table-bordered table">
                                 <tbody data-bind="foreach: generatedD">
                                     <tr>
-                                        <td><input type="checkbox" name="combinations[]" /></td>
+                                        <td><input type="checkbox" data-bind="attr: { 'value': ko.toJSON($data), 'id': 'checkBox-' + $index }, checked: $parent.generatedData" /></td>
                                         <td data-bind="text:display_name"></td>
                                         <td>Price: <input class="pull-right" type="text" value="0.00" data-bind="value:price" /></td>
                                     </tr>
@@ -70,6 +70,7 @@
         me.recipes = ko.observableArray([]);
         me.vendor = ko.observable();
         me.generatedD = ko.observableArray([]);
+        me.generatedData = ko.observableArray();
         me.key = function(a,b){
                 if(a>b)
                     return b + '-' + a;
@@ -123,8 +124,12 @@
             
         }
         me.send = function(){
-            var data = ko.mapping.toJS(me.generatedD);
-            console.dir(data);
+            var d = [];
+            var tmp = me.generatedData();
+            for(i in tmp){
+                d.push(JSON.parse(tmp[i]));
+            }
+            console.dir(d);
         }
         
     }
