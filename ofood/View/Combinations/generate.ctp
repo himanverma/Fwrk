@@ -5,44 +5,55 @@
             </div><!-- /.box-header -->
             <!-- form start -->
             <div class="box-body">
-                    <div class="form-group">
-                        <?php echo $this->Form->input("vendor_id",array(
-                                    'div'=>false,
-                                    'options' => array(),
-                                    'class'=>'form-control',
-                                    'placeholder' => 'Enter Username',
-                                    'data-bind'=> "value:vendor, options: dataV, optionsText: 'name', optionsValue: 'id'"
-                                )); 
-                              
-                        ?>
-                    </div>
-                    <div class="form-group">
-                        <?php echo $this->Form->input("recipe_id",array(
-                                    'div'=>false,
-                                    'options' => array(),
-                                    'class'=>'form-control',
-                                    'placeholder' => 'Enter Username',
-                                    'multiple'=>'multiple',
-                                    'data-bind'=> "selectedOptions:recipes, options: dataR, optionsText: 'recipe_name', optionsValue: 'id'"
-                                )); 
-                              
-                        ?>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" data-bind="click:generate">Generate Combinations</button>
-                    </div>
-                    <div class="form-group">
-                        <table class="table-bordered table">
-                            <tbody data-bind="foreach: generatedD">
-                                <tr>
-                                    <td><input type="checkbox" name="combinations[]" /></td>
-                                    <td data-bind="text:display_name"></td>
-                                    <td>Price: <input class="pull-right" type="text" value="0.00" data-bind="value:price" /></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <?php echo $this->Form->input("vendor_id",array(
+                                        'div'=>false,
+                                        'options' => array(),
+                                        'class'=>'form-control',
+                                        'placeholder' => 'Enter Username',
+                                        'data-bind'=> "value:vendor, options: dataV, optionsText: 'name', optionsValue: 'id'"
+                                    )); 
 
+                            ?>
+                        </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <?php echo $this->Form->input("recipe_id",array(
+                                        'div'=>false,
+                                        'options' => array(),
+                                        'class'=>'form-control',
+                                        'placeholder' => 'Enter Username',
+                                        'multiple'=>'multiple',
+                                        'data-bind'=> "selectedOptions:recipes, options: dataR, optionsText: 'recipe_name', optionsValue: 'id'"
+                                    )); 
+
+                            ?>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" data-bind="click:generate">Generate Combinations</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <table class="table-bordered table">
+                                <tbody data-bind="foreach: generatedD">
+                                    <tr>
+                                        <td><input type="checkbox" name="combinations[]" /></td>
+                                        <td data-bind="text:display_name"></td>
+                                        <td>Price: <input class="pull-right" type="text" value="0.00" data-bind="value:price" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                    
+                    
+                    
                     <div class="form-group">
                         <button class="btn btn-primary" data-bind="click:send">Add</button>
                     </div>
@@ -66,6 +77,7 @@
         }
         me.keyAr = [];
         me.generate = function(){
+            me.keyAr = [];
             var r = me.recipes();
             var r2 = me.recipes();
             if(r.length < 2){
