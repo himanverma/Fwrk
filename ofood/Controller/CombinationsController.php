@@ -25,7 +25,10 @@ class CombinationsController extends AppController {
         
 /*------------------------------------------ Web-Services-Start----------------------------------------*/
         public function api_index() {
-            $combination = $this->Combination->find('all');
+            $combination = $this->Combination->find('all',array(
+                "fields" => array("get_d(30.734459,76.829537,Vendor.lat,Vendor.long) as distance","Vendor.*","Combination.*"),
+                "order"=>'distance ASC'
+            ));
             $this->set(array(
                 'data' => $combination,
                 '_serialize' => array('data')
@@ -155,6 +158,12 @@ class CombinationsController extends AppController {
                 $r[] = $d['Vendor']; 
             }
             $this->set("vendors", $r);
+            if($this->request->is('post')){
+                foreach($this->request->data as $data){
+                    $this->Combination->saveAssociated($data, array('deep' => true));
+                    debug($data);
+                }
+            }
             
         }
 }
