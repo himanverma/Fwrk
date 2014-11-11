@@ -1,22 +1,11 @@
 package com.future.getfood;
+
 /*this is launching*/
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.Window;
-import android.widget.EditText;
-import android.widget.Toast;
-import com.future.foodimg.DetectNetwork;
-import com.future.getfood.R;
-import com.future.listscroll.IInfiniteScrollListener;
-import com.future.listscroll.InfiniteScrollListView;
-import com.future.listscroll.InfiniteScrollOnScrollListener;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -26,10 +15,25 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-public class DishesActivity extends ActionBarActivity implements
-		IInfiniteScrollListener {
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-	private static final String LOG_TAG = DishesActivity.class.getSimpleName();
+import com.future.foodimg.DetectNetwork;
+import com.future.listscroll.IInfiniteScrollListener;
+import com.future.listscroll.InfiniteScrollListView;
+import com.future.listscroll.InfiniteScrollOnScrollListener;
+
+public class DishesActivity extends Activity implements IInfiniteScrollListener {
+
 	protected InfiniteScrollListView listView;
 	private MyAdapter adapter;
 	private InfiniteScrollOnScrollListener scrollListener;
@@ -37,7 +41,7 @@ public class DishesActivity extends ActionBarActivity implements
 	private boolean executing = false;
 	ArrayList<String> items;
 	HttpResponse response;
-	String s;
+	String s,st;
 	EditText search;
 
 	@Override
@@ -52,7 +56,7 @@ public class DishesActivity extends ActionBarActivity implements
 		listView.setListener(scrollListener);
 		adapter = new MyAdapter(this);
 		listView.setAdapter(adapter);
-		getdetail();
+		//getdetail();
 		// Populate initial list
 		items = new ArrayList<String>();
 		for (int i = 0; i < 8; i++) {
@@ -61,6 +65,15 @@ public class DishesActivity extends ActionBarActivity implements
 		}
 		listView.appendItems(items);
 
+		((ImageView)findViewById(R.id.imageView1)).setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent in=new Intent(DishesActivity.this,OrderFood.class);
+				startActivity(in);
+			}
+		});
 	}
 
 	@Override
@@ -106,9 +119,9 @@ public class DishesActivity extends ActionBarActivity implements
 			executing = false;
 
 			if (result.size() > 0) {
-				Toast.makeText(getApplicationContext(),
-						"Loaded " + String.valueOf(result.size()) + " items",
-						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getApplicationContext(),
+//						"Loaded " + String.valueOf(result.size()) + " items",
+//						Toast.LENGTH_SHORT).show();
 			} else {
 
 				Toast.makeText(getApplicationContext(),

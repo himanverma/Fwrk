@@ -3,40 +3,66 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.future.getfood.DishesActivity">
+    tools:context="com.future.getfood.DishesActivity"
+    android:background="#ffffff">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#6699CC" >
+        android:background="@drawable/top_bg"
+        >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/menu_icon" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/profile_icon" />
 
         <EditText
             android:id="@+id/editText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView1"
             android:ems="10"
-            android:gravity="center"
+            android:hint="search"
+            android:paddingLeft="5dp"
+            android:paddingRight="35dp"
+            android:background="@drawable/search_bg"
             android:inputType="textPersonName" >
 
             <requestFocus />
         </EditText>
 
         <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/editText1"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/btn" />
+            android:src="@drawable/search_icon" />
 
     </RelativeLayout>
 
     <com.future.listscroll.InfiniteScrollListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="424dp" />
+        android:layout_height="match_parent"
+        android:divider="#ffffff"
+        android:dividerHeight="1dp" />
 
 </LinearLayout>
