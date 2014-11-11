@@ -70,8 +70,8 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-//				Intent in=new Intent(DishesActivity.this,OrderFood.class);
-//				startActivity(in);
+				Intent in=new Intent(DishesActivity.this,OrderDishes.class);
+				startActivity(in);
 			}
 		});
 	}

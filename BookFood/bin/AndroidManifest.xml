@@ -43,9 +43,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.future.getfood.OrderFood"
+            android:name="com.future.getfood.OrderDishes"
             android:screenOrientation="portrait" >
         </activity>
+        
+         <activity
+            android:name="com.future.getfood.Order_Confirmation"
+            android:screenOrientation="portrait" >
+        </activity>
+        
         
          <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
