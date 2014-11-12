@@ -25,10 +25,27 @@ class CombinationsController extends AppController {
         
 /*------------------------------------------ Web-Services-Start----------------------------------------*/
         public function api_index() {
-            $combination = $this->Combination->find('all',array(
-                "fields" => array("get_d(30.734459,76.829537,Vendor.lat,Vendor.long) as distance","Vendor.*","Combination.*"),
-                "order"=>'distance ASC'
+            
+            
+//            $lat=$this->request->data['User']['latitude']=30.7238504;
+//            $long=$this->request->data['User']['longitude']=76.8465098;
+//            $count=$this->request->data['User']['count']=1;
+            $lat=$this->request->data['User']['latitude'];
+            $long=$this->request->data['User']['longitude'];
+            $count=$this->request->data['User']['count'];
+            $combination1 = $this->Combination->find('count',array(
+                "fields" => array("get_d($lat,$long,Vendor.lat,Vendor.long) as distance","Vendor.*","Combination.*"),
+                "order"=>'distance ASC',
             ));
+            
+            $combination = $this->Combination->find('all',array(
+                "fields" => array("get_d($lat,$long,Vendor.lat,Vendor.long) as distance","Vendor.*","Combination.*"),
+                "order"=>'distance ASC',
+                'limit'=>8,
+                'page' => $count
+            ));
+            $combination['list']=$combination1;
+//            Debugger::log($combination);
             $this->set(array(
                 'data' => $combination,
                 '_serialize' => array('data')
@@ -161,7 +178,6 @@ class CombinationsController extends AppController {
             if($this->request->is('post')){
                 foreach($this->request->data as $data){
                     $this->Combination->saveAssociated($data, array('deep' => true));
-                    debug($data);
                 }
             }
             

@@ -148,7 +148,7 @@
                 d.push(JSON.parse(tmp[i]));
             }
             $.post('?q=data', {data: d}, function(data) {
-
+                window.location.reload();
             });
             console.dir(d);
         }
