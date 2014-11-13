@@ -89,4 +89,25 @@ class Recipe extends AppModel {
 		)
 	);
 
+        public function delete($id = null, $cascade = true) {
+            if ($id == null) {
+                $id = $this->id;
+            }
+            $path = $this->read(array('image'), $id);
+            $vale=explode('ofood/',$path['Recipe']['image']);
+            unlink($vale[1]);
+            parent::delete($id, $cascade);
+        }
+        public function beforeSave($options = array()) {
+            App::uses("HtmlHelper", "View/Helper");
+            $html = new HtmlHelper(new View());
+            if($this->data[$this->alias]['image']['name']!=""){
+                $ext=pathinfo($this->data[$this->alias]['image']['name'], PATHINFO_EXTENSION);
+                $image_name = date('YmdHis').rand(1,999) . "." . $ext;
+                $destination="files/recipe_images/".$image_name;
+                move_uploaded_file($this->data[$this->alias]['image']['tmp_name'],$destination);
+                $this->data[$this->alias]['image'] =$html->url("/files/recipe_images/".$image_name,true);
+            }
+            parent::beforeSave($options);
+        }
 }
