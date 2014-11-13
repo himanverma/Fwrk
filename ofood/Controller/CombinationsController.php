@@ -41,8 +41,8 @@ class CombinationsController extends AppController {
             $combination = $this->Combination->find('all',array(
                 "fields" => array("get_d($lat,$long,Vendor.lat,Vendor.long) as distance","Vendor.*","Combination.*"),
                 "order"=>'distance ASC',
-                'limit'=>8,
-                'page' => $count
+//                'limit'=>8,
+//                'page' => $count
             ));
             $combination['list']=$combination1;
 //            Debugger::log($combination);
