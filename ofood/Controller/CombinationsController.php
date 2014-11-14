@@ -20,7 +20,7 @@ class CombinationsController extends AppController {
         
         public function beforeFilter() {
             parent::beforeFilter();
-            $this->Auth->allow(array('api_index','api_view'));
+            $this->Auth->allow(array('api_index','api_view','api_search'));
         }
         
 /*------------------------------------------ Web-Services-Start----------------------------------------*/
@@ -63,7 +63,24 @@ class CombinationsController extends AppController {
                 ));
 	}
         
-/*------------------------------------------ Web-Services-End----------------------------------------*/            
+        
+        public function api_search($like=NULL){
+            $like=$this->request->data['Combination']['search'];
+            $currentDate = date("Y-m-d");
+            $searchRecords=$this->Combination->find('all',array('conditions'=>array(
+                "AND" => array (
+                    "Combination.display_name LIKE" => "%$like%",
+                    "Combination.date >=" => date('Y-m-d', strtotime($currentDate))
+                )
+            )));
+            $this->set(array(
+                'data' => $searchRecords,
+                '_serialize' => array('data')
+            ));
+        }
+
+
+        /*------------------------------------------ Web-Services-End----------------------------------------*/            
 
 /**
  * index method

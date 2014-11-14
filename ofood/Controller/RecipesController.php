@@ -17,7 +17,7 @@ class RecipesController extends AppController {
 	public $components = array('Paginator', 'Session');
         
         public function api_index(){
-            $recipes = $this->Recipe->find('all');
+            $recipes = $this->Recipe->find('all',array('recursive'=>-1));
             $this->set(array(
                 'data' => $recipes,
                 '_serialize' => array('data')
