@@ -13,6 +13,7 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.future.foodimg.ImageLoader;
 import com.future.getfood.R;
 import com.future.listscroll.InfiniteScrollAdapter;
 
@@ -31,9 +32,14 @@ public class MyAdapter extends InfiniteScrollAdapter {
 	ArrayList<String>namelist;
 	ArrayList<String>namelist1;
 	ArrayList<String>pricelist;
-	private int mSelectedPos = -1;
-
-	public MyAdapter(Context context,ArrayList<String>ll,ArrayList<String>nll,ArrayList<String>pll) {
+	ArrayList<String>imglist;
+	ArrayList<String>addresslist;
+	ArrayList<String>mobilelist;
+	ArrayList<String>phonelist;
+	ArrayList<String>chefphoto;
+    ImageLoader il;
+	public MyAdapter(Context context,ArrayList<String>ll,ArrayList<String>nll,ArrayList<String>pll,ArrayList<String>imll,
+			ArrayList<String>adml,ArrayList<String>poll,ArrayList<String>moll,ArrayList<String>pcholl) {
 		super(context);
 		ctx = context;
 		items = new ArrayList<HashMap<String, String>>();
@@ -44,6 +50,12 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		namelist=nll;
 		pricelist=pll;
 		namelist1.addAll(list);
+		imglist=imll;
+		addresslist=adml;
+		mobilelist=moll;
+		phonelist=poll;
+		chefphoto=pcholl;
+		il=new ImageLoader(ctx);
 	}
 
 	@Override
@@ -68,9 +80,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		return list.get(position);
 	}
 
-	public void SetSelectedPosition(int position) {
-		mSelectedPos = position;
-	}
+	
 
 	@Override
 	public View getRealView(LayoutInflater inflater, final int position,
@@ -94,7 +104,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		CheckBox chk1=(CheckBox) v.findViewById(R.id.checkBox1);
 		CheckBox chk2=(CheckBox) v.findViewById(R.id.checkBox2);
 		CheckBox chk3=(CheckBox) v.findViewById(R.id.checkBox3);
-		
+		il.DisplayImage(imglist.get(position), dish_img);
 		// Log.e("nnn", list.get(position));
 		 dish_name.setText(list.get(position));
 		 user_name.setText("By "+namelist.get(position));
@@ -115,7 +125,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 					rel.setVisibility(View.VISIBLE);
 					bool = false;
-					SetSelectedPosition(position);
+					
 				}
 
 			}
@@ -137,7 +147,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 					rel.setVisibility(View.VISIBLE);
 					bool = false;
-					SetSelectedPosition(position);
+					
 				}
 
 			}
@@ -150,6 +160,11 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 				Intent in = new Intent(ctx, ChefProfile.class);
 				in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				in.putExtra("photo", chefphoto.get(position));
+				in.putExtra("name", namelist.get(position));
+				in.putExtra("address", addresslist.get(position));
+				in.putExtra("mob", mobilelist.get(position));
+				in.putExtra("phone", phonelist.get(position));
 				
 				ctx.startActivity(in);
 

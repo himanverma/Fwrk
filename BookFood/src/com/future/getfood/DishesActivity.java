@@ -56,7 +56,12 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
     ArrayList<String>mylist=new ArrayList<String>();
     ArrayList<String>namelist=new ArrayList<String>();
     ArrayList<String>pricelist=new ArrayList<String>();
-	ArrayList<HashMap<String, String>>list=new ArrayList<HashMap<String,String>>();
+    ArrayList<String>imglist=new ArrayList<String>();
+    ArrayList<String>address_list=new ArrayList<String>();
+    ArrayList<String>phone_list=new ArrayList<String>();
+    ArrayList<String>mobile_list=new ArrayList<String>();
+    ArrayList<String>chef_photo=new ArrayList<String>();
+	
 	protected int total_num;
 	
 	@Override
@@ -241,7 +246,7 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 				// what to do when background task is completed
 
 				try {
-					HashMap<String, String> map = new HashMap<String, String>();
+					
 					JSONObject obj = new JSONObject(s);
 					JSONObject data = obj.getJSONObject("data");
 					String total_count = data.getString("list");
@@ -281,33 +286,23 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 							String vendor_name = obj5.getString("display_name");
 							String price = obj5.getString("price");
 							String cmd_id = obj5.getString("id");
-							map.put("distance", distance);
-							map.put("id", id);
-							map.put("name", name);
-							map.put("photo", photo);
-							map.put("company_logo", company_logo);
-							map.put("company_name", company_name);
-							map.put("address", address);
-							map.put("city", city);
-							map.put("state", state);
-							map.put("country", country);
-							map.put("email", email);
-							map.put("mobile_number", mobile_number);
-							map.put("phone_number", phone_number);
-							map.put("lat", lat);
-							map.put("lng", lng);
-							map.put("vendor_name", vendor_name);
-							map.put("price", price);
+							String image = obj5.getString("image");
+							
 
 						//	Log.e("fhgfhj", vendor_name+"  "+cmd_id);
 					mylist.add(vendor_name);
 					namelist.add(name);
 					pricelist.add(price);
-					adapter = new MyAdapter(DishesActivity.this,mylist,namelist,pricelist);
+					imglist.add(image);
+					address_list.add(address+","+city+","+state+","+country);
+					phone_list.add(phone_number);
+					mobile_list.add(mobile_number);
+					chef_photo.add(photo);
+					adapter = new MyAdapter(DishesActivity.this,mylist,namelist,pricelist,imglist,address_list,phone_list,mobile_list,chef_photo);
 					listView.setAdapter(adapter);
-					//listView.appendItems(mylist);
+					
 					}
-					// alert(msg);
+					
 				} catch (Exception e) {
 
 					e.printStackTrace();
