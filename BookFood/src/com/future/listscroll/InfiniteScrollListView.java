@@ -25,7 +25,7 @@ public class InfiniteScrollListView extends ListView {
     @Override
     public void setSelection(int position) { }
 
-    public void appendItems(ArrayList items) {
+    public void appendItems(ArrayList<String> items) {
         if (getAdapter() == null) {
             throw new NullPointerException("Can not append items to a null adapter");
         }

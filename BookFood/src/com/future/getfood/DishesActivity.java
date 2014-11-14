@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -12,17 +14,23 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -39,41 +47,82 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 	private InfiniteScrollOnScrollListener scrollListener;
 	private ListTask listTask;
 	private boolean executing = false;
-	ArrayList<String> items;
+	ArrayList<HashMap<String, String>> items;
 	HttpResponse response;
-	String s,st;
+	String s, st;
 	EditText search;
-
+	GPSTracker gps;
+	double latitude, longitude;
+    ArrayList<String>mylist=new ArrayList<String>();
+    ArrayList<String>namelist=new ArrayList<String>();
+    ArrayList<String>pricelist=new ArrayList<String>();
+	ArrayList<HashMap<String, String>>list=new ArrayList<HashMap<String,String>>();
+	protected int total_num;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setSoftInputMode(
+			      WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.activity_main);
 
+		
 		listView = (InfiniteScrollListView) findViewById(R.id.list_view);
 		search = (EditText) findViewById(R.id.editText1);
 		scrollListener = new InfiniteScrollOnScrollListener(this);
-		listView.setListener(scrollListener);
-		adapter = new MyAdapter(this);
-		listView.setAdapter(adapter);
-		//getdetail();
-		// Populate initial list
-		items = new ArrayList<String>();
-		for (int i = 0; i < 8; i++) {
-			String str = "Index: " + String.valueOf(i);
-			items.add(str);
-		}
-		listView.appendItems(items);
+		//listView.setListener(scrollListener);
 
-		((ImageView)findViewById(R.id.imageView1)).setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent in=new Intent(DishesActivity.this,OrderDishes.class);
-				startActivity(in);
-			}
-		});
+		
+		// getting current latlng
+				gps = new GPSTracker(DishesActivity.this);
+				if (gps.canGetLocation()) {
+
+					latitude = gps.getLatitude();
+					longitude = gps.getLongitude();
+					getdetail(1);
+				} else {
+
+					gps.showSettingsAlert();
+				}
+
+
+				search.addTextChangedListener(new TextWatcher() {
+
+					@Override
+					public void onTextChanged(CharSequence s, int start, int before,
+							int count) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void beforeTextChanged(CharSequence s, int start, int count,
+							int after) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void afterTextChanged(Editable s) {
+						// TODO Auto-generated method stub
+						String text = search.getText().toString()
+								.toLowerCase(Locale.getDefault());
+						adapter.filter(text);
+					}
+				});
+				
+		((ImageView) findViewById(R.id.imageView1))
+				.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						Intent in = new Intent(DishesActivity.this,
+								DishesList.class);
+						startActivity(in);
+					}
+				});
 	}
 
 	@Override
@@ -81,9 +130,9 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 		if (!executing) {
 
 			// Toast.makeText(this, "End is near", Toast.LENGTH_SHORT).show();
-			executing = true;
-			listTask = new ListTask();
-			listTask.execute(listView.getRealCount());
+			//executing = true;
+			//listTask = new ListTask();
+			//listTask.execute(listView.getRealCount());
 		}
 	}
 
@@ -91,7 +140,8 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 	@Override
 	public void onScrollCalled(int firstVisibleItem, int visibleItemCount,
 			int totalItemCount) {
-
+		
+		    Log.e("fist", firstVisibleItem+" "+visibleItemCount+" "+totalItemCount);
 	}
 
 	private class ListTask extends AsyncTask<Integer, Void, ArrayList<String>> {
@@ -104,10 +154,10 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 				e.printStackTrace();
 			}
 			ArrayList<String> items = new ArrayList<String>();
-			if (params[0] < 40) {
-				for (int i = params[0]; i < (params[0] + 8); i++) {
+			if (params[0] < total_num) {
+				for (int i = params[0]; i < (params[0] + 7); i++) {
 					String str = "Index: " + String.valueOf(i);
-					items.add(str);
+					items.add(mylist.get(i));
 				}
 			}
 			return items;
@@ -119,9 +169,9 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 			executing = false;
 
 			if (result.size() > 0) {
-//				Toast.makeText(getApplicationContext(),
-//						"Loaded " + String.valueOf(result.size()) + " items",
-//						Toast.LENGTH_SHORT).show();
+				 Toast.makeText(getApplicationContext(),
+				 "Loaded " + String.valueOf(result.size()) + " items",
+				 Toast.LENGTH_SHORT).show();
 			} else {
 
 				Toast.makeText(getApplicationContext(),
@@ -131,7 +181,7 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 	}
 
 	// method for sending user detail on server
-	protected void getdetail() {
+	protected void getdetail(final int page) {
 		// TODO Auto-generated method stub
 
 		AsyncTask<Void, Void, Void> updateTask = new AsyncTask<Void, Void, Void>() {
@@ -150,63 +200,30 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 
 				// do your background operation here
 				try {
+					long milli=System.currentTimeMillis();
 					String url = getResources().getString(R.string.url)
-							+ "api/app/appFirstStart.json";
-
+							+ "api/Combinations.json?a="+milli;
+                      mylist.clear();
 					MultipartEntity entity = new MultipartEntity(
 							HttpMultipartMode.BROWSER_COMPATIBLE);
 
-					SimpleDateFormat sdf = new SimpleDateFormat(
-							"yyyyMMdd_HHmmss");
-					String currentDateandTime = sdf.format(new Date());
-
+					
 					HttpClient httpclient = new DefaultHttpClient();
 					HttpPost httppost = new HttpPost(url);
 
-					// entity.addPart("data[User][username]", new
-					// StringBody(username));
-					// entity.addPart("data[User][email]", new
-					// StringBody(emailid));
-					// entity.addPart("data[User][mobile_number]", new
-					// StringBody(mobile));
-					// entity.addPart("data[User][photo]", new
-					// ByteArrayBody(byteuserimg,
-					// currentDateandTime + ".png"));
-					//
-					//
-					//
-					// entity.addPart("data[User][password]", new StringBody(
-					// passowrd));
-					//
-					// entity.addPart("data[User][id_proof]", new
-					// ByteArrayBody(ba,
-					// currentDateandTime + ".png"));
-					//
-					// entity.addPart("data[User][address]", new
-					// StringBody(address1));
-					// entity.addPart("data[User][city]", new
-					// StringBody(city1));
-					// entity.addPart("data[User][state]", new
-					// StringBody(state1));
-					// entity.addPart("data[User][country]", new
-					// StringBody(country1));
-					// entity.addPart("data[User][type]", new
-					// StringBody(chk_value));
-					//
-					// entity.addPart("data[User][device_token]", new
-					// StringBody("hhjjs65667676"));
-					//
-					// entity.addPart("data[User][latitude]", new
-					// StringBody("345667"));
-					// entity.addPart("data[User][longitude]", new
-					// StringBody("7645434"));
-
+					entity.addPart("data[User][latitude]", new StringBody(
+							String.valueOf(latitude)));
+					entity.addPart("data[User][longitude]", new StringBody(
+							String.valueOf(longitude)));
+					entity.addPart("data[User][count]", new StringBody(
+							String.valueOf(page)));
+					
 					httppost.setEntity(entity);
 
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					Log.e("fhgfhj", s);
+					//Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -222,18 +239,79 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 			@Override
 			protected void onPostExecute(Void result) {
 				// what to do when background task is completed
-				//
-				// try{
-				//
-				// JSONObject obj=new JSONObject(s);
-				// JSONObject obj1=obj.getJSONObject("data");
-				// String error=obj1.getString("error");
-				// String msg=obj1.getString("msg");
-				// //alert(msg);
-				// }catch(Exception e){
-				//
-				// e.printStackTrace();
-				// }
+
+				try {
+					HashMap<String, String> map = new HashMap<String, String>();
+					JSONObject obj = new JSONObject(s);
+					JSONObject data = obj.getJSONObject("data");
+					String total_count = data.getString("list");
+					Log.e("ttt", total_count);
+					    
+					
+					total_num = Integer.parseInt(total_count);
+					
+					//Iterator<?> keys = obj3.keys();
+					for(int i = 0; i<data.names().length(); i++){
+//						String key = (String) keys.next();
+//						if (obj3.get(key) instanceof JSONObject) {
+						JSONObject obj3 = data.getJSONObject(String.valueOf(i));
+							JSONObject objj = obj3.getJSONObject("0");
+							String distance = objj.getString("distance");
+
+							JSONObject obj4 = obj3.getJSONObject("Vendor");
+							String id = obj4.getString("id");
+							String name = obj4.getString("name");
+							String photo = obj4.getString("photo");
+							String company_logo = obj4
+									.getString("company_logo");
+							String company_name = obj4
+									.getString("company_name");
+							String address = obj4.getString("address");
+							String city = obj4.getString("city");
+							String state = obj4.getString("state");
+							String country = obj4.getString("country");
+							String email = obj4.getString("email");
+							String mobile_number = obj4
+									.getString("mobile_number");
+							String phone_number = obj4
+									.getString("phone_number");
+							String lat = obj4.getString("lat");
+							String lng = obj4.getString("long");
+							JSONObject obj5 = obj3.getJSONObject("Combination");
+							String vendor_name = obj5.getString("display_name");
+							String price = obj5.getString("price");
+							String cmd_id = obj5.getString("id");
+							map.put("distance", distance);
+							map.put("id", id);
+							map.put("name", name);
+							map.put("photo", photo);
+							map.put("company_logo", company_logo);
+							map.put("company_name", company_name);
+							map.put("address", address);
+							map.put("city", city);
+							map.put("state", state);
+							map.put("country", country);
+							map.put("email", email);
+							map.put("mobile_number", mobile_number);
+							map.put("phone_number", phone_number);
+							map.put("lat", lat);
+							map.put("lng", lng);
+							map.put("vendor_name", vendor_name);
+							map.put("price", price);
+
+						//	Log.e("fhgfhj", vendor_name+"  "+cmd_id);
+					mylist.add(vendor_name);
+					namelist.add(name);
+					pricelist.add(price);
+					adapter = new MyAdapter(DishesActivity.this,mylist,namelist,pricelist);
+					listView.setAdapter(adapter);
+					//listView.appendItems(mylist);
+					}
+					// alert(msg);
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
 				dialog.cancel();
 			}
 
