@@ -1,16 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.future.getfood.DishesActivity"
-    android:background="#ffffff">
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    tools:context="com.future.getfood.DishesActivity" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/top_bg"
-        >
+        android:background="@drawable/top_bg" >
 
         <ImageView
             android:id="@+id/imageView1"
@@ -38,12 +37,13 @@
             android:layout_margin="5dp"
             android:layout_toLeftOf="@+id/imageView2"
             android:layout_toRightOf="@+id/imageView1"
+            android:background="@drawable/search_bg"
             android:ems="10"
             android:hint="search"
+            android:inputType="textPersonName"
             android:paddingLeft="5dp"
             android:paddingRight="35dp"
-            android:background="@drawable/search_bg"
-            android:inputType="textPersonName" >
+            android:textColor="#000000" >
 
             <requestFocus />
         </EditText>
@@ -55,14 +55,18 @@
             android:layout_alignRight="@+id/editText1"
             android:layout_centerVertical="true"
             android:src="@drawable/search_icon" />
-
     </RelativeLayout>
 
     <com.future.listscroll.InfiniteScrollListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
         android:divider="#ffffff"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp"
+       
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        />
 
 </LinearLayout>

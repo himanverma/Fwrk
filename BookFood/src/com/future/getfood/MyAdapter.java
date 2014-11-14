@@ -13,51 +13,74 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.future.foodimg.ImageLoader;
 import com.future.getfood.R;
 import com.future.listscroll.InfiniteScrollAdapter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class MyAdapter extends InfiniteScrollAdapter {
 
-	private ArrayList<String> items;
+	private ArrayList<HashMap<String, String>> items;
 	public static boolean bool = true;
 	Context ctx;
 	int pos;
-	private int mSelectedPos = -1;
-
-	public MyAdapter(Context context) {
+	ArrayList<String>list;
+	ArrayList<String>namelist;
+	ArrayList<String>namelist1;
+	ArrayList<String>pricelist;
+	ArrayList<String>imglist;
+	ArrayList<String>addresslist;
+	ArrayList<String>mobilelist;
+	ArrayList<String>phonelist;
+	ArrayList<String>chefphoto;
+    ImageLoader il;
+	public MyAdapter(Context context,ArrayList<String>ll,ArrayList<String>nll,ArrayList<String>pll,ArrayList<String>imll,
+			ArrayList<String>adml,ArrayList<String>poll,ArrayList<String>moll,ArrayList<String>pcholl) {
 		super(context);
 		ctx = context;
-		items = new ArrayList<String>();
+		items = new ArrayList<HashMap<String, String>>();
+		list=new ArrayList<String>();
+		namelist1=new ArrayList<String>();
+		
+		list=ll;
+		namelist=nll;
+		pricelist=pll;
+		namelist1.addAll(list);
+		imglist=imll;
+		addresslist=adml;
+		mobilelist=moll;
+		phonelist=poll;
+		chefphoto=pcholl;
+		il=new ImageLoader(ctx);
 	}
 
 	@Override
 	public ArrayList getItems() {
-		return items;
+		return list;
 	}
 
 	@Override
 	public void addItems(Collection items) {
 		if (items.size() > 0) {
-			this.items.addAll(items);
+			this.list.addAll(items);
 		} else {
 			super.setDoneLoading();
 		}
 		notifyDataSetChanged();
-		Log.e("ggg", "heer");
+		
 	}
 
 	@Override
 	public Object getRealItem(int position) {
-		Log.e("gggbbb", "heer");
-		return items.get(position);
+		
+		return list.get(position);
 	}
 
-	public void SetSelectedPosition(int position) {
-		mSelectedPos = position;
-	}
+	
 
 	@Override
 	public View getRealView(LayoutInflater inflater, final int position,
@@ -69,16 +92,24 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		 RatingBar rb=(RatingBar) v.findViewById(R.id.ratingBar1);
 		 TextView rate_num=((TextView) v.findViewById(R.id.textView2));
 		 TextView delivery_time=((TextView) v.findViewById(R.id.textView3));
-		 
+		 TextView price_dd=((TextView) v.findViewById(R.id.textView4));
 		Button btn = (Button) v.findViewById(R.id.button1);
 		Button send = (Button) v.findViewById(R.id.button2);
 		final RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.rel22);
+		
+		final RelativeLayout rel1 = (RelativeLayout) v.findViewById(R.id.rr1);
+		
+		final RelativeLayout rel2 = (RelativeLayout) v.findViewById(R.id.rr2);
+		
 		CheckBox chk1=(CheckBox) v.findViewById(R.id.checkBox1);
 		CheckBox chk2=(CheckBox) v.findViewById(R.id.checkBox2);
 		CheckBox chk3=(CheckBox) v.findViewById(R.id.checkBox3);
-		
-		 
-		btn.setOnClickListener(new View.OnClickListener() {
+		il.DisplayImage(imglist.get(position), dish_img);
+		// Log.e("nnn", list.get(position));
+		 dish_name.setText(list.get(position));
+		 user_name.setText("By "+namelist.get(position));
+		 price_dd.setText("Price: Rs"+pricelist.get(position));
+		rel1.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -94,21 +125,47 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 					rel.setVisibility(View.VISIBLE);
 					bool = false;
-					SetSelectedPosition(position);
+					
 				}
 
 			}
 		});
 
-		send.setOnClickListener(new View.OnClickListener() {
+		rel2.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				Intent in = new Intent(ctx, NextAct.class);
+				
+				if (bool == false) {
+
+					rel.setVisibility(View.GONE);
+					bool = true;
+
+				} else {
+
+					rel.setVisibility(View.VISIBLE);
+					bool = false;
+					
+				}
+
+			}
+		});
+		user_name.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				Intent in = new Intent(ctx, ChefProfile.class);
 				in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				in.putExtra("text", items.get(position));
+				in.putExtra("photo", chefphoto.get(position));
+				in.putExtra("name", namelist.get(position));
+				in.putExtra("address", addresslist.get(position));
+				in.putExtra("mob", mobilelist.get(position));
+				in.putExtra("phone", phonelist.get(position));
+				
 				ctx.startActivity(in);
 
 			}
@@ -120,8 +177,25 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 	@Override
 	public View getLoadingView(LayoutInflater inflater, ViewGroup parent) {
+		
 		return inflater.inflate(R.layout.list_loading, null);
 	}
 
-	
+	// Filter Class
+			public void filter(String charText) {
+				charText = charText.toLowerCase(Locale.getDefault());
+				list.clear();
+				if (charText.length() == 0) {
+					list.addAll(namelist1);
+				} else {
+					for (int i = 0; i < namelist1.size(); i++) {
+						if (namelist1.get(i)
+								.toLowerCase(Locale.getDefault())
+								.contains(charText)) {
+							list.add(namelist1.get(i));
+						}
+					}
+				}
+				notifyDataSetChanged();
+			}
 }

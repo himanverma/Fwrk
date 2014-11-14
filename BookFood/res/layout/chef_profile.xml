@@ -37,7 +37,7 @@
     <RelativeLayout
         android:id="@+id/rel2"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="210dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/rel1" 
         android:background="@drawable/profile_bg">
@@ -67,8 +67,9 @@
             android:id="@+id/ratingBar1"
             style="@style/foodRatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:layout_below="@+id/textView2"
+            
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -106,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView3"
             android:layout_toRightOf="@+id/imageView4"
-            android:text="0172-400-2354"
+            android:text="0172-400-2354 / 9015340228"
             android:textColor="#ffffff"
             android:textSize="12dp" />
 
