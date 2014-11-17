@@ -64,7 +64,7 @@ class Recipe extends AppModel {
 		'CombinationItem' => array(
 			'className' => 'CombinationItem',
 			'foreignKey' => 'recipe_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -77,7 +77,7 @@ class Recipe extends AppModel {
 		'MealMenu' => array(
 			'className' => 'MealMenu',
 			'foreignKey' => 'recipe_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

@@ -73,7 +73,7 @@ class VendorDay extends AppModel {
 		'MealMenu' => array(
 			'className' => 'MealMenu',
 			'foreignKey' => 'vendor_day_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -86,7 +86,7 @@ class VendorDay extends AppModel {
 		'Order' => array(
 			'className' => 'Order',
 			'foreignKey' => 'vendor_day_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

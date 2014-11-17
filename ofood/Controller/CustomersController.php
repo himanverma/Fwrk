@@ -20,7 +20,7 @@ class CustomersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('api_index'));
+        $this->Auth->allow(array('api_index', 'api_add'));
     }
 
     public function api_index() {
@@ -31,6 +31,51 @@ class CustomersController extends AppController {
         ));
     }
 
+    public function api_add() {
+        Configure::write('debug',0);
+        if ($this->request->is('post')) {
+            $customerRcord = $this->Customer->find('first', array(
+                'conditions' => array(
+                    "OR" => array(
+                        "Customer.mobile_number" => $this->request->data['Customer']['mobile_number'],
+                        "Customer.fbid" => $this->request->data['Customer']['fbid'],
+                    )
+                )
+            ));
+            if (!empty($customerRcord)) {
+                $this->Customer->updateAll(array(
+                    'Customer.deviceId' => "'" . $this->request->data['Customer']['deviceId'] . "'"
+                        ), array(
+                    'Customer.id' => $customerRcord['Customer']['id']
+                ));
+                $this->set(array(
+                    'data' => $customerRcord['Customer']['id'],
+                    '_serialize' => array('data')
+                ));
+            } else {
+                if ($this->Customer->save($this->request->data)) {
+                    /* send this v_code to mail and sms for verification */
+                    $v_code = strtoupper(bin2hex(decbin($this->Customer->getLastInsertID())));
+
+                    $this->Customer->updateAll(array(
+                        'Customer.v_code' => "'" . $v_code . "'"
+                            ), array(
+                        "Customer.id" => $this->Customer->getLastInsertID()
+                    ));
+                    $this->set(array(
+                        'data' => $this->Customer->getLastInsertID(),
+                        '_serialize' => array('data')
+                    ));
+                } else {
+                    $this->set(array(
+                        'data' => 'sorry',
+                        '_serialize' => array('data')
+                    ));
+                }
+            }
+        }
+    }
+    
     /**
      * index method
      *

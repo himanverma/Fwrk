@@ -33,12 +33,19 @@ class CombinationsController extends AppController {
             $lat=$this->request->data['User']['latitude'];
             $long=$this->request->data['User']['longitude'];
             $count=$this->request->data['User']['count'];
+            $currentDate = date("Y-m-d");
             $combination1 = $this->Combination->find('count',array(
+                "conditions"=>array(
+                    "Combination.date >=" => date('Y-m-d', strtotime($currentDate))
+                ),
                 "fields" => array("get_d($lat,$long,Vendor.lat,Vendor.long) as distance","Vendor.*","Combination.*"),
                 "order"=>'distance ASC',
             ));
             
             $combination = $this->Combination->find('all',array(
+                "conditions"=>array(
+                    "Combination.date >=" => date('Y-m-d', strtotime($currentDate))
+                ),
                 "fields" => array("get_d($lat,$long,Vendor.lat,Vendor.long) as distance","Vendor.*","Combination.*"),
                 "order"=>'distance ASC',
 //                'limit'=>8,
@@ -183,7 +190,6 @@ class CombinationsController extends AppController {
                 $r[] = $d['Recipe']; 
             }
             $this->set("recipes", $r);
-            
             $this->loadModel('Vendor');
             $this->Vendor->recursive = 0;
             $vendors = $this->Vendor->find('all');
@@ -197,6 +203,5 @@ class CombinationsController extends AppController {
                     $this->Combination->saveAssociated($data, array('deep' => true));
                 }
             }
-            
         }
 }

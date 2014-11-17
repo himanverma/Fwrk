@@ -186,7 +186,7 @@ class Vendor extends AppModel {
 		'Combination' => array(
 			'className' => 'Combination',
 			'foreignKey' => 'vendor_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -196,23 +196,23 @@ class Vendor extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'VendorDay' => array(
-			'className' => 'VendorDay',
-			'foreignKey' => 'vendor_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
+//		'VendorDay' => array(
+//			'className' => 'VendorDay',
+//			'foreignKey' => 'vendor_id',
+//			'dependent' => true,
+//			'conditions' => '',
+//			'fields' => '',
+//			'order' => '',
+//			'limit' => '',
+//			'offset' => '',
+//			'exclusive' => '',
+//			'finderQuery' => '',
+//			'counterQuery' => ''
+//		),
 		'VendorDocument' => array(
 			'className' => 'VendorDocument',
 			'foreignKey' => 'vendor_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -225,7 +225,7 @@ class Vendor extends AppModel {
 		'VendorReview' => array(
 			'className' => 'VendorReview',
 			'foreignKey' => 'vendor_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

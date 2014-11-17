@@ -79,7 +79,7 @@ class Combination extends AppModel {
 		'CombinationItem' => array(
 			'className' => 'CombinationItem',
 			'foreignKey' => 'combination_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

@@ -172,10 +172,23 @@ class Customer extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+		'Address' => array(
+			'className' => 'Address',
+			'foreignKey' => 'customer_id',
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Order' => array(
 			'className' => 'Order',
 			'foreignKey' => 'customer_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -188,7 +201,7 @@ class Customer extends AppModel {
 		'VendorReview' => array(
 			'className' => 'VendorReview',
 			'foreignKey' => 'customer_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
