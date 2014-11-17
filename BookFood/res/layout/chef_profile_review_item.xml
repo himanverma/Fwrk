@@ -17,7 +17,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/chef_img" />
+            android:src="@drawable/chef_img" 
+            android:background="@drawable/round_corner"/>
 
         <TextView
             android:id="@+id/textView1"

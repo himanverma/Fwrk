@@ -49,10 +49,11 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:background="#E5E4E2"
+           
             android:padding="1dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_launcher" 
+            android:background="@drawable/round_corner"/>
 
         <TextView
             android:id="@+id/textView1"

@@ -21,7 +21,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -113,7 +115,12 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 						// TODO Auto-generated method stub
 						String text = search.getText().toString()
 								.toLowerCase(Locale.getDefault());
+						
+					try{
 						adapter.filter(text);
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 					}
 				});
 				
@@ -250,11 +257,9 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 					JSONObject obj = new JSONObject(s);
 					JSONObject data = obj.getJSONObject("data");
 					String total_count = data.getString("list");
-					Log.e("ttt", total_count);
-					    
 					
 					total_num = Integer.parseInt(total_count);
-					
+				if(!(total_num<=0)){
 					//Iterator<?> keys = obj3.keys();
 					for(int i = 0; i<data.names().length(); i++){
 //						String key = (String) keys.next();
@@ -294,7 +299,7 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 					namelist.add(name);
 					pricelist.add(price);
 					imglist.add(image);
-					address_list.add(address+","+city+","+state+","+country);
+					address_list.add(address+","+city);
 					phone_list.add(phone_number);
 					mobile_list.add(mobile_number);
 					chef_photo.add(photo);
@@ -302,7 +307,10 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 					listView.setAdapter(adapter);
 					
 					}
+				}else{
 					
+					alert("no data found");
+				}
 				} catch (Exception e) {
 
 					e.printStackTrace();
@@ -315,5 +323,31 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 			updateTask.execute((Void[]) null);
 
 	}
+	@SuppressWarnings("deprecation")
+	public void alert(String msg) {
 
+		final AlertDialog alertDialog = new AlertDialog.Builder(
+				DishesActivity.this).create();
+
+		// Setting Dialog Title
+		alertDialog.setTitle("FoodApp");
+
+		// Setting Dialog Message
+		alertDialog.setMessage(msg);
+
+		// Setting Icon to Dialog
+		alertDialog.setIcon(R.drawable.ic_launcher);
+
+		// Setting OK Button
+		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+
+				alertDialog.cancel();
+				finish();
+			}
+		});
+
+		// Showing Alert Message
+		alertDialog.show();
+	}
 }

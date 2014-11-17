@@ -76,25 +76,17 @@ public class ChefProfile extends Activity {
 			
 		}
 
-		if (chef_mob.equals(null)||chef_pho.equals(null)) {
+		if (chef_mob.equals(null)) {
 
 			chefmob.setText("Not set");
 			
 		} else {
 			
-		if(chef_mob.equals(null)){
-			
-			chefmob.setText(chef_pho);
-		}
-		else if(chef_pho.equals(null)){
-			
+		
 			chefmob.setText(chef_mob);
-		}else{
-			
-			chefmob.setText(chef_pho+" / "+chef_mob);
 		}
 			
-		}
+		
 
 		
 		back = (ImageView) findViewById(R.id.imageView1);

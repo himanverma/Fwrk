@@ -6,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="visible">Visible</string>
     <string name="not_visible">Not Visible</string>
-      <string name="url">http://uneekarts.com/office/ofood/</string>
+    <string name="url">http://uneekarts.com/office/ofood/</string>
+    <string name="fbid">281129088678615</string>
+
 </resources>

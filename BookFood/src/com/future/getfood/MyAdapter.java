@@ -8,10 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.future.foodimg.ImageLoader;
 import com.future.getfood.R;
@@ -28,6 +31,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 	public static boolean bool = true;
 	Context ctx;
 	int pos;
+	String chk_value="no";
 	ArrayList<String>list;
 	ArrayList<String>namelist;
 	ArrayList<String>namelist1;
@@ -93,22 +97,95 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		 TextView rate_num=((TextView) v.findViewById(R.id.textView2));
 		 TextView delivery_time=((TextView) v.findViewById(R.id.textView3));
 		 TextView price_dd=((TextView) v.findViewById(R.id.textView4));
-		Button btn = (Button) v.findViewById(R.id.button1);
-		Button send = (Button) v.findViewById(R.id.button2);
+	
+		final Button send = (Button) v.findViewById(R.id.button2);
+		
 		final RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.rel22);
-		
 		final RelativeLayout rel1 = (RelativeLayout) v.findViewById(R.id.rr1);
-		
 		final RelativeLayout rel2 = (RelativeLayout) v.findViewById(R.id.rr2);
 		
-		CheckBox chk1=(CheckBox) v.findViewById(R.id.checkBox1);
-		CheckBox chk2=(CheckBox) v.findViewById(R.id.checkBox2);
-		CheckBox chk3=(CheckBox) v.findViewById(R.id.checkBox3);
+		final CheckBox chk1=(CheckBox) v.findViewById(R.id.checkBox1);
+		final CheckBox chk2=(CheckBox) v.findViewById(R.id.checkBox2);
+		final CheckBox chk3=(CheckBox) v.findViewById(R.id.checkBox3);
+		chk1.setChecked(true);
+		chk_value="4 Roti+Rice";
+		
+		//set value
 		il.DisplayImage(imglist.get(position), dish_img);
-		// Log.e("nnn", list.get(position));
 		 dish_name.setText(list.get(position));
 		 user_name.setText("By "+namelist.get(position));
 		 price_dd.setText("Price: Rs"+pricelist.get(position));
+		 
+		 chk1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				
+				if(chk1.isChecked()){
+					
+					chk_value="4 Roti+Rice";
+					chk2.setChecked(false);
+					chk3.setChecked(false);
+					Log.e("mmmm", chk_value);
+				}
+			}
+		});
+		 
+		 
+		 chk2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					
+					if(chk2.isChecked()){
+						
+						chk_value="Full Rice";
+						chk1.setChecked(false);
+						chk3.setChecked(false);
+						Log.e("mmmm", chk_value);
+					}
+				}
+			});
+		 
+		 chk3.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					// TODO Auto-generated method stub
+					
+					if(chk3.isChecked()){
+						
+						chk_value="6 Roti";
+						chk1.setChecked(false);
+						chk2.setChecked(false);
+						Log.e("mmmm", chk_value);
+					}
+				}
+			});
+		 
+		 send.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			if(chk_value.equals("no")){
+				
+				Toast.makeText(ctx, "please select option!",5000).show();
+				
+			}else{
+				Intent in = new Intent(ctx, OrderDishes.class);
+				in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				in.putExtra("dish", list.get(position));
+				in.putExtra("chk", chk_value);
+				in.putExtra("price", pricelist.get(position));
+				ctx.startActivity(in);
+			}
+			}
+		});
+		 
 		rel1.setOnClickListener(new View.OnClickListener() {
 
 			@Override
