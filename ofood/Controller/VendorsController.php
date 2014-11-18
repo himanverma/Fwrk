@@ -32,9 +32,10 @@ class VendorsController extends AppController {
 		}
 		$options = array(
                     'recursive'=>3,
-                    'contain'=>array('Combination'),
+                    'contain'=>array('Combination','VendorReview'),
                     'conditions' => array('Vendor.' . $this->Vendor->primaryKey => $id)
                     );
+                //$this->Vender->virtualFields['rating'] = 'SUM(`VendorReview`.`ratings`) / COUNT(`VendorReview`.`ratings`) * 5';
                 $this->set(array(
                     'data' => $this->Vendor->find('first', $options),
                     '_serialize' => array('data')

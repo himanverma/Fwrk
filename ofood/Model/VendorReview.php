@@ -7,7 +7,7 @@ App::uses('AppModel', 'Model');
  * @property Vendor $Vendor
  */
 class VendorReview extends AppModel {
-
+    
 /**
  * Validation rules
  *

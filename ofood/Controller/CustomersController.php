@@ -34,6 +34,7 @@ class CustomersController extends AppController {
     public function api_add() {
         Configure::write('debug',0);
         if ($this->request->is('post')) {
+       // $this->request->data['Customer']['mobile_number']="45376345";
             $customerRcord = $this->Customer->find('first', array(
                 'conditions' => array(
                     "OR" => array(
@@ -42,6 +43,7 @@ class CustomersController extends AppController {
                     )
                 )
             ));
+            //debug($customerRcord); exit;
             if (!empty($customerRcord)) {
                 $this->Customer->updateAll(array(
                     'Customer.deviceId' => "'" . $this->request->data['Customer']['deviceId'] . "'"
@@ -68,7 +70,7 @@ class CustomersController extends AppController {
                     ));
                 } else {
                     $this->set(array(
-                        'data' => 'sorry',
+                        'data' => array("error" => 1,"msg" => $this->Customer->validationErrors),
                         '_serialize' => array('data')
                     ));
                 }
