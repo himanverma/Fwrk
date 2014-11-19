@@ -1,99 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-     android:background="#ffffff" >
-
-    <RelativeLayout
-        android:id="@+id/rr1"
-        android:layout_width="fill_parent"
-        android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@drawable/content_bg" >
-
-        <TextView
-            android:id="@+id/dishname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="5dp"
-            android:text="Dishes name"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FF0033"
-            android:gravity="center"
-            android:textSize="13dp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
+    android:layout_height="fill_parent" >
 
     <RelativeLayout
         android:id="@+id/rr2"
         android:layout_width="fill_parent"
-        android:layout_height="140dp"
+        android:layout_height="170dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/rr1"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="@drawable/content_bg" >
+        android:background="@drawable/item_box1" >
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="90dp"
-            android:layout_height="100dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-           
-            android:padding="1dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher" 
-            android:background="@drawable/round_corner"/>
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/imageView1"
-            android:singleLine="true"
-            android:text="by Jsontent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
-
-        <RatingBar
-            android:id="@+id/ratingBar1"
-            style="@style/foodRatingBar"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/rr1"
+            android:layout_width="fill_parent"
             android:layout_height="30dp"
-            android:layout_below="@+id/textView1"
-            android:layout_toRightOf="@+id/imageView1" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" >
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView1"
-            android:layout_toRightOf="@+id/ratingBar1"
-            android:text="(3.5)"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignLeft="@+id/textView1"
-            android:layout_below="@+id/textView2"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/delivery_icon" />
+            <TextView
+                android:id="@+id/dishname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:text="Dishes name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FF0033"
+                android:textSize="13dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/textView3"
@@ -113,23 +54,75 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView2"
-            android:layout_toRightOf="@+id/imageView1"
+            android:layout_alignBottom="@+id/imageView1"
+            android:layout_alignLeft="@+id/imageView2"
+            android:layout_alignRight="@+id/textView3"
+            android:layout_marginTop="5dp"
             android:text="Price:Rs50"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#FF0033" />
 
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="90dp"
+            android:layout_height="100dp"
+            android:layout_alignLeft="@+id/rr1"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/round_corner"
+            android:padding="1dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView2"
+            android:layout_alignTop="@+id/imageView1"
+            android:singleLine="true"
+            android:text="by Jsontent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+
+        <RatingBar
+            android:id="@+id/ratingBar1"
+            style="@style/foodRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:isIndicator="true"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/textView1" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_toRightOf="@+id/ratingBar1"
+            android:text="(3.5)"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@+id/ratingBar1"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/imageView1"
+            android:src="@drawable/delivery_icon1" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rel22"
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/rr2"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="@drawable/content_bg"
+        android:background="@drawable/options_bg1"
         android:visibility="gone" >
 
         <CheckBox
@@ -139,7 +132,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"
-            android:text="4 Roti+Rice"
+            android:text="4 Roti+Half Rice"
             android:textColor="#000000" />
 
         <CheckBox
@@ -163,12 +156,12 @@
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/checkBox1"
-            android:layout_marginRight="16dp"
-            android:text="" 
-            android:background="@drawable/order_btn"/>
+            android:layout_marginRight="10dp"
+            android:background="@drawable/order_btn"
+            android:text="" />
     </RelativeLayout>
 
 </RelativeLayout>

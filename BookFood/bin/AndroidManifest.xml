@@ -66,13 +66,16 @@
             android:name="com.future.getfood.DishSearchList"
             android:screenOrientation="portrait" >
         </activity>
-        
-         <activity
+        <activity
             android:name="com.future.getfood.FacebookLogin"
-            android:screenOrientation="portrait" 
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
-        
+        <activity
+            android:name="com.future.getfood.PaymentProcess"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

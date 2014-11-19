@@ -31,35 +31,50 @@ public class MyAdapter extends InfiniteScrollAdapter {
 	public static boolean bool = true;
 	Context ctx;
 	int pos;
-	String chk_value="no";
-	ArrayList<String>list;
-	ArrayList<String>namelist;
-	ArrayList<String>namelist1;
-	ArrayList<String>pricelist;
-	ArrayList<String>imglist;
-	ArrayList<String>addresslist;
-	ArrayList<String>mobilelist;
-	ArrayList<String>phonelist;
-	ArrayList<String>chefphoto;
-    ImageLoader il;
-	public MyAdapter(Context context,ArrayList<String>ll,ArrayList<String>nll,ArrayList<String>pll,ArrayList<String>imll,
-			ArrayList<String>adml,ArrayList<String>poll,ArrayList<String>moll,ArrayList<String>pcholl) {
+	String chk_value = "no";
+	ArrayList<String> list;
+	ArrayList<String> namelist;
+	ArrayList<String> namelist1;
+	ArrayList<String> pricelist;
+	ArrayList<String> imglist;
+	ArrayList<String> addresslist;
+	ArrayList<String> mobilelist;
+	ArrayList<String> phonelist;
+	ArrayList<String> chefphoto;
+	ArrayList<String> chefid;
+	ArrayList<String> chefrate;
+	ImageLoader il;
+	SessionManager sess;
+	String user_id;
+
+	public MyAdapter(Context context, ArrayList<String> ll,
+			ArrayList<String> nll, ArrayList<String> pll,
+			ArrayList<String> imll, ArrayList<String> adml,
+			ArrayList<String> poll, ArrayList<String> moll,
+			ArrayList<String> pcholl,ArrayList<String> idll,ArrayList<String> rll) {
 		super(context);
 		ctx = context;
 		items = new ArrayList<HashMap<String, String>>();
-		list=new ArrayList<String>();
-		namelist1=new ArrayList<String>();
-		
-		list=ll;
-		namelist=nll;
-		pricelist=pll;
+		list = new ArrayList<String>();
+		namelist1 = new ArrayList<String>();
+
+		list = ll;
+		namelist = nll;
+		pricelist = pll;
 		namelist1.addAll(list);
-		imglist=imll;
-		addresslist=adml;
-		mobilelist=moll;
-		phonelist=poll;
-		chefphoto=pcholl;
-		il=new ImageLoader(ctx);
+		imglist = imll;
+		addresslist = adml;
+		mobilelist = moll;
+		phonelist = poll;
+		chefphoto = pcholl;
+		chefid=idll;
+		chefrate=rll;
+		il = new ImageLoader(ctx);
+
+		sess = new SessionManager(ctx);
+		HashMap<String, String> map = sess.getUserDetails();
+		user_id = map.get(SessionManager.KEY_ID);
+
 	}
 
 	@Override
@@ -75,124 +90,141 @@ public class MyAdapter extends InfiniteScrollAdapter {
 			super.setDoneLoading();
 		}
 		notifyDataSetChanged();
-		
+
 	}
 
 	@Override
 	public Object getRealItem(int position) {
-		
+
 		return list.get(position);
 	}
-
-	
 
 	@Override
 	public View getRealView(LayoutInflater inflater, final int position,
 			View convertView, ViewGroup parent) {
 		View v = inflater.inflate(R.layout.dishes_item, null);
-		TextView dish_name=((TextView) v.findViewById(R.id.dishname));
-		ImageView dish_img=(ImageView) v.findViewById(R.id.imageView1);
-		TextView user_name=((TextView) v.findViewById(R.id.textView1));
-		 RatingBar rb=(RatingBar) v.findViewById(R.id.ratingBar1);
-		 TextView rate_num=((TextView) v.findViewById(R.id.textView2));
-		 TextView delivery_time=((TextView) v.findViewById(R.id.textView3));
-		 TextView price_dd=((TextView) v.findViewById(R.id.textView4));
-	
+		TextView dish_name = ((TextView) v.findViewById(R.id.dishname));
+		ImageView dish_img = (ImageView) v.findViewById(R.id.imageView1);
+		TextView user_name = ((TextView) v.findViewById(R.id.textView1));
+		RatingBar rb = (RatingBar) v.findViewById(R.id.ratingBar1);
+		TextView rate_num = ((TextView) v.findViewById(R.id.textView2));
+		TextView delivery_time = ((TextView) v.findViewById(R.id.textView3));
+		TextView price_dd = ((TextView) v.findViewById(R.id.textView4));
+
 		final Button send = (Button) v.findViewById(R.id.button2);
-		
+
 		final RelativeLayout rel = (RelativeLayout) v.findViewById(R.id.rel22);
 		final RelativeLayout rel1 = (RelativeLayout) v.findViewById(R.id.rr1);
 		final RelativeLayout rel2 = (RelativeLayout) v.findViewById(R.id.rr2);
-		
-		final CheckBox chk1=(CheckBox) v.findViewById(R.id.checkBox1);
-		final CheckBox chk2=(CheckBox) v.findViewById(R.id.checkBox2);
-		final CheckBox chk3=(CheckBox) v.findViewById(R.id.checkBox3);
+
+		final CheckBox chk1 = (CheckBox) v.findViewById(R.id.checkBox1);
+		final CheckBox chk2 = (CheckBox) v.findViewById(R.id.checkBox2);
+		final CheckBox chk3 = (CheckBox) v.findViewById(R.id.checkBox3);
 		chk1.setChecked(true);
-		chk_value="4 Roti+Rice";
-		
-		//set value
+		chk_value = "4 Roti+Rice";
+
+		// set value
 		il.DisplayImage(imglist.get(position), dish_img);
-		 dish_name.setText(list.get(position));
-		 user_name.setText("By "+namelist.get(position));
-		 price_dd.setText("Price: Rs"+pricelist.get(position));
-		 
-		 chk1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+		dish_name.setText(list.get(position));
+		user_name.setText("By " + namelist.get(position));
+		price_dd.setText("Price: Rs" + pricelist.get(position));
+		rb.setRating(Float.parseFloat(chefrate.get(position)));
+		rate_num.setText("("+chefrate.get(position)+")");
+		
+		chk1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
 				// TODO Auto-generated method stub
-				
-				if(chk1.isChecked()){
-					
-					chk_value="4 Roti+Rice";
+
+				if (chk1.isChecked()) {
+
+					chk_value = "4 Roti+Rice";
 					chk2.setChecked(false);
 					chk3.setChecked(false);
-					Log.e("mmmm", chk_value);
+					
 				}
 			}
 		});
-		 
-		 
-		 chk2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					// TODO Auto-generated method stub
+
+		chk2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+
+				if (chk2.isChecked()) {
+
+					chk_value = "Full Rice";
+					chk1.setChecked(false);
+					chk3.setChecked(false);
 					
-					if(chk2.isChecked()){
-						
-						chk_value="Full Rice";
-						chk1.setChecked(false);
-						chk3.setChecked(false);
-						Log.e("mmmm", chk_value);
-					}
 				}
-			});
-		 
-		 chk3.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					// TODO Auto-generated method stub
+			}
+		});
+
+		chk3.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+
+				if (chk3.isChecked()) {
+
+					chk_value = "6 Roti";
+					chk1.setChecked(false);
+					chk2.setChecked(false);
 					
-					if(chk3.isChecked()){
-						
-						chk_value="6 Roti";
-						chk1.setChecked(false);
-						chk2.setChecked(false);
-						Log.e("mmmm", chk_value);
-					}
 				}
-			});
-		 
-		 send.setOnClickListener(new View.OnClickListener() {
-			
+			}
+		});
+
+		send.setOnClickListener(new View.OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-			if(chk_value.equals("no")){
-				
-				Toast.makeText(ctx, "please select option!",5000).show();
-				
-			}else{
-				Intent in = new Intent(ctx, OrderDishes.class);
-				in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				in.putExtra("dish", list.get(position));
-				in.putExtra("chk", chk_value);
-				in.putExtra("price", pricelist.get(position));
-				ctx.startActivity(in);
-			}
+
+				if (chk_value.equals("no")) {
+
+					Toast.makeText(ctx, "please select option!", 5000).show();
+
+				} else {
+
+					if (user_id.equals("0")) {
+
+						Intent in = new Intent(ctx, Order_Confirmation.class);
+						in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						in.putExtra("dish", list.get(position));
+						in.putExtra("chk", chk_value);
+						in.putExtra("price", pricelist.get(position));
+						
+						ctx.startActivity(in);
+					
+					
+					} else {
+						
+						Intent in = new Intent(ctx, OrderDishes.class);
+						in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						in.putExtra("dish", list.get(position));
+						in.putExtra("chk", chk_value);
+						in.putExtra("price", pricelist.get(position));
+						
+						ctx.startActivity(in);
+					}
+				}
 			}
 		});
-		 
+
 		rel1.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				
 				if (bool == false) {
 
 					rel.setVisibility(View.GONE);
@@ -202,7 +234,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 					rel.setVisibility(View.VISIBLE);
 					bool = false;
-					
+
 				}
 
 			}
@@ -214,7 +246,6 @@ public class MyAdapter extends InfiniteScrollAdapter {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				
 				if (bool == false) {
 
 					rel.setVisibility(View.GONE);
@@ -224,7 +255,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 					rel.setVisibility(View.VISIBLE);
 					bool = false;
-					
+
 				}
 
 			}
@@ -242,37 +273,37 @@ public class MyAdapter extends InfiniteScrollAdapter {
 				in.putExtra("address", addresslist.get(position));
 				in.putExtra("mob", mobilelist.get(position));
 				in.putExtra("phone", phonelist.get(position));
-				
+				in.putExtra("chefid", chefid.get(position));
+				in.putExtra("rate", chefrate.get(position));
 				ctx.startActivity(in);
 
 			}
 		});
-		
+
 		bool = true;
 		return v;
 	}
 
 	@Override
 	public View getLoadingView(LayoutInflater inflater, ViewGroup parent) {
-		
+
 		return inflater.inflate(R.layout.list_loading, null);
 	}
 
 	// Filter Class
-			public void filter(String charText) {
-				charText = charText.toLowerCase(Locale.getDefault());
-				list.clear();
-				if (charText.length() == 0) {
-					list.addAll(namelist1);
-				} else {
-					for (int i = 0; i < namelist1.size(); i++) {
-						if (namelist1.get(i)
-								.toLowerCase(Locale.getDefault())
-								.contains(charText)) {
-							list.add(namelist1.get(i));
-						}
-					}
+	public void filter(String charText) {
+		charText = charText.toLowerCase(Locale.getDefault());
+		list.clear();
+		if (charText.length() == 0) {
+			list.addAll(namelist1);
+		} else {
+			for (int i = 0; i < namelist1.size(); i++) {
+				if (namelist1.get(i).toLowerCase(Locale.getDefault())
+						.contains(charText)) {
+					list.add(namelist1.get(i));
 				}
-				notifyDataSetChanged();
 			}
+		}
+		notifyDataSetChanged();
+	}
 }

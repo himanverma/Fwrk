@@ -40,6 +40,9 @@ public class Order_Confirmation extends Activity {
 	EditText pho_num;
 	ImageView placeorder;
 	SessionManager sess;
+	String dishname;
+	String chkname;
+	String price;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +53,13 @@ public class Order_Confirmation extends Activity {
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.order_confirmation);
 
-		sess = new SessionManager(this);
+		// getting value from MyAdapter
+		Intent in = getIntent();
+		dishname = in.getStringExtra("dish");
+		chkname = in.getStringExtra("chk");
+		price = in.getStringExtra("price");
 
+		sess = new SessionManager(this);
 		pho_num = (EditText) findViewById(R.id.editText1);
 		placeorder = (ImageView) findViewById(R.id.imageView4);
 
@@ -117,7 +125,7 @@ public class Order_Confirmation extends Activity {
 				try {
 					long milli = System.currentTimeMillis();
 					String url = getResources().getString(R.string.url)
-							+ "api/customers/add.json?a="+milli;
+							+ "api/customers/add.json?a=" + milli;
 
 					MultipartEntity entity = new MultipartEntity(
 							HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -155,6 +163,13 @@ public class Order_Confirmation extends Activity {
 					JSONObject obj = new JSONObject(s);
 					String custmor_Id = obj.getString("data");
 					sess.setId(custmor_Id);
+					
+					Intent in = new Intent(Order_Confirmation.this, OrderDishes.class);
+					in.putExtra("dish",dishname);
+					in.putExtra("chk", chkname);
+					in.putExtra("price", price);
+					startActivity(in);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

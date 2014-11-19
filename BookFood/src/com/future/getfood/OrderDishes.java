@@ -14,6 +14,7 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.future.foodimg.DetectNetwork;
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Address;
@@ -63,11 +65,12 @@ public class OrderDishes extends FragmentActivity {
 	ImageView cls;
 	EditText street, area, zipcode, landmark, phone_num;
 	TextView edit, del;
-    Button save;
-    SessionManager sess;
-    String user_id;
+	Button save;
+	SessionManager sess;
+	String user_id;
 	protected HttpResponse response;
 	protected String s;
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -77,10 +80,10 @@ public class OrderDishes extends FragmentActivity {
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.order);
 
-		sess=new SessionManager(this);
-		HashMap<String, String>map=sess.getUserDetails();
-		user_id=map.get(SessionManager.KEY_ID);
-		
+		sess = new SessionManager(this);
+		HashMap<String, String> map = sess.getUserDetails();
+		user_id = map.get(SessionManager.KEY_ID);
+
 		// getting value from MyAdapter
 		Intent in = getIntent();
 		dishname = in.getStringExtra("dish");
@@ -154,8 +157,8 @@ public class OrderDishes extends FragmentActivity {
 		phone_num = (EditText) findViewById(R.id.editText5);
 		cls = (ImageView) findViewById(R.id.imageView4);
 
-		save=(Button)findViewById(R.id.button1);
-		
+		save = (Button) findViewById(R.id.button1);
+
 		// disable edittext box
 		street.setFocusableInTouchMode(false);
 		street.setFocusable(false);
@@ -163,7 +166,7 @@ public class OrderDishes extends FragmentActivity {
 		area.setFocusable(false);
 		zipcode.setFocusableInTouchMode(false);
 		zipcode.setFocusable(false);
-         
+
 		zipcode.setText(zip);
 		street.setText(add + "," + sub2);
 		area.setText(sub1 + "," + city);
@@ -208,151 +211,197 @@ public class OrderDishes extends FragmentActivity {
 				area.setFocusable(true);
 				zipcode.setFocusableInTouchMode(true);
 				zipcode.setFocusable(true);
-				
+
 				street.setText("");
 				area.setText("");
 				zipcode.setText("");
 			}
 		});
-		
-		
-		((ImageView)findViewById(R.id.imageView1)).setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		});
+
+		((ImageView) findViewById(R.id.imageView1))
+				.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						finish();
+					}
+				});
 
 		save.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				int ppp=phone_num.getText().toString().length();
-				if(street.getText().toString().equals("")){
-					
+				int ppp = phone_num.getText().toString().length();
+				String adds = street.getText().toString() + ","
+						+ area.getText().toString() + ","
+						+ zipcode.getText().toString() + ","
+						+ phone_num.getText().toString();
+
+				if (street.getText().toString().equals("")) {
+
 					street.setError("Please fill street name!");
 					street.requestFocus();
-				}else{
-					
-					if(area.getText().toString().equals("")){
-						
+				} else {
+
+					if (area.getText().toString().equals("")) {
+
 						area.setError("please fill area name!");
 						area.requestFocus();
-					}else{
-						
-						if(zipcode.getText().toString().equals("")){
-							
+					} else {
+
+						if (zipcode.getText().toString().equals("")) {
+
 							zipcode.setError("Please fill pincode!");
 							zipcode.requestFocus();
-						}else{
-						if(phone_num.getText().toString().equals("")){
-							
-							phone_num.setError("Please fill correct phone number");
-							phone_num.requestFocus();
-						}else{
-							if(ppp!=10){
-								
-								phone_num.setError("Please fill correct phone number");
+						} else {
+							if (phone_num.getText().toString().equals("")) {
+
+								phone_num
+										.setError("Please fill correct phone number");
 								phone_num.requestFocus();
-								
-							}else{
-								
-								Intent in=new Intent(OrderDishes.this,Order_Confirmation.class);
-								startActivity(in);
-							}	
+							} else {
+								if (ppp != 10) {
+
+									phone_num
+											.setError("Please fill correct phone number");
+									phone_num.requestFocus();
+
+								} else {
+									userdetail();
+									//dialog(adds);
+								}
 							}
-						
+
 						}
 					}
 				}
-				
+
 			}
 		});
 	}
-	
-	
+
 	// method for sending user detail on server
-		protected void userdetail() {
-			// TODO Auto-generated method stub
+	protected void userdetail() {
+		// TODO Auto-generated method stub
 
-			AsyncTask<Void, Void, Void> updateTask = new AsyncTask<Void, Void, Void>() {
-				ProgressDialog dialog = new ProgressDialog(OrderDishes.this);
+		AsyncTask<Void, Void, Void> updateTask = new AsyncTask<Void, Void, Void>() {
+			ProgressDialog dialog = new ProgressDialog(OrderDishes.this);
 
-				@Override
-				protected void onPreExecute() {
-					// what to do before background task
-					dialog.setMessage("Validating... ");
-					dialog.setIndeterminate(true);
-					dialog.show();
+			@Override
+			protected void onPreExecute() {
+				// what to do before background task
+				dialog.setMessage("Validating... ");
+				dialog.setIndeterminate(true);
+				dialog.show();
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
+
+				// do your background operation here
+				
+				 JSONObject obj = new JSONObject();
+		            try {
+		                obj.put("firstname", "dharam");
+		                obj.put("lastname", "Singh");
+		                obj.put("address", street.getText().toString());
+		                obj.put("area", area.getText().toString());
+		                obj.put("landmark", landmark.getText().toString());
+		                obj.put("phone", phone_num.getText().toString());
+		                obj.put("zipcode", zipcode.getText().toString());
+		                obj.put("lat", String.valueOf(latitude));
+		                obj.put("lng", String.valueOf(longitude));
+		                
+
+		            } catch (JSONException e) {
+		                // TODO Auto-generated catch block
+		                e.printStackTrace();
+		            }
+		            
+				try {
+					long milli = System.currentTimeMillis();
+					String url = getResources().getString(R.string.url)
+							+ "api/Addresses/add.json?a=" + milli;
+
+					MultipartEntity entity = new MultipartEntity(
+							HttpMultipartMode.BROWSER_COMPATIBLE);
+
+					HttpClient httpclient = new DefaultHttpClient();
+					HttpPost httppost = new HttpPost(url);
+
+					 entity.addPart("data[Address][customer_id]", new StringBody(user_id));
+					 entity.addPart("data[Address][data]", new StringBody(obj.toString()));
+					 entity.addPart("data[Address][status]", new StringBody("1"));
+					
+					httppost.setEntity(entity);
+
+					response = httpclient.execute(httppost);
+
+					s = EntityUtils.toString(response.getEntity());
+					Log.e("fhgfhj", s);
+
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 
-				@Override
-				protected Void doInBackground(Void... params) {
+				return null;
+			}
 
-					// do your background operation here
-					try {
-						long milli=System.currentTimeMillis();
-						String url = getResources().getString(R.string.url)
-								+ "api/Combinations.json?a="+milli;
-	                      
-						MultipartEntity entity = new MultipartEntity(
-								HttpMultipartMode.BROWSER_COMPATIBLE);
+			@Override
+			protected void onPostExecute(Void result) {
+				// what to do when background task is completed
 
-						
-						HttpClient httpclient = new DefaultHttpClient();
-						HttpPost httppost = new HttpPost(url);
+				dialog.cancel();
+			}
 
-						entity.addPart("data[User][firstname]", new StringBody(
-								String.valueOf(latitude)));
-						entity.addPart("data[User][lastname]", new StringBody(
-								String.valueOf(longitude)));
-						entity.addPart("data[User][address]", new StringBody(
-								String.valueOf(page)));
-						entity.addPart("data[User][area]", new StringBody(
-								String.valueOf(page)));
-						entity.addPart("data[User][landmark]", new StringBody(
-								String.valueOf(page)));
-						entity.addPart("data[User][phone]", new StringBody(
-								String.valueOf(page)));
-						entity.addPart("data[User][zipcode]", new StringBody(
-								String.valueOf(page)));
-						
-						entity.addPart("data[User][lat]", new StringBody(
-								String.valueOf(page)));
-						entity.addPart("data[User][lng]", new StringBody(
-								String.valueOf(page)));
-						
-						httppost.setEntity(entity);
+		};
+		if ((DetectNetwork.hasConnection(getApplicationContext())))
+			updateTask.execute((Void[]) null);
 
-						response = httpclient.execute(httppost);
+	}
 
-						s = EntityUtils.toString(response.getEntity());
-						Log.e("fhgfhj", s);
+	public void dialog(String addss) {
 
-					} catch (ClientProtocolException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+		final Dialog d = new Dialog(this);
+		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		d.setContentView(R.layout.confirmation_dialog);
+		TextView dish_name = (TextView) d.findViewById(R.id.textView4);
+		TextView dish_price = (TextView) d.findViewById(R.id.textView3);
+		TextView dish_add = (TextView) d.findViewById(R.id.textView5);
+		Button cls = (Button) d.findViewById(R.id.button1);
+		Button cirm = (Button) d.findViewById(R.id.button2);
+		d.show();
 
-					return null;
-				}
+		dish_name.setText(dishname + "+" + chkname);
+		dish_price.setText("Rs " + price);
+		dish_add.setText(addss);
 
-				@Override
-				protected void onPostExecute(Void result) {
-					// what to do when background task is completed
+		cls.setOnClickListener(new View.OnClickListener() {
 
-					dialog.cancel();
-				}
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				d.cancel();
+			}
+		});
 
-			};
-			if ((DetectNetwork.hasConnection(getApplicationContext())))
-				updateTask.execute((Void[]) null);
+		cirm.setOnClickListener(new View.OnClickListener() {
 
-		}
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				d.cancel();
+				Intent in=new Intent(OrderDishes.this,PaymentProcess.class);
+				startActivity(in);
+				
+			}
+		});
+
+	}
 }

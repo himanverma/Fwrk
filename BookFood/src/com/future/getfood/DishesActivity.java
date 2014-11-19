@@ -63,6 +63,8 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
     ArrayList<String>phone_list=new ArrayList<String>();
     ArrayList<String>mobile_list=new ArrayList<String>();
     ArrayList<String>chef_photo=new ArrayList<String>();
+    ArrayList<String>chef_id=new ArrayList<String>();
+    ArrayList<String>chef_rating=new ArrayList<String>();
 	
 	protected int total_num;
 	
@@ -235,7 +237,7 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					//Log.e("fhgfhj", s);
+					Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -287,6 +289,10 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 									.getString("phone_number");
 							String lat = obj4.getString("lat");
 							String lng = obj4.getString("long");
+							
+							String rating = obj4.getString("ratings");
+							
+							
 							JSONObject obj5 = obj3.getJSONObject("Combination");
 							String vendor_name = obj5.getString("display_name");
 							String price = obj5.getString("price");
@@ -303,7 +309,9 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 					phone_list.add(phone_number);
 					mobile_list.add(mobile_number);
 					chef_photo.add(photo);
-					adapter = new MyAdapter(DishesActivity.this,mylist,namelist,pricelist,imglist,address_list,phone_list,mobile_list,chef_photo);
+					chef_id.add(id);
+					chef_rating.add(rating);
+					adapter = new MyAdapter(DishesActivity.this,mylist,namelist,pricelist,imglist,address_list,phone_list,mobile_list,chef_photo,chef_id,chef_rating);
 					listView.setAdapter(adapter);
 					
 					}

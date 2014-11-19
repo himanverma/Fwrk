@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
-    android:background="@drawable/bg">
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg1" >
 
     <RelativeLayout
         android:id="@+id/rel1"
@@ -28,10 +28,9 @@
             android:layout_alignTop="@+id/imageView1"
             android:layout_centerHorizontal="true"
             android:text="Chef Profile"
-            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -39,8 +38,8 @@
         android:layout_width="fill_parent"
         android:layout_height="210dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/rel1" 
-        android:background="@drawable/profile_bg">
+        android:layout_below="@+id/rel1"
+        android:background="@drawable/profile_bg" >
 
         <ImageView
             android:id="@+id/imageView2"
@@ -70,8 +69,8 @@
             style="@style/foodRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:isIndicator="true"
             android:layout_below="@+id/textView2"
-            
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -82,10 +81,10 @@
             android:layout_below="@+id/ratingBar1"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:textSize="12dp"
             android:text="123,Housing Board,panchakula"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textSize="12dp" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -113,49 +112,7 @@
             android:textColor="#ffffff"
             android:textSize="12dp" />
 
-        <RelativeLayout
-            android:id="@+id/List_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="20dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignTop="@+id/reviews"
-            android:layout_toLeftOf="@+id/reviews"
-            android:background="@drawable/active_btn" >
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="List"
-                android:textColor="#ffffff"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/reviews"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/imageView4"
-            android:background="@drawable/unactive_btn" >
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:text="Reviews"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        </RelativeLayout>
-
+       
     </RelativeLayout>
 
     <RelativeLayout
@@ -165,14 +122,17 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/rel2"
         android:visibility="visible" >
-        
-        <com.future.listscroll.InfiniteScrollListView
-            android:id="@+id/list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@drawable/reviews_divider"
-            android:dividerHeight="1dp" />
 
+        <ListView
+            android:id="@+id/listView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:fadingEdge="none"
+            android:scrollbars="none" >
+        </ListView>
+        
     </RelativeLayout>
 
     <RelativeLayout
@@ -182,8 +142,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/rel2"
         android:layout_margin="3dp"
-        android:visibility="gone"
-        android:background="@drawable/reviews_bg" >
+        android:background="@drawable/reviews_bg"
+        android:visibility="gone" >
 
         <RelativeLayout
             android:id="@+id/bottom"
@@ -199,8 +159,8 @@
                 android:layout_height="fill_parent"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="100dp" 
-                android:background="@drawable/btn_divider">
+                android:layout_marginRight="100dp"
+                android:background="@drawable/btn_divider" >
             </RelativeLayout>
 
             <Button
@@ -226,13 +186,12 @@
                 android:background="@drawable/write_btn"
                 android:ems="10"
                 android:hint="comments..."
+                android:inputType="textPersonName"
                 android:paddingLeft="5dp"
-                android:textSize="13dp"
-                android:inputType="textPersonName" >
+                android:textSize="13dp" >
 
                 <requestFocus />
             </EditText>
-
         </RelativeLayout>
 
         <ListView
@@ -241,13 +200,211 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/bottom"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true" 
+            android:layout_alignParentTop="true"
             android:divider="@drawable/reviews_divider"
             android:dividerHeight="1dp"
-            android:fadingEdge="none">
-
+            android:fadingEdge="none"
+            android:scrollbars="none" >
         </ListView>
-    
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/jjjy"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/rel2"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:id="@+id/mmmm"
+            android:layout_width="fill_parent"
+            android:layout_height="240dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/mmmjk"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/rating_box" >
+
+            <RelativeLayout
+                android:id="@+id/kli"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/rating_box_title_bg" >
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:text="Rating"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000000" />
+            </RelativeLayout>
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/kli"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/select_box" />
+
+            <RelativeLayout
+                android:id="@+id/done"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_alignLeft="@+id/spinner1"
+                android:layout_alignRight="@+id/spinner1"
+                android:layout_below="@+id/spinner1"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/done_bg" >
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:text="Done"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/textView9"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/textView9"
+                    android:src="@drawable/ok" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar14"
+                    style="@style/foodRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="5dp" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/mmmjk"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" >
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/star" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView5"
+                android:src="@drawable/star" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageView6"
+                android:src="@drawable/give_us_rating" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/id"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/rel2"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal"
+        android:weightSum="3" >
+        
+         <RelativeLayout
+            android:id="@+id/List_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+           
+            android:background="@drawable/active_btn" 
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="List"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+
+        
+
+        <RelativeLayout
+            android:id="@+id/review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          
+            android:background="@drawable/unactive_btn"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="Reviews"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#ffffff" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/reviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           
+            android:background="@drawable/unactive_btn" 
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="Ratings"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
