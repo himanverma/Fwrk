@@ -20,7 +20,7 @@ class CombinationsController extends AppController {
         
         public function beforeFilter() {
             parent::beforeFilter();
-            $this->Auth->allow(array('api_index','api_view'));
+            $this->Auth->allow(array('api_index','api_view','api_search'));
         }
         
 /*------------------------------------------ Web-Services-Start----------------------------------------*/
@@ -33,16 +33,23 @@ class CombinationsController extends AppController {
             $lat=$this->request->data['User']['latitude'];
             $long=$this->request->data['User']['longitude'];
             $count=$this->request->data['User']['count'];
+            $currentDate = date("Y-m-d");
             $combination1 = $this->Combination->find('count',array(
+                "conditions"=>array(
+                    "Combination.date >=" => date('Y-m-d', strtotime($currentDate))
+                ),
                 "fields" => array("get_d($lat,$long,Vendor.lat,Vendor.long) as distance","Vendor.*","Combination.*"),
                 "order"=>'distance ASC',
             ));
             
             $combination = $this->Combination->find('all',array(
+                "conditions"=>array(
+                    "Combination.date >=" => date('Y-m-d', strtotime($currentDate))
+                ),
                 "fields" => array("get_d($lat,$long,Vendor.lat,Vendor.long) as distance","Vendor.*","Combination.*"),
                 "order"=>'distance ASC',
-                'limit'=>8,
-                'page' => $count
+//                'limit'=>8,
+//                'page' => $count
             ));
             $combination['list']=$combination1;
 //            Debugger::log($combination);
@@ -63,7 +70,24 @@ class CombinationsController extends AppController {
                 ));
 	}
         
-/*------------------------------------------ Web-Services-End----------------------------------------*/            
+        
+        public function api_search($like=NULL){
+            $like=$this->request->data['Combination']['search'];
+            $currentDate = date("Y-m-d");
+            $searchRecords=$this->Combination->find('all',array('conditions'=>array(
+                "AND" => array (
+                    "Combination.display_name LIKE" => "%$like%",
+                    "Combination.date >=" => date('Y-m-d', strtotime($currentDate))
+                )
+            )));
+            $this->set(array(
+                'data' => $searchRecords,
+                '_serialize' => array('data')
+            ));
+        }
+
+
+        /*------------------------------------------ Web-Services-End----------------------------------------*/            
 
 /**
  * index method
@@ -166,7 +190,6 @@ class CombinationsController extends AppController {
                 $r[] = $d['Recipe']; 
             }
             $this->set("recipes", $r);
-            
             $this->loadModel('Vendor');
             $this->Vendor->recursive = 0;
             $vendors = $this->Vendor->find('all');
@@ -180,6 +203,5 @@ class CombinationsController extends AppController {
                     $this->Combination->saveAssociated($data, array('deep' => true));
                 }
             }
-            
         }
 }

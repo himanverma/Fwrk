@@ -5,7 +5,7 @@
 <header class="header">
     <a href="<?php echo $this->Html->webroot; ?>" target="_blank" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        Rug-Builder
+        PickMeal
     </a>
 
     <style>

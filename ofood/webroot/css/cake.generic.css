@@ -264,6 +264,8 @@ input[type=submit],
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.2);
 	-webkit-user-select: none;
 	user-select: none;
+        margin: 3px 5px;
+        float: left;
 }
 .actions ul li a:hover,
 .actions a:hover {
@@ -471,4 +473,27 @@ pre {
 /** Elements **/
 #url-rewriting-warning {
 	display:none;
+}
+
+
+/*************************************************************************/
+
+.combinations table{
+    width: 100% !important;
+}
+
+.input.select.required > label {
+    width: 9%;
+}
+.input.text.required > label{
+    width: 9%;
+}
+.input.datetime > label{
+    width: 9%;
+}
+.input.number > label{
+    width: 9%;
+}
+.input.text > label{
+    width: 9%;
 }
