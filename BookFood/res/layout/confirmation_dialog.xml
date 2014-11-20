@@ -10,7 +10,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_margin="5dp"
-        android:background="@drawable/bg" >
+        android:background="@drawable/bg1" >
 
         <RelativeLayout
             android:id="@+id/kkkk"

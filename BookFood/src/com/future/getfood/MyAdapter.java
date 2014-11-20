@@ -2,6 +2,7 @@ package com.future.getfood;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 	public static boolean bool = true;
 	Context ctx;
 	int pos;
+	private Typeface tf1,tf2,tf3,tf4;
 	String chk_value = "no";
 	ArrayList<String> list;
 	ArrayList<String> namelist;
@@ -74,7 +76,10 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		sess = new SessionManager(ctx);
 		HashMap<String, String> map = sess.getUserDetails();
 		user_id = map.get(SessionManager.KEY_ID);
-
+		tf1 = Typeface.createFromAsset(ctx.getAssets(), "Roboto-Bold.ttf");
+		tf2 = Typeface.createFromAsset(ctx.getAssets(), "Roboto-Light.ttf");
+		tf3 = Typeface.createFromAsset(ctx.getAssets(), "Roboto-Regular.ttf");
+		tf4 = Typeface.createFromAsset(ctx.getAssets(), "Roboto-Thin.ttf");
 	}
 
 	@Override
@@ -126,11 +131,15 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		// set value
 		il.DisplayImage(imglist.get(position), dish_img);
 		dish_name.setText(list.get(position));
+		dish_name.setTypeface(tf1);
 		user_name.setText("By " + namelist.get(position));
+		user_name.setTypeface(tf3);
 		price_dd.setText("Price: Rs" + pricelist.get(position));
+		price_dd.setTypeface(tf1);
+		delivery_time.setTypeface(tf4);
 		rb.setRating(Float.parseFloat(chefrate.get(position)));
 		rate_num.setText("("+chefrate.get(position)+")");
-		
+		rate_num.setTypeface(tf4);
 		chk1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -196,7 +205,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 					if (user_id.equals("0")) {
 
-						Intent in = new Intent(ctx, Order_Confirmation.class);
+						Intent in = new Intent(ctx, UserLogin.class);
 						in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						in.putExtra("dish", list.get(position));
 						in.putExtra("chk", chk_value);

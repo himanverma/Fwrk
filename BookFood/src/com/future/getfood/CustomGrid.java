@@ -22,6 +22,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ public class CustomGrid extends BaseAdapter {
 	ImageLoader il;
 	TextView textView;
 	ImageView imageView;
+	private Typeface tf1;
 	private static LayoutInflater inflater = null;
 
 	public CustomGrid(Context c, ArrayList<String> name, ArrayList<String> Image) {
@@ -47,7 +49,7 @@ public class CustomGrid extends BaseAdapter {
 		this.dishname = name;
         dishname1.addAll(dishname);
 		il = new ImageLoader(mContext);
-
+		tf1 = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Bold.ttf");
 		inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -105,7 +107,7 @@ public class CustomGrid extends BaseAdapter {
 		holder.img = (ImageView) rowView.findViewById(R.id.grid_image);
 
 		holder.tv.setText(dishname.get(position));
-		
+		holder.tv.setTypeface(tf1);
 		il.DisplayImage(dishimg.get(position), holder.img);
 		
 		

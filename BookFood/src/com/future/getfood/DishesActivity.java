@@ -55,6 +55,7 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 	EditText search;
 	GPSTracker gps;
 	double latitude, longitude;
+	ImageView profile;
     ArrayList<String>mylist=new ArrayList<String>();
     ArrayList<String>namelist=new ArrayList<String>();
     ArrayList<String>pricelist=new ArrayList<String>();
@@ -65,7 +66,8 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
     ArrayList<String>chef_photo=new ArrayList<String>();
     ArrayList<String>chef_id=new ArrayList<String>();
     ArrayList<String>chef_rating=new ArrayList<String>();
-	
+	SessionManager sess;
+	String userid;
 	protected int total_num;
 	
 	@Override
@@ -76,10 +78,29 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 			      WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.activity_main);
 
+		sess=new SessionManager(this);
+		HashMap<String, String>map=sess.getUserDetails();
+		userid=map.get(SessionManager.KEY_ID);
 		
 		listView = (InfiniteScrollListView) findViewById(R.id.list_view);
 		search = (EditText) findViewById(R.id.editText1);
 		scrollListener = new InfiniteScrollOnScrollListener(this);
+		
+		profile=(ImageView) findViewById(R.id.imageView2);
+		profile.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if(userid.equals("0")){
+					Toast.makeText(getApplicationContext(), "Make your profile first.", 5000).show();
+				}else{
+					
+					Intent in=new Intent(DishesActivity.this,UserProfile.class);
+					startActivity(in);
+				}
+			}
+		});
 		//listView.setListener(scrollListener);
 
 		
@@ -237,7 +258,7 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					Log.e("fhgfhj", s);
+					//Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block

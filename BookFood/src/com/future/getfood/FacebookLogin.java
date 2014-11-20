@@ -142,13 +142,13 @@ public class FacebookLogin extends Activity {
 					
 					JSONObject jsonObj = (JSONObject) new JSONTokener(me)
 							.nextValue();
-					//name = jsonObj.getString("name");
+					name = jsonObj.getString("name");
 					id = jsonObj.getString("id");
-//					try {
-//						email = jsonObj.getString("email");
-//					} catch (Exception e) {
-//						email = id + "@facebook.com";
-//					}
+					try {
+						email = jsonObj.getString("email");
+					} catch (Exception e) {
+						email = id + "@facebook.com";
+					}
 
 					//Log.i("fb", name + " " + email + " " + id);
 					// what = 0;
@@ -177,10 +177,15 @@ public class FacebookLogin extends Activity {
 							"data[Customer][deviceId]", getDeviceDetail()));
 
 					nameValuePairs.add(new BasicNameValuePair(
+							"data[Customer][name]", name));
+					
+					nameValuePairs.add(new BasicNameValuePair(
+							"data[Customer][email]", email));
+					
+					nameValuePairs.add(new BasicNameValuePair(
 							"data[Customer][fbrawdata]", me));
 					
 					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
 					// Execute HTTP Post Request
 					HttpResponse response = httpclient.execute(httppost);
 
@@ -201,8 +206,16 @@ public class FacebookLogin extends Activity {
 
 				try{
 					JSONObject obj=new JSONObject(s);
-					String custmor_Id=obj.getString("data");
-					sess.setId(custmor_Id);
+					JSONObject obj1=obj.getJSONObject("data");
+					JSONObject obj2=obj1.getJSONObject("record");
+					JSONObject obj3=obj2.getJSONObject("Customer");
+					String custmor_Id=obj3.getString("id");
+					String custmor_name=obj3.getString("name");
+					String custmor_email=obj3.getString("email");
+					String custmor_fbid=obj3.getString("fbid");
+					String custmor_mob=obj3.getString("mobile_number");
+					String img_url="https://graph.facebook.com/"+custmor_fbid+"/picture?type=small";
+					sess.setId(custmor_Id,custmor_name,custmor_email,img_url,custmor_mob);
 				}catch(Exception e){
 					e.printStackTrace();
 				}

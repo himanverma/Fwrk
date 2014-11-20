@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/top_bg" >
+        android:background="@drawable/top_strip1" >
 
         <ImageView
             android:id="@+id/imageView1"
@@ -48,6 +48,8 @@
         android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/round_corner"
         android:src="@drawable/user" />
 
     <TextView

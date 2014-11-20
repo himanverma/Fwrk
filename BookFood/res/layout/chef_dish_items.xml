@@ -89,7 +89,7 @@
             android:id="@+id/ratingBar1"
             style="@style/foodRatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="25dp"
             android:isIndicator="true"
             
             android:layout_alignLeft="@+id/textView1"

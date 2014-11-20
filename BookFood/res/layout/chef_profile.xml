@@ -10,7 +10,7 @@
         android:layout_height="45dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/top_bg" >
+        android:background="@drawable/top_strip1" >
 
         <ImageView
             android:id="@+id/imageView1"
@@ -68,7 +68,7 @@
             android:id="@+id/ratingBar1"
             style="@style/foodRatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:isIndicator="true"
             android:layout_below="@+id/textView2"
             android:layout_centerHorizontal="true" />
@@ -151,7 +151,7 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/bottom_bg" >
+            android:background="@drawable/top_strip1" >
 
             <RelativeLayout
                 android:id="@+id/line12"
@@ -219,7 +219,7 @@
         <RelativeLayout
             android:id="@+id/mmmm"
             android:layout_width="fill_parent"
-            android:layout_height="240dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/mmmjk"
             android:layout_marginBottom="5dp"
@@ -291,9 +291,9 @@
                     android:id="@+id/ratingBar14"
                     style="@style/foodRatingBar"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_alignParentBottom="true"
+                    android:layout_height="25dp"
                     android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp" />
 
             </RelativeLayout>

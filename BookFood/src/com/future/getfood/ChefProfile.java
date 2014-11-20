@@ -21,6 +21,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,7 +62,8 @@ public class ChefProfile extends Activity {
 	MyAdapter adapter;
    RatingBar bar;
 	RelativeLayout rel_list, rel_review, rel_rating;
-
+	private Typeface tf1,tf2,tf3,tf4;
+	TextView t1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -71,6 +73,13 @@ public class ChefProfile extends Activity {
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.chef_profile);
 
+		
+		tf1 = Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf");
+		tf2 = Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf");
+		tf3 = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
+		tf4 = Typeface.createFromAsset(getAssets(), "Roboto-Thin.ttf");
+		
+		
 		il = new ImageLoader(this);
 		Intent in = getIntent();
 		img_url = in.getStringExtra("photo");
@@ -81,12 +90,17 @@ public class ChefProfile extends Activity {
 		chef_id = in.getStringExtra("chefid");
         chef_rate=in.getStringExtra("rate");
         
+        t1=(TextView) findViewById(R.id.textView1);
+        t1.setTypeface(tf1);
         
 		chef_photo = (ImageView) findViewById(R.id.imageView2);
 		chefname = (TextView) findViewById(R.id.textView2);
+		chefname.setTypeface(tf2);
 		chefadd = (TextView) findViewById(R.id.textView3);
+		chefadd.setTypeface(tf3);
 		chefmob = (TextView) findViewById(R.id.textView4);
-
+		chefmob.setTypeface(tf3);
+		
 		dish_list = (RelativeLayout) findViewById(R.id.dish_list);
 		dish_review = (RelativeLayout) findViewById(R.id.review_list);
 		dish_rate = (RelativeLayout) findViewById(R.id.jjjy);
@@ -370,11 +384,16 @@ public class ChefProfile extends Activity {
 			holder.bar = (RatingBar) rowView.findViewById(R.id.ratingBar1);
  
 			holder.dish_name.setText(dishnamelist.get(arg0));
+			holder.dish_name.setTypeface(tf1);
 			holder.chef_name.setText(chef_name);
+			holder.chef_name.setTypeface(tf3);
 			holder.rate.setText("("+chef_rate+")");
+			holder.rate.setTypeface(tf1);
 			holder.price.setText("Price :Rs"+dishprice.get(arg0));
+			holder.price.setTypeface(tf1);
 			il.DisplayImage(dishimg.get(arg0), holder.dish_img);
             holder.bar.setRating(Float.parseFloat(chef_rate));
+           
 			return rowView;
 		}
 

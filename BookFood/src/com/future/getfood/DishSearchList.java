@@ -97,7 +97,11 @@ public class DishSearchList extends Activity {
 				// TODO Auto-generated method stub
 				String text = search.getText().toString()
 						.toLowerCase(Locale.getDefault());
+			try{
 				adapter.filter(text);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 			}
 		});
 

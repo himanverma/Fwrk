@@ -50,18 +50,6 @@
             android:textColor="#000000"
             android:textSize="15dp" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/imageView1"
-            android:layout_alignLeft="@+id/imageView2"
-            android:layout_alignRight="@+id/textView3"
-            android:layout_marginTop="5dp"
-            android:text="Price:Rs50"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#FF0033" />
-
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="90dp"
@@ -89,7 +77,7 @@
             android:id="@+id/ratingBar1"
             style="@style/foodRatingBar"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="26dp"
             android:isIndicator="true"
             android:layout_alignLeft="@+id/textView1"
             android:layout_below="@+id/textView1" />
@@ -110,8 +98,21 @@
             android:layout_height="25dp"
             android:layout_below="@+id/ratingBar1"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/imageView1"
             android:src="@drawable/delivery_icon1" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView2"
+            android:layout_alignRight="@+id/textView3"
+            android:layout_below="@+id/textView3"
+            android:text="Price:Rs50"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FF0033" />
+
     </RelativeLayout>
 
     <RelativeLayout

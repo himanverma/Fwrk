@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg" >
+    android:background="@drawable/bg1" >
 
     <RelativeLayout
         android:id="@+id/hjk"
@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/top_bg" >
+        android:background="@drawable/top_strip1" >
 
         <ImageView
             android:id="@+id/imageView1"
