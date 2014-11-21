@@ -232,7 +232,7 @@
             <RelativeLayout
                 android:id="@+id/rel4"
                 android:layout_width="fill_parent"
-                android:layout_height="420dp"
+                android:layout_height="590dp"
                 android:layout_alignParentTop="true"
                 android:layout_margin="5dp"
                 android:background="@drawable/delivery_addr_box" >
@@ -269,7 +269,7 @@
                 <EditText
                     android:id="@+id/editText1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/textView11"
@@ -278,10 +278,10 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="street"
+                    android:hint="first name"
                     android:textColor="#000000"
                     android:inputType="textPersonName"
-                    android:paddingLeft="5dp" >
+                    android:paddingLeft="7dp" >
 
                     <requestFocus />
                 </EditText>
@@ -293,7 +293,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/huy"
                     android:layout_marginLeft="8dp"
-                    android:text="Street"
+                    android:text="First Name"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -305,7 +305,7 @@
                     android:layout_below="@+id/editText1"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
-                    android:text="Area"
+                    android:text="Last Name"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -322,17 +322,17 @@
                 <EditText
                     android:id="@+id/editText2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_alignLeft="@+id/textView13"
                     android:layout_alignRight="@+id/editText1"
                     android:layout_below="@+id/textView13"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="Area"
+                    android:hint="last name"
                      android:textColor="#000000"
                     android:inputType="textPersonName"
-                    android:paddingLeft="5dp" />
+                    android:paddingLeft="7dp" />
 
                 <TextView
                     android:id="@+id/textView15"
@@ -342,7 +342,7 @@
                     android:layout_below="@+id/editText2"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
-                    android:text="Zipcode/Pincode"
+                    android:text="Address"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -359,17 +359,23 @@
                 <EditText
                     android:id="@+id/editText3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_alignLeft="@+id/textView15"
                     android:layout_alignRight="@+id/editText2"
                     android:layout_below="@+id/textView15"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="Zipcode"
-                     android:textColor="#000000"
-                    android:inputType="number"
-                    android:paddingLeft="5dp" />
+                    android:gravity="top|left"
+                    android:hint="address"
+                    android:inputType="textEmailAddress|textMultiLine"
+                    android:lines="20"
+                   
+                    android:paddingLeft="7dp"
+                    android:scrollHorizontally="false"
+                    android:scrollbars="vertical"
+                    android:singleLine="false"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/textView17"
@@ -379,24 +385,34 @@
                     android:layout_below="@+id/editText3"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
-                    android:text="Landmark"
+                    android:text="Area"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
+                <TextView
+                    android:id="@+id/textView188"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView17"
+                    android:layout_alignBottom="@+id/textView17"
+                    android:layout_toRightOf="@+id/textView17"
+                    android:text="*"
+                    android:textColor="#FF0000" />
+                
                 <EditText
                     android:id="@+id/editText4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_alignLeft="@+id/textView17"
                     android:layout_alignRight="@+id/editText3"
                     android:layout_below="@+id/textView17"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="landmark"
+                    android:hint="area"
                      android:textColor="#000000"
                     android:inputType="textPersonName"
-                    android:paddingLeft="5dp" />
+                    android:paddingLeft="7dp" />
 
                 <TextView
                     android:id="@+id/textView18"
@@ -406,70 +422,25 @@
                     android:layout_below="@+id/editText4"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
-                    android:text="Phone No."
+                    android:text="City"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
                 <EditText
                     android:id="@+id/editText5"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_alignLeft="@+id/textView18"
                     android:layout_alignRight="@+id/editText4"
                     android:layout_below="@+id/textView18"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="phone number"
+                    android:hint="city"
                      android:textColor="#000000"
-                    android:inputType="phone"
+                    android:inputType="textPersonName"
                     android:maxLength="10"
-                    android:paddingLeft="5dp" />
-
-                <TextView
-                    android:id="@+id/delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imageView6"
-                    android:layout_alignRight="@+id/editText5"
-                    android:layout_alignTop="@+id/imageView6"
-                    android:gravity="center"
-                    android:text="Delete"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#000000" />
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/editText5"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toLeftOf="@+id/delete"
-                    android:src="@drawable/delete_icon1" />
-
-                <TextView
-                    android:id="@+id/edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imageView7"
-                    android:layout_alignTop="@+id/imageView7"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toLeftOf="@+id/imageView6"
-                    android:gravity="center"
-                    android:text="Edit"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#000000" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/editText5"
-                    android:layout_marginTop="10dp"
-                    android:layout_toLeftOf="@+id/edit"
-                    android:src="@drawable/edit_icon" />
+                    android:paddingLeft="7dp" />
 
                 <TextView
                     android:id="@+id/textView19"
@@ -480,6 +451,94 @@
                     android:layout_toRightOf="@+id/textView18"
                     android:text="*"
                     android:textColor="#FF0000" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/editText5"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Zipcode/Pincode"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView20"
+                    android:layout_alignBottom="@+id/textView20"
+                    android:layout_toRightOf="@+id/textView20"
+                    android:text="*"
+                    android:textColor="#FF0000" />
+
+                <EditText
+                    android:id="@+id/editText6"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/textView24"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/addr_input"
+                    android:ems="10"
+                    android:textColor="#000000"
+                    android:hint="zipcode"
+                    android:paddingLeft="7dp"
+                    android:inputType="number" />
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/editText6"
+                    android:layout_below="@+id/editText6"
+                    android:text="Medium Text"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView25"
+                    android:layout_alignBottom="@+id/textView25"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Phone No."
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/textView25"
+                    android:layout_alignBottom="@+id/textView25"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/textView16"
+                    android:text="*"
+                    android:textColor="#FF0000" />
+
+                <EditText
+                    android:id="@+id/editText7"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/textView27"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/addr_input"
+                    android:ems="10"
+                    android:hint="phone no."
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:paddingLeft="7dp"
+                    android:textColor="#000000" />
 
             </RelativeLayout>
 

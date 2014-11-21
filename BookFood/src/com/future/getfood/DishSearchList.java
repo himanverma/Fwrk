@@ -60,6 +60,7 @@ public class DishSearchList extends Activity {
 	ArrayList<String> chef_photo = new ArrayList<String>();
 	ArrayList<String> chef_id = new ArrayList<String>();
 	ArrayList<String> chef_rating = new ArrayList<String>();
+	ArrayList<String> cid_list = new ArrayList<String>();
 	String search1;
 
 	@Override
@@ -209,7 +210,7 @@ public class DishSearchList extends Activity {
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					// Log.e("fhgfhj", s);
+					 Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -238,6 +239,7 @@ public class DishSearchList extends Activity {
 							String display_name = obj2
 									.getString("display_name");
 							String image = obj2.getString("image");
+							String cid = obj2.getString("id");
 							String price = obj2.getString("price");
 
 							JSONObject obj3 = obj1.getJSONObject("Vendor");
@@ -272,12 +274,13 @@ public class DishSearchList extends Activity {
 							chef_photo.add(photo);
 							chef_id.add(id);
 							chef_rating.add(rating);
+							cid_list.add(cid);
 						}
 
 						adapter = new MyAdapter(DishSearchList.this, mylist,
 								namelist, pricelist, imglist, address_list,
 								phone_list, mobile_list, chef_photo, chef_id,
-								chef_rating);
+								chef_rating,cid_list);
 						listView.setAdapter(adapter);
 					} else {
 

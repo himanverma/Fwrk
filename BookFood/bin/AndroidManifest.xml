@@ -44,42 +44,51 @@
         </activity>
         <activity
             android:name="com.future.getfood.OrderDishes"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+             android:configChanges="orientation">
         </activity>
         <activity
             android:name="com.future.getfood.UserLogin"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+             android:configChanges="orientation" >
         </activity>
         <activity
             android:name="com.future.getfood.ChefProfile"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+             android:configChanges="orientation" >
         </activity>
         <activity
             android:name="com.future.getfood.UserProfile"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+             android:configChanges="orientation">
         </activity>
         <activity
             android:name="com.future.getfood.DishesList"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+             android:configChanges="orientation" >
         </activity>
         <activity
             android:name="com.future.getfood.DishSearchList"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+             android:configChanges="orientation">
         </activity>
         <activity
             android:name="com.future.getfood.FacebookLogin"
             android:screenOrientation="portrait"
+             android:configChanges="orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
         <activity
             android:name="com.future.getfood.PaymentProcess"
             android:screenOrientation="portrait"
+             android:configChanges="orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
         
           <activity
             android:name="com.future.getfood.Registration"
             android:screenOrientation="portrait"
+             android:configChanges="orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
         

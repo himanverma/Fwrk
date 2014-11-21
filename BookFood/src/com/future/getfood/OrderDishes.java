@@ -41,15 +41,20 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class OrderDishes extends FragmentActivity {
 
 	String dishname;
 	String chkname;
 	String price;
+	String cid;
 	FragmentManager fmanager;
 	Fragment fragment;
 	SupportMapFragment supportmapfragment;
@@ -63,8 +68,9 @@ public class OrderDishes extends FragmentActivity {
 	double latitude, longitude;
 	String add, city, country, sub1, sub2, state, zip;
 	ImageView cls;
-	EditText street, area, zipcode, landmark, phone_num;
-	TextView edit, del;
+	EditText fname, lname, address, area, zipcode, mcity, phone_num;
+	CheckBox cod, debit, credit, netb;
+	String chk_value="na";
 	Button save;
 	SessionManager sess;
 	String user_id;
@@ -89,6 +95,7 @@ public class OrderDishes extends FragmentActivity {
 		dishname = in.getStringExtra("dish");
 		chkname = in.getStringExtra("chk");
 		price = in.getStringExtra("price");
+		cid = in.getStringExtra("cid");
 
 		// getting current latlng
 		gps = new GPSTracker(OrderDishes.this);
@@ -147,74 +154,115 @@ public class OrderDishes extends FragmentActivity {
 		dish_name = (TextView) findViewById(R.id.textView5);
 		dish_price = (TextView) findViewById(R.id.textView6);
 		total_price = (TextView) findViewById(R.id.textView8);
-		edit = (TextView) findViewById(R.id.edit);
-		del = (TextView) findViewById(R.id.delete);
 
-		street = (EditText) findViewById(R.id.editText1);
-		area = (EditText) findViewById(R.id.editText2);
-		zipcode = (EditText) findViewById(R.id.editText3);
-		landmark = (EditText) findViewById(R.id.editText4);
-		phone_num = (EditText) findViewById(R.id.editText5);
+		fname = (EditText) findViewById(R.id.editText1);
+		lname = (EditText) findViewById(R.id.editText2);
+		address = (EditText) findViewById(R.id.editText3);
+		area = (EditText) findViewById(R.id.editText4);
+		mcity = (EditText) findViewById(R.id.editText5);
+		zipcode = (EditText) findViewById(R.id.editText6);
+		phone_num = (EditText) findViewById(R.id.editText7);
+
 		cls = (ImageView) findViewById(R.id.imageView4);
 
 		save = (Button) findViewById(R.id.button1);
 
 		// disable edittext box
-		street.setFocusableInTouchMode(false);
-		street.setFocusable(false);
-		area.setFocusableInTouchMode(false);
-		area.setFocusable(false);
-		zipcode.setFocusableInTouchMode(false);
-		zipcode.setFocusable(false);
+		// street.setFocusableInTouchMode(false);
+		// street.setFocusable(false);
+		// area.setFocusableInTouchMode(false);
+		// area.setFocusable(false);
+		// zipcode.setFocusableInTouchMode(false);
+		// zipcode.setFocusable(false);
 
 		zipcode.setText(zip);
-		street.setText(add + "," + sub2);
-		area.setText(sub1 + "," + city);
+		address.setText(add + "," + sub2);
+		area.setText(sub1);
+		mcity.setText(city);
+
 		// set value
 		dish_name.setText(dishname + "+" + chkname);
 		dish_price.setText("Rs " + price);
 		total_price.setText("Rs " + price);
 
+		cod = (CheckBox) findViewById(R.id.checkBox1);
+		debit = (CheckBox) findViewById(R.id.checkBox2);
+		credit = (CheckBox) findViewById(R.id.checkBox3);
+		netb = (CheckBox) findViewById(R.id.checkBox4);
+
+		cod.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+
+				if (cod.isChecked()) {
+
+					debit.setChecked(false);
+					credit.setChecked(false);
+					netb.setChecked(false);
+					chk_value = "Cash on Delivery";
+				}
+			}
+		});
+
+		debit.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+
+				if (debit.isChecked()) {
+
+					cod.setChecked(false);
+					credit.setChecked(false);
+					netb.setChecked(false);
+					chk_value = "Debit Card";
+				}
+			}
+		});
+
+		credit.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+
+				if (credit.isChecked()) {
+
+					debit.setChecked(false);
+					cod.setChecked(false);
+					netb.setChecked(false);
+					chk_value = "Credit Card";
+				}
+			}
+		});
+
+		netb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+
+				if (netb.isChecked()) {
+
+					debit.setChecked(false);
+					credit.setChecked(false);
+					cod.setChecked(false);
+					chk_value = "Net Banking";
+				}
+			}
+		});
 		cls.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				finish();
-			}
-		});
-
-		edit.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// enable edittext box
-				street.setFocusableInTouchMode(true);
-				street.setFocusable(true);
-				area.setFocusableInTouchMode(true);
-				area.setFocusable(true);
-				zipcode.setFocusableInTouchMode(true);
-				zipcode.setFocusable(true);
-			}
-		});
-
-		del.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// enable edittext box
-				street.setFocusableInTouchMode(true);
-				street.setFocusable(true);
-				area.setFocusableInTouchMode(true);
-				area.setFocusable(true);
-				zipcode.setFocusableInTouchMode(true);
-				zipcode.setFocusable(true);
-
-				street.setText("");
-				area.setText("");
-				zipcode.setText("");
 			}
 		});
 
@@ -234,48 +282,74 @@ public class OrderDishes extends FragmentActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				int ppp = phone_num.getText().toString().length();
-				String adds = street.getText().toString() + ","
+				String adds = address.getText().toString() + ","
 						+ area.getText().toString() + ","
 						+ zipcode.getText().toString() + ","
 						+ phone_num.getText().toString();
+				if (fname.getText().toString().equals("")) {
 
-				if (street.getText().toString().equals("")) {
-
-					street.setError("Please fill street name!");
-					street.requestFocus();
+					fname.setError("Please fill street name!");
+					fname.requestFocus();
 				} else {
+					if (lname.getText().toString().equals("")) {
 
-					if (area.getText().toString().equals("")) {
-
-						area.setError("please fill area name!");
-						area.requestFocus();
+						lname.setError("Please fill street name!");
+						lname.requestFocus();
 					} else {
 
-						if (zipcode.getText().toString().equals("")) {
+						if (address.getText().toString().equals("")) {
 
-							zipcode.setError("Please fill pincode!");
-							zipcode.requestFocus();
+							address.setError("Please fill street name!");
+							address.requestFocus();
 						} else {
-							if (phone_num.getText().toString().equals("")) {
 
-								phone_num
-										.setError("Please fill correct phone number");
-								phone_num.requestFocus();
+							if (area.getText().toString().equals("")) {
+
+								area.setError("please fill area name!");
+								area.requestFocus();
 							} else {
-								if (ppp != 10) {
 
-									phone_num
-											.setError("Please fill correct phone number");
-									phone_num.requestFocus();
+								if (mcity.getText().toString().equals("")) {
+
+									mcity.setError("Please fill pincode!");
+									mcity.requestFocus();
 
 								} else {
-									userdetail();
-									//dialog(adds);
+
+									if (zipcode.getText().toString().equals("")) {
+
+										zipcode.setError("Please fill pincode!");
+										zipcode.requestFocus();
+									} else {
+										if (phone_num.getText().toString()
+												.equals("")) {
+
+											phone_num
+													.setError("Please fill correct phone number");
+											phone_num.requestFocus();
+										} else {
+											if (ppp != 10) {
+
+												phone_num
+														.setError("Please fill correct phone number");
+												phone_num.requestFocus();
+
+											} else {
+											 if(chk_value.equals("na")){
+												Toast.makeText(OrderDishes.this, "Please select payment type", 5000).show();
+											 }else{
+												userdetail();
+											 }
+											}
+										}
+
+									}
 								}
 							}
-
 						}
+
 					}
+
 				}
 
 			}
@@ -301,25 +375,24 @@ public class OrderDishes extends FragmentActivity {
 			protected Void doInBackground(Void... params) {
 
 				// do your background operation here
-				
-				 JSONObject obj = new JSONObject();
-		            try {
-		                obj.put("firstname", "dharam");
-		                obj.put("lastname", "Singh");
-		                obj.put("address", street.getText().toString());
-		                obj.put("area", area.getText().toString());
-		                obj.put("landmark", landmark.getText().toString());
-		                obj.put("phone", phone_num.getText().toString());
-		                obj.put("zipcode", zipcode.getText().toString());
-		                obj.put("lat", String.valueOf(latitude));
-		                obj.put("lng", String.valueOf(longitude));
-		                
 
-		            } catch (JSONException e) {
-		                // TODO Auto-generated catch block
-		                e.printStackTrace();
-		            }
-		            
+				JSONObject obj = new JSONObject();
+				try {
+					obj.put("firstname", "dharam");
+					obj.put("lastname", "Singh");
+					obj.put("address", address.getText().toString());
+					obj.put("area", area.getText().toString());
+					obj.put("city", mcity.getText().toString());
+					obj.put("phone", phone_num.getText().toString());
+					obj.put("zipcode", zipcode.getText().toString());
+					obj.put("lat", String.valueOf(latitude));
+					obj.put("lng", String.valueOf(longitude));
+
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 				try {
 					long milli = System.currentTimeMillis();
 					String url = getResources().getString(R.string.url)
@@ -331,9 +404,170 @@ public class OrderDishes extends FragmentActivity {
 					HttpClient httpclient = new DefaultHttpClient();
 					HttpPost httppost = new HttpPost(url);
 
-					 entity.addPart("data[Address][customer_id]", new StringBody(user_id));
-					 entity.addPart("data[Address][data]", new StringBody(obj.toString()));
-					 entity.addPart("data[Address][status]", new StringBody("1"));
+					entity.addPart("data[Address][customer_id]",
+							new StringBody(user_id));
+					entity.addPart("data[Address][data]",
+							new StringBody(obj.toString()));
+					entity.addPart("data[Address][status]", new StringBody("1"));
+
+					entity.addPart("data[Address][f_name]", new StringBody(
+							fname.getText().toString()));
+					entity.addPart("data[Address][l_name]", new StringBody(
+							lname.getText().toString()));
+					entity.addPart("data[Address][address]", new StringBody(
+							address.getText().toString()));
+
+					entity.addPart("data[Address][area]", new StringBody(area
+							.getText().toString()));
+					entity.addPart("data[Address][city]", new StringBody(mcity
+							.getText().toString()));
+					entity.addPart("data[Address][zipcode]", new StringBody(
+							zipcode.getText().toString()));
+
+					entity.addPart("data[Address][phone_number]",
+							new StringBody(phone_num.getText().toString()));
+					entity.addPart("data[Address][lat]",
+							new StringBody(String.valueOf(latitude)));
+					entity.addPart("data[Address][long]",
+							new StringBody(String.valueOf(longitude)));
+
+					httppost.setEntity(entity);
+
+					response = httpclient.execute(httppost);
+
+					s = EntityUtils.toString(response.getEntity());
+					Log.e("fhgfhj", s);
+
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				// what to do when background task is completed
+
+				dialog.cancel();
+				try {
+					JSONObject obj = new JSONObject(s);
+					JSONObject obj1=obj.getJSONObject("data");
+					String msg = obj1.getString("msg");
+					String address_id=obj1.getString("addressid");
+					if (msg.equals("success")) {
+						String add = address.getText().toString() + ","
+								+ area.getText().toString() + ","
+								+ mcity.getText().toString() + ","
+								+ zipcode.getText().toString();
+						dialogd(add,address_id);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		};
+		if ((DetectNetwork.hasConnection(getApplicationContext())))
+			updateTask.execute((Void[]) null);
+
+	}
+
+	public void dialogd(String addss,final String addid) {
+
+		final Dialog d = new Dialog(this);
+		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		d.setContentView(R.layout.confirmation_dialog);
+		TextView dish_name = (TextView) d.findViewById(R.id.textView4);
+		TextView dish_price = (TextView) d.findViewById(R.id.textView3);
+		TextView dish_add = (TextView) d.findViewById(R.id.textView5);
+		TextView payment_type = (TextView) d.findViewById(R.id.textView8);
+		Button cls = (Button) d.findViewById(R.id.button1);
+		Button confirm = (Button) d.findViewById(R.id.button2);
+		d.show();
+
+		dish_name.setText(dishname + "+" + chkname);
+		dish_price.setText("Rs " + price);
+		dish_add.setText(addss);
+		payment_type.setText(chk_value);
+
+		cls.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				d.cancel();
+			}
+		});
+
+		confirm.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				d.cancel();
+				orderProcess(addid);
+				
+
+			}
+		});
+
+	}
+
+	// method for sending user detail on server
+	protected void orderProcess(final String addid) {
+		// TODO Auto-generated method stub
+
+		AsyncTask<Void, Void, Void> updateTask = new AsyncTask<Void, Void, Void>() {
+			ProgressDialog dialog = new ProgressDialog(OrderDishes.this);
+
+			@Override
+			protected void onPreExecute() {
+				// what to do before background task
+				dialog.setMessage("Validating... ");
+				dialog.setIndeterminate(true);
+				dialog.show();
+			}
+
+			@Override
+			protected Void doInBackground(Void... params) {
+
+				// do your background operation here
+
+				try {
+					long milli = System.currentTimeMillis();
+					String url = getResources().getString(R.string.url)
+							+ "api/orders/add.json?a=" + milli;
+
+					MultipartEntity entity = new MultipartEntity(
+							HttpMultipartMode.BROWSER_COMPATIBLE);
+
+					HttpClient httpclient = new DefaultHttpClient();
+					HttpPost httppost = new HttpPost(url);
+
+					entity.addPart("data[Order][customer_id]", new StringBody(
+							user_id));
+					entity.addPart("data[Order][combination_id]",
+							new StringBody(cid));
+					// mmmmmmmm
+					entity.addPart("data[Order][address_id]", new StringBody(
+							addid));
+
+					entity.addPart(" data[Order][recipe_names]",
+							new StringBody(dishname + "+" + chkname));
+
+					entity.addPart("data[Order][status]", new StringBody("1"));
+					entity.addPart("data[Order][paid_via]", new StringBody(
+							chk_value));
+
+					entity.addPart("data[Order][lat]",
+							new StringBody(String.valueOf(latitude)));
+					entity.addPart("data[Order][long]",
+							new StringBody(String.valueOf(longitude)));
 					
 					httppost.setEntity(entity);
 
@@ -358,6 +592,17 @@ public class OrderDishes extends FragmentActivity {
 				// what to do when background task is completed
 
 				dialog.cancel();
+				try {
+					JSONObject obj=new JSONObject(s);
+					String st=obj.getString("data");
+					if(st.equals("Success")){
+						Intent in = new Intent(OrderDishes.this, PaymentProcess.class);
+						startActivity(in);
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 		};
@@ -366,42 +611,4 @@ public class OrderDishes extends FragmentActivity {
 
 	}
 
-	public void dialog(String addss) {
-
-		final Dialog d = new Dialog(this);
-		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		d.setContentView(R.layout.confirmation_dialog);
-		TextView dish_name = (TextView) d.findViewById(R.id.textView4);
-		TextView dish_price = (TextView) d.findViewById(R.id.textView3);
-		TextView dish_add = (TextView) d.findViewById(R.id.textView5);
-		Button cls = (Button) d.findViewById(R.id.button1);
-		Button cirm = (Button) d.findViewById(R.id.button2);
-		d.show();
-
-		dish_name.setText(dishname + "+" + chkname);
-		dish_price.setText("Rs " + price);
-		dish_add.setText(addss);
-
-		cls.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				d.cancel();
-			}
-		});
-
-		cirm.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				d.cancel();
-				Intent in=new Intent(OrderDishes.this,PaymentProcess.class);
-				startActivity(in);
-				
-			}
-		});
-
-	}
 }

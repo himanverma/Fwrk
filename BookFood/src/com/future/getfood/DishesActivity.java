@@ -66,6 +66,7 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
     ArrayList<String>chef_photo=new ArrayList<String>();
     ArrayList<String>chef_id=new ArrayList<String>();
     ArrayList<String>chef_rating=new ArrayList<String>();
+    ArrayList<String>cid_list=new ArrayList<String>();
 	SessionManager sess;
 	String userid;
 	protected int total_num;
@@ -321,7 +322,7 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 							String image = obj5.getString("image");
 							
 
-						//	Log.e("fhgfhj", vendor_name+"  "+cmd_id);
+					//Log.e("fhgfhj", vendor_name+"  "+cmd_id);
 					mylist.add(vendor_name);
 					namelist.add(name);
 					pricelist.add(price);
@@ -332,7 +333,11 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 					chef_photo.add(photo);
 					chef_id.add(id);
 					chef_rating.add(rating);
-					adapter = new MyAdapter(DishesActivity.this,mylist,namelist,pricelist,imglist,address_list,phone_list,mobile_list,chef_photo,chef_id,chef_rating);
+					cid_list.add(cmd_id);
+					adapter = new MyAdapter(DishesActivity.this,mylist,namelist,
+							pricelist,imglist,address_list,
+							phone_list,mobile_list,chef_photo,
+							chef_id,chef_rating,cid_list);
 					listView.setAdapter(adapter);
 					
 					}

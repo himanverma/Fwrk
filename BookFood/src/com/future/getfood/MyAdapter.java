@@ -45,6 +45,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 	ArrayList<String> chefphoto;
 	ArrayList<String> chefid;
 	ArrayList<String> chefrate;
+	ArrayList<String> cid;
 	ImageLoader il;
 	SessionManager sess;
 	String user_id;
@@ -53,7 +54,8 @@ public class MyAdapter extends InfiniteScrollAdapter {
 			ArrayList<String> nll, ArrayList<String> pll,
 			ArrayList<String> imll, ArrayList<String> adml,
 			ArrayList<String> poll, ArrayList<String> moll,
-			ArrayList<String> pcholl,ArrayList<String> idll,ArrayList<String> rll) {
+			ArrayList<String> pcholl,ArrayList<String> idll,
+			ArrayList<String> rll,ArrayList<String> cll) {
 		super(context);
 		ctx = context;
 		items = new ArrayList<HashMap<String, String>>();
@@ -71,6 +73,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		chefphoto = pcholl;
 		chefid=idll;
 		chefrate=rll;
+		cid=cll;
 		il = new ImageLoader(ctx);
 
 		sess = new SessionManager(ctx);
@@ -211,6 +214,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 						in.putExtra("chk", chk_value);
 						in.putExtra("price", pricelist.get(position));
 						
+						
 						ctx.startActivity(in);
 					
 					
@@ -221,7 +225,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 						in.putExtra("dish", list.get(position));
 						in.putExtra("chk", chk_value);
 						in.putExtra("price", pricelist.get(position));
-						
+						in.putExtra("cid", cid.get(position));
 						ctx.startActivity(in);
 					}
 				}

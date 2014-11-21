@@ -173,7 +173,7 @@ public class Registration extends Activity {
 						e.printStackTrace();
 					}
 
-					entity.addPart("data[Customer][username]", new StringBody(
+					entity.addPart("data[Customer][name]", new StringBody(
 							user_name.getText().toString()));
 
 					entity.addPart("data[Customer][email]", new StringBody(
