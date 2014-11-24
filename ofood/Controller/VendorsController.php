@@ -14,7 +14,7 @@ class VendorsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator', 'Session','Date');
         
         
         public function api_index(){
@@ -31,13 +31,25 @@ class VendorsController extends AppController {
 			throw new NotFoundException(__('Invalid vendor'));
 		}
 		$options = array(
-                    'recursive'=>3,
-                    'contain'=>array('Combination','VendorReview'),
+                    'recursive'=>2,
+                    'contain'=>array(
+                        'Combination',
+                        'VendorReview'=>array(
+                            'Customer'=>array('id','name','image')
+                            )
+                        ),
                     'conditions' => array('Vendor.' . $this->Vendor->primaryKey => $id)
                     );
                 //$this->Vender->virtualFields['rating'] = 'SUM(`VendorReview`.`ratings`) / COUNT(`VendorReview`.`ratings`) * 5';
+                $allRecords=$this->Vendor->find('first', $options);
+                
+                foreach ($allRecords['VendorReview'] as $allRecord){
+                    $allRecord['created']=$this->Date->time_elapsed_string($allRecord['created']);
+                    $allRecord1[]=$allRecord;
+                }
+                $allRecords['VendorReview']=$allRecord1;
                 $this->set(array(
-                    'data' => $this->Vendor->find('first', $options),
+                    'data' => $allRecords,
                     '_serialize' => array('data')
                 ));
 	}

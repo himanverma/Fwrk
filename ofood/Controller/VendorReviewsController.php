@@ -16,6 +16,11 @@ class VendorReviewsController extends AppController {
  */
 	public $components = array('Paginator', 'Session');
         
+        public function beforeFilter() {
+            parent::beforeFilter();
+            $this->Auth->allow();
+        }
+
         public function api_index(){
             $VendorReview = $this->VendorReview->find('all');
             $this->set(array(
@@ -23,6 +28,32 @@ class VendorReviewsController extends AppController {
                 '_serialize' => array('data')
             ));
         }
+        
+        public function api_add() {
+		if ($this->request->is('post')) {
+			$this->VendorReview->create();
+			if ($this->VendorReview->save($this->request->data)) {
+				$this->set(array(
+                                    'data' => array(
+                                                    "error" => 0,
+                                                    "msg" => "success"
+                                                ),
+                                    '_serialize' => array('data')
+                                ));
+			} else {
+				$this->set(array(
+                                    'data' => array(
+                                                    "error" => 1,
+                                                    "msg" => "sorry"
+                                                ),
+                                    '_serialize' => array('data')
+                                ));
+			}
+		}
+	}
+        
+        
+        
 
 /**
  * index method

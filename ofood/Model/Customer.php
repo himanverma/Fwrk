@@ -31,7 +31,7 @@ class Customer extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-		),*/
+		),
 		'name' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
@@ -161,7 +161,7 @@ class Customer extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-		),
+		),*/
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -218,6 +218,20 @@ class Customer extends AppModel {
             if(isset($this->data[$this->alias]['password'])){
                 $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
             }
+            
+            
+            App::uses("HtmlHelper", "View/Helper");
+            $html = new HtmlHelper(new View());
+                if($this->data[$this->alias]['image']['name']!=""){
+                    $ext=pathinfo($this->data[$this->alias]['image']['name'], PATHINFO_EXTENSION);
+                    $image_name = date('YmdHis').rand(1,999) . "." . $ext;
+                    $path=$this->data[$this->alias]['image']['tmp_name'];
+//                    $this->data[$this->alias]['image'] =$image_name;
+                    $this->data[$this->alias]['image'] =$html->url("/files/profile_image/".$image_name,true);
+                    $destination="files/profile_image/".$image_name;
+                    move_uploaded_file($path,$destination);
+                }
+                parent::beforeSave($options);
         }
 
 }
