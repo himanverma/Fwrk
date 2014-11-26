@@ -32,6 +32,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.future.foodimg.DetectNetwork;
@@ -62,7 +63,8 @@ public class DishSearchList extends Activity {
 	ArrayList<String> chef_rating = new ArrayList<String>();
 	ArrayList<String> cid_list = new ArrayList<String>();
 	String search1;
-
+	SessionManager sess;
+	String userid;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -77,6 +79,29 @@ public class DishSearchList extends Activity {
 		Intent in = getIntent();
 		search1 = in.getStringExtra("search");
 		getdetail(search1);
+
+		sess = new SessionManager(this);
+		HashMap<String, String> map = sess.getUserDetails();
+		userid = map.get(SessionManager.KEY_ID);
+		
+
+		((RelativeLayout)findViewById(R.id.nn2)).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (userid.equals("0")) {
+					Toast.makeText(getApplicationContext(),
+							"Make your profile first.", 5000).show();
+				} else {
+
+					Intent in = new Intent(DishSearchList.this,
+							UserProfile.class);
+					startActivity(in);
+				}
+			}
+		});
+
 		search.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -98,23 +123,23 @@ public class DishSearchList extends Activity {
 				// TODO Auto-generated method stub
 				String text = search.getText().toString()
 						.toLowerCase(Locale.getDefault());
-			try{
-				adapter.filter(text);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+				try {
+					adapter.filter(text);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 
-		((ImageView) findViewById(R.id.imageView1))
-				.setOnClickListener(new View.OnClickListener() {
+		((RelativeLayout) findViewById(R.id.nn1))
+		.setOnClickListener(new View.OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						finish();
-					}
-				});
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
 	}
 
 	// @Override
@@ -210,7 +235,7 @@ public class DishSearchList extends Activity {
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					 Log.e("fhgfhj", s);
+					Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -280,7 +305,7 @@ public class DishSearchList extends Activity {
 						adapter = new MyAdapter(DishSearchList.this, mylist,
 								namelist, pricelist, imglist, address_list,
 								phone_list, mobile_list, chef_photo, chef_id,
-								chef_rating,cid_list);
+								chef_rating, cid_list);
 						listView.setAdapter(adapter);
 					} else {
 

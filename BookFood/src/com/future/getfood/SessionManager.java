@@ -9,23 +9,32 @@ import android.content.SharedPreferences.Editor;
  
 public class SessionManager {
     // Shared Preferences
-    SharedPreferences pref;
-    Editor editor;
+    SharedPreferences pref,pref1;
+    Editor editor,editor1;
     Context _context;
  
     int PRIVATE_MODE = 0;
+    int PRIVATE_MODE1 = 1;
     private static final String PREF_NAME = "foodapp";
+    private static final String PREF_NAME1 = "GCM";
     public static final String KEY_ID = "id";
     public static final String KEY_USER = "name";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PHOTO = "photo";
     public static final String KEY_PHONE = "phone";
+    
+    public static final String KEY_GCMID = "gcmid";
    
     // Constructor
     public SessionManager(Context context){
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+        
+        
+        pref1 = _context.getSharedPreferences(PREF_NAME1, PRIVATE_MODE1);
+        editor1 = pref1.edit();
+        
     }
      
     /**
@@ -41,7 +50,11 @@ public class SessionManager {
         editor.commit();
     }   
    
-    
+    public void setGCMId(String gcmid){
+        
+        editor1.putString(KEY_GCMID, gcmid);
+        editor1.commit();
+    } 
     /**
      * Get stored session data
      * */
@@ -56,5 +69,11 @@ public class SessionManager {
         return user;
     }
      
-   
+    public HashMap<String, String> getGCMID(){
+        HashMap<String, String> user = new HashMap<String, String>();
+        // user name
+        user.put(KEY_GCMID, pref1.getString(KEY_GCMID, "0"));
+        
+        return user;
+    }
 }

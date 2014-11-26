@@ -16,6 +16,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.future.foodimg.CircularImageView;
 import com.future.foodimg.DetectNetwork;
 import com.future.foodimg.ImageLoader;
 
@@ -23,6 +24,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.Toast;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.RelativeLayout;
@@ -51,7 +54,7 @@ public class ChefProfile extends Activity {
 	String chef_add;
 	String chef_mob;
 	String chef_pho, chef_id, chef_rate;
-	ImageView chef_photo;
+	//ImageView chef_photo;
 	TextView chefname;
 	TextView chefadd;
 	TextView chefmob;
@@ -90,7 +93,7 @@ public class ChefProfile extends Activity {
 	RatingBar rateme;
 	String userid;
 	float ratevalue;
-
+	CircularImageView circularImageView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -127,7 +130,7 @@ public class ChefProfile extends Activity {
 		post = (ImageView) findViewById(R.id.imageView5);
 		rateme = (RatingBar) findViewById(R.id.ratingBar3);
 
-		chef_photo = (ImageView) findViewById(R.id.imageView2);
+		//chef_photo = (ImageView) findViewById(R.id.imageView2);
 		chefname = (TextView) findViewById(R.id.textView2);
 		chefname.setTypeface(tf2);
 		chefadd = (TextView) findViewById(R.id.textView3);
@@ -145,6 +148,10 @@ public class ChefProfile extends Activity {
 		rel_list = (RelativeLayout) findViewById(R.id.List_btn);
 		rel_review = (RelativeLayout) findViewById(R.id.review);
 
+		circularImageView = (CircularImageView)findViewById(R.id.imageView2);
+		circularImageView.setBorderColor(Color.GRAY);
+	    circularImageView.setBorderWidth(5);
+	    
 		post.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -179,8 +186,8 @@ public class ChefProfile extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				rel_list.setBackgroundResource(R.drawable.active_btn);
-				rel_review.setBackgroundResource(R.drawable.unactive_btn);
+				rel_list.setBackgroundColor(Color.parseColor("#66414144"));
+				rel_review.setBackgroundColor(Color.parseColor("#909393"));
 
 				dish_list.setVisibility(View.VISIBLE);
 				dish_review.setVisibility(View.GONE);
@@ -194,8 +201,8 @@ public class ChefProfile extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				rel_list.setBackgroundResource(R.drawable.unactive_btn);
-				rel_review.setBackgroundResource(R.drawable.active_btn);
+				rel_review.setBackgroundColor(Color.parseColor("#66414144"));
+				rel_list.setBackgroundColor(Color.parseColor("#909393"));
 
 				dish_list.setVisibility(View.GONE);
 				dish_review.setVisibility(View.VISIBLE);
@@ -207,14 +214,14 @@ public class ChefProfile extends Activity {
 		getdish();
 
 		bar.setRating(Float.parseFloat(chef_rate));
-
-		if (img_url.equals(null)) {
-
-			chef_photo.setImageResource(R.drawable.ic_launcher);
-		} else {
-
-			il.DisplayImage(img_url, chef_photo);
-		}
+		il.DisplayImage(img_url, circularImageView);
+//		if (img_url.equals(null)) {
+//
+//			chef_photo.setImageResource(R.drawable.ic_launcher);
+//		} else {
+//
+//			il.DisplayImage(img_url, chef_photo);
+//		}
 
 		if (chef_name.equals(null)) {
 
@@ -244,7 +251,7 @@ public class ChefProfile extends Activity {
 		}
 
 		back = (ImageView) findViewById(R.id.imageView1);
-		back.setOnClickListener(new View.OnClickListener() {
+		((RelativeLayout)findViewById(R.id.kkkk)).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -304,7 +311,7 @@ public class ChefProfile extends Activity {
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-				//	Log.e("fhgfhj", s);
+					//Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -561,7 +568,7 @@ public class ChefProfile extends Activity {
 				rid.clear();
 				rvid.clear();
 				rtime.clear();
-				Log.e("mmm", "msg");
+				
 				try {
 					long milli = System.currentTimeMillis();
 					String url = getResources().getString(R.string.url)
@@ -596,11 +603,29 @@ public class ChefProfile extends Activity {
 			protected void onPostExecute(Void result) {
 				// what to do when background task is completed
 
+				chefname.setText("");
+				chefadd.setText("");
+				chefmob.setText("");
+				circularImageView.setImageBitmap(null);
+				bar.setRating(Float.parseFloat("0.0"));
 				try {
 
 					JSONObject obj = new JSONObject(s);
 					JSONObject obj1 = obj.getJSONObject("data");
+					JSONObject obj3=obj1.getJSONObject("Vendor");
+					String vnd_name=obj3.getString("name");
+					String vnd_photo=obj3.getString("photo");
+					String vnd_star=obj3.getString("ratings");
+					String vnd_add=obj3.getString("address");
+					String vnd_mob=obj3.getString("mobile_number");
+					//set vlaue
+					chefname.setText(vnd_name);
+					chefadd.setText(vnd_add);
+					chefmob.setText(vnd_mob);
+					il.DisplayImage(vnd_photo, circularImageView);
+					bar.setRating(Float.parseFloat(vnd_star));
 					JSONArray arr = obj1.getJSONArray("VendorReview");
+					
 					for (int i = 0; i < arr.length(); i++) {
 
 						JSONObject obj2 = arr.getJSONObject(i);
@@ -611,11 +636,11 @@ public class ChefProfile extends Activity {
 						String ratings = obj2.getString("ratings");
 						String time = obj2.getString("created");
 
-						JSONObject obj3 = obj2.getJSONObject("Customer");
+						JSONObject obj4 = obj2.getJSONObject("Customer");
 
-						String c_id = obj3.getString("id");
-						String name = obj3.getString("name");
-						String image = obj3.getString("image");
+						String c_id = obj4.getString("id");
+						String name = obj4.getString("name");
+						String image = obj4.getString("image");
 
 						rcustmerid.add(customer_id);
 						rcustmername.add(name);
@@ -703,8 +728,10 @@ public class ChefProfile extends Activity {
 			TextView chef_review;
 			TextView time;
 			TextView rate;
-			ImageView user_img;
+			CircularImageView circularImageView;
 			RatingBar bar;
+			ScrollView sc;
+			
 		}
 
 		@Override
@@ -719,9 +746,12 @@ public class ChefProfile extends Activity {
 			holder.chef_review = (TextView) rowView.findViewById(R.id.textView3);
 			holder.time = (TextView) rowView.findViewById(R.id.textView4);
 			holder.rate = (TextView) rowView.findViewById(R.id.textView2);
-			holder.user_img = (ImageView) rowView.findViewById(R.id.imageView1);
+			holder.circularImageView = (CircularImageView)rowView.findViewById(R.id.imageView1);
+			holder.circularImageView.setBorderColor(Color.GRAY);
+			holder.circularImageView.setBorderWidth(5);
+		    
 			holder.bar = (RatingBar) rowView.findViewById(R.id.ratingBar1);
-
+			holder.sc = (ScrollView) rowView.findViewById(R.id.scrollView1);
 			holder.chef_name.setText(rcustmername.get(arg0));
 			holder.chef_name.setTypeface(tf1);
 			holder.chef_review.setText(rcustmerreview.get(arg0));
@@ -730,9 +760,10 @@ public class ChefProfile extends Activity {
 			holder.rate.setTypeface(tf1);
 			holder.time.setText(rtime.get(arg0));
 			holder.time.setTypeface(tf1);
-			il.DisplayImage(rcustmerimg.get(arg0), holder.user_img);
+			il.DisplayImage(rcustmerimg.get(arg0), holder.circularImageView);
 			holder.bar.setRating(Float.parseFloat(rcustmerrate.get(arg0)));
-
+			holder.sc.fullScroll(ScrollView.FOCUS_DOWN);
+			holder.sc.fullScroll(ScrollView.FOCUS_UP);
 			return rowView;
 		}
 

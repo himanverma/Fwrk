@@ -14,7 +14,7 @@ import android.widget.ImageView;
 
 public class CircularImageView extends ImageView {
 
-	private int borderWidth = 5;
+	private int borderWidth = 2;
 	private int viewWidth;
 	private int viewHeight;
 	private Bitmap image;
@@ -44,7 +44,7 @@ public class CircularImageView extends ImageView {
 		paint.setAntiAlias(true);
 		
 		paintBorder = new Paint();
-		setBorderColor(Color.BLUE);
+		setBorderColor(Color.GRAY);
 		paintBorder.setAntiAlias(true);		
 	}
 	

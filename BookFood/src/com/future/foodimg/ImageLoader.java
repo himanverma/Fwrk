@@ -57,7 +57,7 @@ public class ImageLoader {
 		this.context = context;
 	}
 
-	int stub_id = R.drawable.ic_launcher;
+	int stub_id = R.drawable.item1;
 
 	public static Bitmap GetCurveImage(Bitmap bitmap) {
 
@@ -178,7 +178,7 @@ public class ImageLoader {
 		}
 
 		return BitmapFactory.decodeResource(context.getResources(),
-				R.drawable.ic_launcher);
+				R.drawable.item1);
 
 	}
 
@@ -202,7 +202,7 @@ public class ImageLoader {
 		imageViews.put(imageView, url);
 		Bitmap bitmap = memoryCache.get(url);
 
-		stub_id = R.drawable.ic_launcher;
+		stub_id = R.drawable.item1;
 
 		if (bitmap != null)
 			imageView.setImageBitmap(bitmap);
@@ -219,7 +219,7 @@ public class ImageLoader {
 		type = 1;
 		imageViews.put(imageView, url);
 		Bitmap bitmap = memoryCache.get(url);
-		stub_id = R.drawable.ic_launcher;
+		stub_id = R.drawable.item1;
 
 		if (bitmap != null)
 			imageView.setImageBitmap(GetCurveImagechat(bitmap));
@@ -237,7 +237,7 @@ public class ImageLoader {
 		type = 1;
 		imageViews.put(imageView, url);
 		Bitmap bitmap = memoryCache.get(url);
-		stub_id = R.drawable.ic_launcher;
+		stub_id = R.drawable.item1;
 
 		if (bitmap != null)
 			imageView.setImageBitmap(GetCurveImage(bitmap));

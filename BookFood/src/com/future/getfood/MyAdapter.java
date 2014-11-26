@@ -3,6 +3,8 @@ package com.future.getfood;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.future.listscroll.InfiniteScrollAdapter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 public class MyAdapter extends InfiniteScrollAdapter {
@@ -49,7 +52,10 @@ public class MyAdapter extends InfiniteScrollAdapter {
 	ImageLoader il;
 	SessionManager sess;
 	String user_id;
-
+	String add, city, country, sub1, sub2, state, zip;
+	GPSTracker gps;
+	double latitude, longitude;
+	
 	public MyAdapter(Context context, ArrayList<String> ll,
 			ArrayList<String> nll, ArrayList<String> pll,
 			ArrayList<String> imll, ArrayList<String> adml,
@@ -83,6 +89,38 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		tf2 = Typeface.createFromAsset(ctx.getAssets(), "Roboto-Light.ttf");
 		tf3 = Typeface.createFromAsset(ctx.getAssets(), "Roboto-Regular.ttf");
 		tf4 = Typeface.createFromAsset(ctx.getAssets(), "Roboto-Thin.ttf");
+		
+		gps = new GPSTracker(ctx);
+		
+		if (gps.canGetLocation()) {
+
+			latitude = gps.getLatitude();
+			longitude = gps.getLongitude();
+			
+			
+			
+		} else {
+
+			gps.showSettingsAlert();
+		}
+		
+//		try {
+//			Geocoder geocoder;
+//			List<Address> addresses;
+//			geocoder = new Geocoder(ctx, Locale.getDefault());
+//			addresses = geocoder.getFromLocation(latitude, longitude, 1);
+//
+//			add = addresses.get(0).getAddressLine(0);
+//			sub1 = addresses.get(0).getSubAdminArea();
+//			sub2 = addresses.get(0).getSubLocality();
+//			city = addresses.get(0).getLocality();
+//			state = addresses.get(0).getAdminArea();
+//			zip = addresses.get(0).getPostalCode();
+//			country = addresses.get(0).getCountryName();
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
@@ -128,16 +166,16 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		final CheckBox chk1 = (CheckBox) v.findViewById(R.id.checkBox1);
 		final CheckBox chk2 = (CheckBox) v.findViewById(R.id.checkBox2);
 		final CheckBox chk3 = (CheckBox) v.findViewById(R.id.checkBox3);
-		chk1.setChecked(true);
+		chk2.setChecked(true);
 		chk_value = "4 Roti+Rice";
 
 		// set value
 		il.DisplayImage(imglist.get(position), dish_img);
 		dish_name.setText(list.get(position));
-		dish_name.setTypeface(tf1);
+		dish_name.setTypeface(tf3);
 		user_name.setText("By " + namelist.get(position));
-		user_name.setTypeface(tf3);
-		price_dd.setText("Price: Rs" + pricelist.get(position));
+		user_name.setTypeface(tf2);
+		price_dd.setText("Price: Rs " + pricelist.get(position));
 		price_dd.setTypeface(tf1);
 		delivery_time.setTypeface(tf4);
 		rb.setRating(Float.parseFloat(chefrate.get(position)));
@@ -152,7 +190,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 				if (chk1.isChecked()) {
 
-					chk_value = "4 Roti+Rice";
+					chk_value = "Full Rice";
 					chk2.setChecked(false);
 					chk3.setChecked(false);
 					
@@ -169,7 +207,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 
 				if (chk2.isChecked()) {
 
-					chk_value = "Full Rice";
+					chk_value = "4 Roti+Half Rice";
 					chk1.setChecked(false);
 					chk3.setChecked(false);
 					

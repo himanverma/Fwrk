@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg1" >
+    android:background="#f2f2f2" >
 
     <RelativeLayout
         android:id="@+id/rel1"
@@ -21,32 +21,6 @@
             android:text="Create Profile"
             android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/kkk"
-        android:layout_width="fill_parent"
-        android:layout_height="120dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/rel1" >
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="120dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:scaleType="fitXY"
-            android:background="@drawable/round_corner" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignBottom="@+id/imageView1"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/camera" />
 
     </RelativeLayout>
 
@@ -137,8 +111,43 @@
             android:textColor="#ffffff"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:background="@drawable/accnt_btn" />
+            android:background="@drawable/save_btn" />
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView4"
+            android:layout_toRightOf="@+id/textView4"
+            android:text="*"
+            android:textColor="#FF0000" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/kkk"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/rel1" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/round_corner"
+            android:scaleType="fitXY"
+            android:src="@drawable/im1" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/imageView1"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/camera" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/bg1" >
+    android:background="#ffffff" >
 
     <RelativeLayout
         android:id="@+id/hjk"
@@ -11,15 +11,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/top_strip1" >
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/previous" />
 
         <TextView
             android:id="@+id/textView1"
@@ -32,14 +23,44 @@
             android:textColor="#ffffff"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <RelativeLayout
+            android:id="@+id/nnn1"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/previous" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/nnn2"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/textView1"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/profile" />
+            android:layout_alignParentTop="true"
+            android:gravity="right" >
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/profile1" />
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <ScrollView
@@ -47,8 +68,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/hjk" 
-        android:scrollbars="none">
+        android:layout_below="@+id/hjk"
+        android:scrollbars="none" >
 
         <LinearLayout
             android:id="@+id/lin"
@@ -67,7 +88,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:layout_margin="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/order_confirmation" />
 
                 <TextView
@@ -86,8 +109,9 @@
                 android:id="@+id/rel2"
                 android:layout_width="fill_parent"
                 android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/confirmation_box" >
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/box" >
 
                 <RelativeLayout
                     android:id="@+id/nnnn"
@@ -96,7 +120,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_toLeftOf="@+id/mmmm"
-                    android:background="@drawable/price_text_bg" >
+                    android:background="#D1D1D1" >
 
                     <TextView
                         android:id="@+id/textView3"
@@ -117,7 +141,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="1dp"
-                    android:background="@drawable/price_text_bg" >
+                    android:background="#D1D1D1" >
 
                     <TextView
                         android:id="@+id/textView4"
@@ -164,7 +188,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/textView5"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/text_divider" >
+                    android:background="#66000000" >
                 </RelativeLayout>
 
                 <TextView
@@ -202,7 +226,6 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
                     android:src="@drawable/cancel_btn" />
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -234,27 +257,17 @@
                 android:layout_width="fill_parent"
                 android:layout_height="590dp"
                 android:layout_alignParentTop="true"
-                android:layout_margin="5dp"
-                android:background="@drawable/delivery_addr_box" >
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/box" >
 
                 <RelativeLayout
                     android:id="@+id/huy"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:background="@drawable/price_text_bg" >
-
-                    <TextView
-                        android:id="@+id/textView10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
-                        android:text="Address"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="#000000" />
+                    android:background="#D1D1D1" >
                 </RelativeLayout>
 
                 <TextView
@@ -279,9 +292,9 @@
                     android:background="@drawable/addr_input"
                     android:ems="10"
                     android:hint="first name"
-                    android:textColor="#000000"
                     android:inputType="textPersonName"
-                    android:paddingLeft="7dp" >
+                    android:paddingLeft="7dp"
+                    android:textColor="#000000" >
 
                     <requestFocus />
                 </EditText>
@@ -330,9 +343,9 @@
                     android:background="@drawable/addr_input"
                     android:ems="10"
                     android:hint="last name"
-                     android:textColor="#000000"
                     android:inputType="textPersonName"
-                    android:paddingLeft="7dp" />
+                    android:paddingLeft="7dp"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/textView15"
@@ -370,7 +383,6 @@
                     android:hint="address"
                     android:inputType="textEmailAddress|textMultiLine"
                     android:lines="20"
-                   
                     android:paddingLeft="7dp"
                     android:scrollHorizontally="false"
                     android:scrollbars="vertical"
@@ -398,7 +410,7 @@
                     android:layout_toRightOf="@+id/textView17"
                     android:text="*"
                     android:textColor="#FF0000" />
-                
+
                 <EditText
                     android:id="@+id/editText4"
                     android:layout_width="wrap_content"
@@ -410,9 +422,9 @@
                     android:background="@drawable/addr_input"
                     android:ems="10"
                     android:hint="area"
-                     android:textColor="#000000"
                     android:inputType="textPersonName"
-                    android:paddingLeft="7dp" />
+                    android:paddingLeft="7dp"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/textView18"
@@ -437,16 +449,15 @@
                     android:background="@drawable/addr_input"
                     android:ems="10"
                     android:hint="city"
-                     android:textColor="#000000"
                     android:inputType="textPersonName"
                     android:maxLength="10"
-                    android:paddingLeft="7dp" />
+                    android:paddingLeft="7dp"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                  
                     android:layout_alignTop="@+id/textView18"
                     android:layout_toRightOf="@+id/textView18"
                     android:text="*"
@@ -484,10 +495,10 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:textColor="#000000"
                     android:hint="zipcode"
+                    android:inputType="number"
                     android:paddingLeft="7dp"
-                    android:inputType="number" />
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/textView25"
@@ -495,7 +506,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/editText6"
                     android:layout_below="@+id/editText6"
-                    android:text="Medium Text"
+                    android:text=""
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -539,7 +550,6 @@
                     android:maxLength="10"
                     android:paddingLeft="7dp"
                     android:textColor="#000000" />
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -572,16 +582,17 @@
                 android:id="@+id/rel6"
                 android:layout_width="fill_parent"
                 android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/map_bg" >
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/box"
+                android:visibility="visible" >
 
-                 <fragment
+                <fragment
                     android:id="@+id/map"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     class="com.google.android.gms.maps.SupportMapFragment" />
-                    
             </RelativeLayout>
 
             <RelativeLayout
@@ -595,6 +606,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/imageView8"
                     android:text="Payment Method"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -608,6 +620,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/payment_icon" />
 
             </RelativeLayout>
@@ -616,8 +629,10 @@
                 android:id="@+id/rel8"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@drawable/payment_box" >
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/box" >
 
                 <RelativeLayout
                     android:id="@+id/uio"
@@ -625,7 +640,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:background="@drawable/price_text_bg" >
+                    android:background="#D1D1D1" >
 
                     <TextView
                         android:id="@+id/textView23"
@@ -685,20 +700,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp" >
-                
-                 <Button
-                     android:id="@+id/button1"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_centerHorizontal="true"
-                     android:background="@drawable/save_btn"
-                     android:text="Save And Continue"
-                     android:textColor="#ffffff"
-                     android:textStyle="bold" />
-                
-            </RelativeLayout>
 
-           
+                <Button
+                    android:id="@+id/button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/save_btn"
+                    android:text="Save And Continue"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

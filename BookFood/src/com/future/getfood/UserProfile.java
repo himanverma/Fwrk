@@ -16,6 +16,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.future.foodimg.CircularImageView;
 import com.future.foodimg.DetectNetwork;
 import com.future.foodimg.ImageLoader;
 import com.future.getfood.ChefProfile.Reviewadapter;
@@ -24,6 +25,7 @@ import com.future.getfood.ChefProfile.Reviewadapter.Holder;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +48,7 @@ public class UserProfile extends Activity {
 	TextView username;
 	TextView useremail;
 	TextView usermob;
-	ImageView img;
+	//ImageView img;
 	SessionManager sess;
 	String userid,nuser,mobuser,euser,imguser;
 	ImageLoader il;
@@ -61,6 +64,7 @@ public class UserProfile extends Activity {
 	ArrayList<String>dish_price=new ArrayList<String>();
 	ArrayList<String>dish_img=new ArrayList<String>();
 	ListView lv;
+	CircularImageView circularImageView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -70,7 +74,7 @@ public class UserProfile extends Activity {
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.user_profile);
 
-		
+		Log.e("namebbb", "here");
 
 		tf1 = Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf");
 		tf2 = Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf");
@@ -86,14 +90,21 @@ public class UserProfile extends Activity {
 		imguser=map.get(SessionManager.KEY_PHOTO);
 		
 		
+		
 		username=(TextView)findViewById(R.id.textView2);
 		useremail=(TextView)findViewById(R.id.textView3);
 		usermob=(TextView)findViewById(R.id.textView4);
-		img=(ImageView)findViewById(R.id.imageView2);
+		//img=(ImageView)findViewById(R.id.imageView2);
+		
+		circularImageView = (CircularImageView)findViewById(R.id.imageView2);
+		circularImageView.setBorderColor(Color.GRAY);
+	    circularImageView.setBorderWidth(5);
+		
 		lv=(ListView) findViewById(R.id.listView1);
-		orderHistory();
+		
 		il=new ImageLoader(this);
 		username.setText(nuser);
+		username.setTypeface(tf3);
 		
 		if(euser.equals("0")){
 			useremail.setVisibility(View.GONE);
@@ -101,6 +112,7 @@ public class UserProfile extends Activity {
 			
 			useremail.setVisibility(View.VISIBLE);
 			useremail.setText(euser);
+			useremail.setTypeface(tf3);
 		}
 		
 		if(mobuser.equals("0")){
@@ -109,11 +121,13 @@ public class UserProfile extends Activity {
 			
 			usermob.setVisibility(View.VISIBLE);
 			usermob.setText(mobuser);
+			usermob.setTypeface(tf3);
 		}
 		
-		il.DisplayImage(imguser, img);
+		il.DisplayImage(imguser, circularImageView);
 		
-		((ImageView) findViewById(R.id.imageView1))
+		orderHistory();
+		((RelativeLayout) findViewById(R.id.jkl))
 				.setOnClickListener(new View.OnClickListener() {
 
 					@Override
@@ -321,7 +335,9 @@ public class UserProfile extends Activity {
 				holder.dish_name.setTypeface(tf1);
 				holder.vender_name.setText("By "+vender_name.get(arg0));
 				holder.vender_name.setTypeface(tf3);
-				holder.time.setText(date_list.get(arg0));
+				String[]dd=date_list.get(arg0).split(" ");
+				//holder.time.setText(date_list.get(arg0));
+				holder.time.setText("Order date: "+dd[0]);
 				holder.time.setTypeface(tf1);
 				holder.price.setText("Price: Rs"+dish_price.get(arg0));
 				holder.price.setTypeface(tf1);

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -41,6 +42,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
 
@@ -62,6 +64,7 @@ public class Registration extends Activity {
 	protected String s;
 	private byte[] ba;
 	private Typeface tf1, tf2, tf3, tf4;
+	String gcmid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,10 @@ public class Registration extends Activity {
 		tf4 = Typeface.createFromAsset(getAssets(), "Roboto-Thin.ttf");
 
 		sess = new SessionManager(this);
+
+		HashMap<String, String> map = sess.getGCMID();
+		gcmid = map.get(SessionManager.KEY_GCMID);
+
 		// getting value from UserLogin
 		Intent in = getIntent();
 		dishname = in.getStringExtra("dish");
@@ -108,26 +115,39 @@ public class Registration extends Activity {
 			}
 		});
 
+		
 		cont.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String uname = user_name.getText().toString();
-				
-//				if(validationEmail(user_email.getText().toString())){
-//			
-//					
-//				}else{
-//					
-//					user_email.setError("Please fill correct email id!");
-//				}
+
+				// if(validationEmail(user_email.getText().toString())){
+				//
+				//
+				// }else{
+				//
+				// user_email.setError("Please fill correct email id!");
+				// }
 				if (uname.equals("")) {
 
 					user_name.setError("Please fill username!");
 				} else {
 
-					senddetail();
+					if (user_email.getText().toString().equals("")) {
+
+						user_email.setError("Please fill emailid!");
+					} else {
+						if (!validationEmail(user_email.getText().toString())) {
+
+							user_email.setError("Please fill correct emailid!");
+
+						} else {
+
+							senddetail();
+						}
+					}
 				}
 			}
 		});
@@ -155,7 +175,7 @@ public class Registration extends Activity {
 				try {
 					long milli = System.currentTimeMillis();
 					String url = getResources().getString(R.string.url)
-							+ "api/customers/add.json?a="+milli;
+							+ "api/customers/add.json?a=" + milli;
 
 					MultipartEntity entity = new MultipartEntity(
 							HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -182,13 +202,16 @@ public class Registration extends Activity {
 							new StringBody(phonenum));
 					entity.addPart("data[Customer][deviceId]", new StringBody(
 							getDeviceDetail()));
+					// device token static
+					entity.addPart("data[Customer][device_token]",
+							new StringBody("kkkdi7999900hhhhhhhh"));
 
 					httppost.setEntity(entity);
 
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					Log.e("fhgfhj", s);
+					 Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -204,30 +227,29 @@ public class Registration extends Activity {
 			@Override
 			protected void onPostExecute(Void result) {
 				// what to do when background task is completed
-				
-				
-				try{
-					JSONObject obj=new JSONObject(s);
-					JSONObject obj1=obj.getJSONObject("data");
-					JSONObject obj2=obj1.getJSONObject("record");
-					JSONObject obj3=obj2.getJSONObject("Customer");
-					String custmor_Id=obj3.getString("id");
-					String custmor_name=obj3.getString("username");
-					String custmor_email=obj3.getString("email");
-					String custmor_img=obj3.getString("image");
-					String custmor_mob=obj3.getString("mobile_number");
-					sess.setId(custmor_Id,custmor_name,custmor_email,custmor_img,custmor_mob);
+
+				try {
+					JSONObject obj = new JSONObject(s);
+					JSONObject obj1 = obj.getJSONObject("data");
+					JSONObject obj2 = obj1.getJSONObject("record");
+					JSONObject obj3 = obj2.getJSONObject("Customer");
+					String custmor_Id = obj3.getString("id");
+					String custmor_name = obj3.getString("name");
+					String custmor_email = obj3.getString("email");
+					String custmor_img = obj3.getString("image");
+					String custmor_mob = obj3.getString("mobile_number");
+					sess.setId(custmor_Id, custmor_name, custmor_email,
+							custmor_img, custmor_mob);
 					Intent in = new Intent(Registration.this, OrderDishes.class);
 					in.putExtra("dish", dishname);
 					in.putExtra("chk", chkname);
 					in.putExtra("price", price);
 					startActivity(in);
 					finish();
-					
-				}catch(Exception e){
+
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
 
 				dialog.cancel();
 			}
@@ -343,7 +365,8 @@ public class Registration extends Activity {
 							.openInputStream(selectedImage);
 
 					Bitmap image1 = BitmapFactory.decodeStream(imageStream);
-					Bitmap scaled = Bitmap.createScaledBitmap(image1, 60, 60, true);
+					Bitmap scaled = Bitmap.createScaledBitmap(image1, 60, 60,
+							true);
 					ByteArrayOutputStream bao = new ByteArrayOutputStream();
 					// user_img.setScaleType(ScaleType.CENTER_CROP);
 
@@ -375,6 +398,7 @@ public class Registration extends Activity {
 
 		}
 	}
+
 	private boolean validationEmail(String str) {
 
 		if (str.indexOf("@") > 0 && str.indexOf(".") > 0) {

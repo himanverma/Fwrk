@@ -41,6 +41,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +54,8 @@ public class DishesList extends Activity {
 	ArrayList<String> dishname = new ArrayList<String>();
 	ArrayList<String> dishimg = new ArrayList<String>();
 	CustomGrid adapter;
-
+	SessionManager sess;
+	String userid;
 	EditText search;
 
 	@Override
@@ -65,10 +67,14 @@ public class DishesList extends Activity {
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.dishlist);
 
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-				.permitAll().build();
-		StrictMode.setThreadPolicy(policy);
+//		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+//				.permitAll().build();
+//		StrictMode.setThreadPolicy(policy);
 
+		sess = new SessionManager(this);
+		HashMap<String, String> map = sess.getUserDetails();
+		userid = map.get(SessionManager.KEY_ID);
+		
 		search = (EditText) findViewById(R.id.editText1);
 
 		back = (ImageView) findViewById(R.id.imageView1);
@@ -77,6 +83,22 @@ public class DishesList extends Activity {
 
 		getdish();
 
+		((RelativeLayout)findViewById(R.id.nn2)).setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (userid.equals("0")) {
+					Toast.makeText(getApplicationContext(),
+							"Make your profile first.", 5000).show();
+				} else {
+
+					Intent in = new Intent(DishesList.this,
+							UserProfile.class);
+					startActivity(in);
+				}
+			}
+		});
 		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -92,7 +114,8 @@ public class DishesList extends Activity {
 			}
 		});
 
-		back.setOnClickListener(new OnClickListener() {
+		((RelativeLayout) findViewById(R.id.nn1))
+		.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {

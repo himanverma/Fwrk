@@ -1,36 +1,20 @@
 package com.future.getfood;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import com.future.foodimg.CircularImageView;
 import com.future.foodimg.ImageLoader;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ImageView.ScaleType;
 
 public class CustomGrid extends BaseAdapter {
 	private Context mContext;
@@ -75,6 +59,7 @@ public class CustomGrid extends BaseAdapter {
 	public class Holder {
 		TextView tv;
 		ImageView img;
+		CircularImageView circularImageView;
 	}
 
 	
@@ -104,11 +89,16 @@ public class CustomGrid extends BaseAdapter {
 
 		rowView = inflater.inflate(R.layout.grid_single, null);
 		holder.tv = (TextView) rowView.findViewById(R.id.grid_text);
-		holder.img = (ImageView) rowView.findViewById(R.id.grid_image);
+		//holder.img = (ImageView) rowView.findViewById(R.id.grid_image);
 
+		holder.circularImageView = (CircularImageView)rowView.findViewById(R.id.imageViewCircular);
+		holder.circularImageView.setBorderColor(Color.GRAY);
+		holder.circularImageView.setBorderWidth(5);
+		//holder.circularImageView.addShadow();
+		
 		holder.tv.setText(dishname.get(position));
 		holder.tv.setTypeface(tf1);
-		il.DisplayImage(dishimg.get(position), holder.img);
+		il.DisplayImage(dishimg.get(position),holder.circularImageView);
 		
 		
 	

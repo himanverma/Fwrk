@@ -10,7 +10,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_margin="5dp"
-        android:background="@drawable/bg1" >
+        android:background="#f2f2f2" >
 
         <RelativeLayout
             android:id="@+id/kkkk"
@@ -18,7 +18,7 @@
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true" 
-            android:background="@drawable/price_text_bg">
+            android:background="#D1D1D1">
 
             <TextView
                 android:id="@+id/textView1"
@@ -78,7 +78,7 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/price_text_bg" >
+            android:background="#D1D1D1" >
 
             <Button
                 android:id="@+id/button1"
