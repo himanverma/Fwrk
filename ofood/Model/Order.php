@@ -134,9 +134,9 @@ class Order extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'VendorDay' => array(
-			'className' => 'VendorDay',
-			'foreignKey' => 'vendor_day_id',
+		'Combination' => array(
+			'className' => 'Combination',
+			'foreignKey' => 'combination_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -144,6 +144,13 @@ class Order extends AppModel {
 		'Customer' => array(
 			'className' => 'Customer',
 			'foreignKey' => 'customer_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Address' => array(
+			'className' => 'Address',
+			'foreignKey' => 'address_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

@@ -26,7 +26,10 @@ class AddressesController extends AppController {
             if($this->request->is('post')){
                 if($this->Address->save($this->request->data)){
                     $this->set(array(
-                        'data' => 'success',
+                        'data' => array(
+                            'msg'=>'success',
+                            'addressid'=>$this->Address->getLastInsertID()
+                            ),
                         '_serialize' => array('data')
                     ));
                 }else{

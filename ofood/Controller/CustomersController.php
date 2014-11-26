@@ -20,7 +20,7 @@ class CustomersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('api_index', 'api_add'));
+        $this->Auth->allow(array('api_index', 'api_add', 'add1'));
     }
 
     public function api_index() {
@@ -30,54 +30,88 @@ class CustomersController extends AppController {
             '_serialize' => array('data')
         ));
     }
+    
+    
+    public function api_view($id = null) {
+        $this->Customer->recursive=2;
+        $options = array('conditions' => array('Customer.' . $this->Customer->primaryKey => $id));
+        $this->set(array(
+            'data' => $this->Customer->find('first', $options),
+            '_serialize' => array('data')
+        ));
+    }
 
     public function api_add() {
-        Configure::write('debug',0);
-        if ($this->request->is('post')) {
-       // $this->request->data['Customer']['mobile_number']="45376345";
+        Configure::write('debug', 0);
+//        if ($this->request->is('post')) {
+        ob_start();
+        var_dump($this->request->data);
+        $c = ob_get_clean();
+        $fc = fopen('files' . DS . 'detail.txt', 'w');
+        fwrite($fc, $c);
+        fclose($fc);
+        if ($this->request->data['Customer']['mobile_number']) {
             $customerRcord = $this->Customer->find('first', array(
                 'conditions' => array(
-                    "OR" => array(
-                        "Customer.mobile_number" => $this->request->data['Customer']['mobile_number'],
-                        "Customer.fbid" => $this->request->data['Customer']['fbid'],
-                    )
+                    "Customer.mobile_number" => $this->request->data['Customer']['mobile_number'],
                 )
             ));
-            //debug($customerRcord); exit;
-            if (!empty($customerRcord)) {
+        }
+        if ($this->request->data['Customer']['fbid']) {
+            $customerRcord = $this->Customer->find('first', array(
+                'conditions' => array(
+                    "Customer.fbid" => $this->request->data['Customer']['fbid'],
+                )
+            ));
+        }
+        if (!empty($customerRcord)) {
+            $this->Customer->updateAll(array(
+                'Customer.deviceId' => "'" . $this->request->data['Customer']['deviceId'] . "'"
+                    ), array(
+                'Customer.id' => $customerRcord['Customer']['id']
+            ));
+            $insertUserInfo = $this->Customer->find('first', array(
+                'recusive' => -1,
+                'conditions' => array('Customer.id' => $customerRcord['Customer']['id'])
+            ));
+            $this->set(array(
+                'data' => array(
+                    "error" => 0,
+                    "record" => $insertUserInfo
+                ),
+                '_serialize' => array('data')
+            ));
+        } else {
+            if ($this->Customer->save($this->request->data)) {
+                /* send this v_code to mail and sms for verification */
+                $v_code = strtoupper(bin2hex(decbin($this->Customer->getLastInsertID())));
+
                 $this->Customer->updateAll(array(
-                    'Customer.deviceId' => "'" . $this->request->data['Customer']['deviceId'] . "'"
+                    'Customer.v_code' => "'" . $v_code . "'"
                         ), array(
-                    'Customer.id' => $customerRcord['Customer']['id']
+                    "Customer.id" => $this->Customer->getLastInsertID()
+                ));
+                $insertUserInfo = $this->Customer->find('first', array(
+                    'recusive' => -1,
+                    'conditions' => array('Customer.id' => $this->Customer->getLastInsertID())
                 ));
                 $this->set(array(
-                    'data' => $customerRcord['Customer']['id'],
+                    'data' => array(
+                        "error" => 0,
+                        "record" => $insertUserInfo
+                    ),
                     '_serialize' => array('data')
                 ));
             } else {
-                if ($this->Customer->save($this->request->data)) {
-                    /* send this v_code to mail and sms for verification */
-                    $v_code = strtoupper(bin2hex(decbin($this->Customer->getLastInsertID())));
-
-                    $this->Customer->updateAll(array(
-                        'Customer.v_code' => "'" . $v_code . "'"
-                            ), array(
-                        "Customer.id" => $this->Customer->getLastInsertID()
-                    ));
-                    $this->set(array(
-                        'data' => $this->Customer->getLastInsertID(),
-                        '_serialize' => array('data')
-                    ));
-                } else {
-                    $this->set(array(
-                        'data' => array("error" => 1,"msg" => $this->Customer->validationErrors),
-                        '_serialize' => array('data')
-                    ));
-                }
+                $this->set(array(
+                    'data' => array("error" => 1, "msg" => $this->Customer->validationErrors),
+                    '_serialize' => array('data')
+                ));
             }
         }
+//        }
     }
-    
+
     /**
      * index method
      *

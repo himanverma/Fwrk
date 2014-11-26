@@ -25,11 +25,11 @@ class Vendor extends AppModel {
             if(!isset($results[0])){
                 if($key == "id"){
                     $x = $this->query('SELECT SUM(VendorReview.ratings) / COUNT(VendorReview.ratings) as trate FROM vendor_reviews as VendorReview WHERE VendorReview.vendor_id='.$results['id']);
-                    $results['ratings'] = round($x[0][0]['trate'],2);
+                    $results['ratings'] = number_format($x[0][0]['trate'],2,".","");
                 }
             }else{
                 $x = $this->query('SELECT SUM(VendorReview.ratings) / COUNT(VendorReview.ratings) as trate FROM vendor_reviews as VendorReview WHERE VendorReview.vendor_id='.$value['Vendor']['id']);
-                $results[$key]['Vendor']['ratings'] = round($x[0][0]['trate'],2);
+                $results[$key]['Vendor']['ratings'] = number_format($x[0][0]['trate'],2,".","");
             }
         }
         return $results;

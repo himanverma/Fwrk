@@ -25,4 +25,20 @@ class Address extends AppModel {
 			'order' => ''
 		)
 	);
+        
+        public $hasMany = array(
+            'Order' => array(
+                'className' => 'Order',
+                'foreignKey' => 'address_id',
+                'dependent' => false,
+                'conditions' => '',
+                'fields' => '',
+                'order' => '',
+                'limit' => '',
+                'offset' => '',
+                'exclusive' => '',
+                'finderQuery' => '',
+                'counterQuery' => ''
+            ),
+        );
 }

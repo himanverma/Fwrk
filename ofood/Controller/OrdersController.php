@@ -15,8 +15,50 @@ class OrdersController extends AppController {
  * @var array
  */
 	public $components = array('Paginator', 'Session');
+        
+        public function beforeFilter() {
+            parent::beforeFilter();
+            $this->Auth->allow('api_order','payu');
+        }
+        
+        
+        public function api_order($id=null){
+            $this->Order->recursive=2;
+            $orderRecords=$this->Order->find('all',array(
+                'contain'=>array(
+                  'Combination' =>array('Vendor'),
+                  'Address'
+                ),
+                'conditions'=>array(
+                    "Order.customer_id"=>$id
+                )
+            ));
+//            debug($orderRecords);
+            $this->set(array(
+                'data' => $orderRecords,
+                '_serialize' => array('data')
+            ));
+        }
+        
+        
+        public function api_add() {
+		if ($this->request->is('post')) {
+			$this->Order->create();
+			if ($this->Order->save($this->request->data)) {
+				$this->set(array(
+                                    'data' => 'Success',
+                                    '_serialize' => array('data')
+                                ));
+			} else {
+				$this->set(array(
+                                    'data' => 'Success',
+                                    '_serialize' => array('data')
+                                ));
+			}
+		}
+	}
 
-/**
+        /**
  * index method
  *
  * @return void
@@ -201,4 +243,17 @@ class OrdersController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+        
+        public function payu($id=NULL){
+            $this->layout="ajax";
+            $options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
+            $this->set('order', $this->Order->find('first', $options));
+        }
+        
+        public function payment_success(){
+            $this->layout="ajax";
+        }
+        public function payment_failure(){
+            $this->layout="ajax";
+        }
 }
