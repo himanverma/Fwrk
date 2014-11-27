@@ -21,7 +21,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true" >
 
-            <TextView
+            <com.future.foodimg.LetterSpacingTextView
                 android:id="@+id/dishname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#FF0033"
                 android:textSize="15dp"
-                android:textScaleX="0.7"
+             
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -126,7 +126,7 @@
     <RelativeLayout
         android:id="@+id/rel22"
         android:layout_width="fill_parent"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/rr2"
         android:layout_marginLeft="5dp"
@@ -167,13 +167,13 @@
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="110dp"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/checkBox2"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/checkBox2"
             android:layout_marginRight="10dp"
-            android:background="@drawable/order_btn_bg" />
+           android:background="@drawable/buttonround" />
 
         <TextView
             android:id="@+id/textView5"
@@ -182,22 +182,24 @@
             android:layout_above="@+id/checkBox3"
             android:layout_alignLeft="@+id/button2"
             android:layout_alignTop="@+id/checkBox2"
+            android:layout_marginBottom="1dp"
             android:layout_toLeftOf="@+id/imageView3"
             android:gravity="center"
             android:text="Order Now"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
-            android:textSize="15dp"
+            android:textSize="14dp"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:layout_above="@+id/checkBox3"
             android:layout_alignRight="@+id/button2"
             android:layout_alignTop="@+id/button2"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="3dp"
             android:src="@drawable/order" />
 
     </RelativeLayout>

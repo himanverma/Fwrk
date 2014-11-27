@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.location.Address;
@@ -69,7 +70,7 @@ public class OrderDishes extends FragmentActivity {
 	GPSTracker gps;
 	double latitude, longitude;
 	String add, city, country, sub1, sub2, state, zip;
-	ImageView cls;
+	Button cls;
 	EditText fname, lname, address, area, zipcode, mcity, phone_num;
 	CheckBox cod, debit, credit, netb;
 	String chk_value = "na";
@@ -99,71 +100,68 @@ public class OrderDishes extends FragmentActivity {
 		HashMap<String, String> map = sess.getUserDetails();
 		user_id = map.get(SessionManager.KEY_ID);
 
-		// // getting value from MyAdapter
-		// Intent in = getIntent();
-		// dishname = in.getStringExtra("dish");
-		// chkname = in.getStringExtra("chk");
-		// price = in.getStringExtra("price");
-		// cid = in.getStringExtra("cid");
+		// getting value from MyAdapter
+		Intent in = getIntent();
+		dishname = in.getStringExtra("dish");
+		chkname = in.getStringExtra("chk");
+		price = in.getStringExtra("price");
+		cid = in.getStringExtra("cid");
 
-		
-		
 		// view object creation
-				dish_name = (TextView) findViewById(R.id.textView5);
-				dish_price = (TextView) findViewById(R.id.textView6);
-				total_price = (TextView) findViewById(R.id.textView8);
+		dish_name = (TextView) findViewById(R.id.textView5);
+		dish_price = (TextView) findViewById(R.id.textView6);
+		total_price = (TextView) findViewById(R.id.textView8);
 
-				fname = (EditText) findViewById(R.id.editText1);
-				lname = (EditText) findViewById(R.id.editText2);
-				address = (EditText) findViewById(R.id.editText3);
-				area = (EditText) findViewById(R.id.editText4);
-				mcity = (EditText) findViewById(R.id.editText5);
-				zipcode = (EditText) findViewById(R.id.editText6);
-				phone_num = (EditText) findViewById(R.id.editText7);
+		fname = (EditText) findViewById(R.id.editText1);
+		lname = (EditText) findViewById(R.id.editText2);
+		address = (EditText) findViewById(R.id.editText3);
+		area = (EditText) findViewById(R.id.editText4);
+		mcity = (EditText) findViewById(R.id.editText5);
+		zipcode = (EditText) findViewById(R.id.editText6);
+		phone_num = (EditText) findViewById(R.id.editText7);
 
-				cls = (ImageView) findViewById(R.id.imageView4);
+		cls = (Button) findViewById(R.id.imageView4);
 
-				save = (Button) findViewById(R.id.button1);
+		save = (Button) findViewById(R.id.button1);
 
-//				zipcode.setText(zip);
-//				address.setText(add + "," + sub2);
-//				area.setText(sub1);
-//				mcity.setText(city);
+		// zipcode.setText(zip);
+		// address.setText(add + "," + sub2);
+		// area.setText(sub1);
+		// mcity.setText(city);
 		//
-//				// set value
-//				dish_name.setText(dishname + "+" + chkname);
-//				dish_name.setTypeface(tf2);
-//				dish_price.setText("Rs " + price);
-//				dish_price.setTypeface(tf2);
-//				total_price.setText("Rs " + price);
-//				total_price.setTypeface(tf2);
-				((TextView) findViewById(R.id.textView5)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView7)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView2)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView1)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView9)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView11)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView13)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView15)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView17)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView18)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView20)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView26)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView21)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView22)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView3)).setTypeface(tf1);
-				((TextView) findViewById(R.id.textView4)).setTypeface(tf1);
+		// // set value
+		// dish_name.setText(dishname + "+" + chkname);
+		// dish_name.setTypeface(tf2);
+		// dish_price.setText("Rs " + price);
+		// dish_price.setTypeface(tf2);
+		// total_price.setText("Rs " + price);
+		// total_price.setTypeface(tf2);
+		((TextView) findViewById(R.id.textView5)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView7)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView2)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView1)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView9)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView11)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView13)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView15)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView17)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView18)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView20)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView26)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView21)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView22)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView3)).setTypeface(tf1);
+		((TextView) findViewById(R.id.textView4)).setTypeface(tf1);
 
-				cod = (CheckBox) findViewById(R.id.checkBox1);
-				debit = (CheckBox) findViewById(R.id.checkBox2);
-				credit = (CheckBox) findViewById(R.id.checkBox3);
-				netb = (CheckBox) findViewById(R.id.checkBox4);
-				cod.setTypeface(tf2);
-				debit.setTypeface(tf2);
-				credit.setTypeface(tf2);
-				netb.setTypeface(tf2);
-				
-				
+		cod = (CheckBox) findViewById(R.id.checkBox1);
+		debit = (CheckBox) findViewById(R.id.checkBox2);
+		credit = (CheckBox) findViewById(R.id.checkBox3);
+		netb = (CheckBox) findViewById(R.id.checkBox4);
+		cod.setTypeface(tf2);
+		debit.setTypeface(tf2);
+		credit.setTypeface(tf2);
+		netb.setTypeface(tf2);
+
 		rel6 = (RelativeLayout) findViewById(R.id.rel6);
 		// getting current latlng
 
@@ -186,61 +184,63 @@ public class OrderDishes extends FragmentActivity {
 				});
 
 		// set map position
-		
-		//gps = new GPSTracker(OrderDishes.this);
-		getdetail();
-//		if (gps.canGetLocation()) {
-//
-//			latitude = gps.getLatitude();
-//			longitude = gps.getLongitude();
-//			current_latlng = new LatLng(latitude, longitude);
-//			
-//		} else {
-//
-//			gps.showSettingsAlert();
-//		}
+
+		gps = new GPSTracker(OrderDishes.this);
+		// getdetail();
+
+		if (gps.canGetLocation()) {
+
+			latitude = gps.getLatitude();
+			longitude = gps.getLongitude();
+			current_latlng = new LatLng(latitude, longitude);
+
+		} else {
+
+			gps.showSettingsAlert();
+		}
 		fmanager = getSupportFragmentManager();
 		fragment = fmanager.findFragmentById(R.id.map);
 		supportmapfragment = (SupportMapFragment) fragment;
 		supportMap = supportmapfragment.getMap();
 
-//		CameraPosition cameraPosition = new CameraPosition.Builder()
-//				.target(current_latlng) // Sets the center of the map to
-//										// Golden Gate Bridge
-//				.zoom(17) // Sets the zoom
-//				.bearing(90) // Sets the orientation of the camera to east
-//				.tilt(30) // Sets the tilt of the camera to 30 degrees
-//				.build(); // Creates a CameraPosition from the builder
-//		supportMap.animateCamera(CameraUpdateFactory
-//				.newCameraPosition(cameraPosition));
+		GetCurrentAddress currentadd = new GetCurrentAddress();
+		currentadd.execute();
 
-//		// ...........................address................................
-//		try {
-//			Geocoder geocoder;
-//			List<Address> addresses;
-//			geocoder = new Geocoder(this, Locale.getDefault());
-//			addresses = geocoder.getFromLocation(latitude, longitude, 1);
-//
-//			add = addresses.get(0).getAddressLine(0);
-//			sub1 = addresses.get(0).getSubAdminArea();
-//			sub2 = addresses.get(0).getSubLocality();
-//			city = addresses.get(0).getLocality();
-//			state = addresses.get(0).getAdminArea();
-//			zip = addresses.get(0).getPostalCode();
-//			country = addresses.get(0).getCountryName();
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		supportMap
-//				.addMarker(new MarkerOptions()
-//						.position(current_latlng)
-//						.title(sub2)
-//						.icon(BitmapDescriptorFactory
-//								.fromResource(R.drawable.location)));
+		// CameraPosition cameraPosition = new CameraPosition.Builder()
+		// .target(current_latlng) // Sets the center of the map to
+		// // Golden Gate Bridge
+		// .zoom(17) // Sets the zoom
+		// .bearing(90) // Sets the orientation of the camera to east
+		// .tilt(30) // Sets the tilt of the camera to 30 degrees
+		// .build(); // Creates a CameraPosition from the builder
+		// supportMap.animateCamera(CameraUpdateFactory
+		// .newCameraPosition(cameraPosition));
 
-		
+		// // ...........................address................................
+		// try {
+		// Geocoder geocoder;
+		// List<Address> addresses;
+		// geocoder = new Geocoder(this, Locale.getDefault());
+		// addresses = geocoder.getFromLocation(latitude, longitude, 1);
+		//
+		// add = addresses.get(0).getAddressLine(0);
+		// sub1 = addresses.get(0).getSubAdminArea();
+		// sub2 = addresses.get(0).getSubLocality();
+		// city = addresses.get(0).getLocality();
+		// state = addresses.get(0).getAdminArea();
+		// zip = addresses.get(0).getPostalCode();
+		// country = addresses.get(0).getCountryName();
+		//
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		//
+		// supportMap
+		// .addMarker(new MarkerOptions()
+		// .position(current_latlng)
+		// .title(sub2)
+		// .icon(BitmapDescriptorFactory
+		// .fromResource(R.drawable.location)));
 
 		cod.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -411,106 +411,79 @@ public class OrderDishes extends FragmentActivity {
 		});
 	}
 
-	// method for sending user detail on server
-	protected void getdetail() {
-		// TODO Auto-generated method stub
+	private class GetCurrentAddress extends AsyncTask<String, String, Void> {
+		ProgressDialog dialog = new ProgressDialog(OrderDishes.this);
 
-		AsyncTask<Void, Void, Void> updateTask = new AsyncTask<Void, Void, Void>() {
-			ProgressDialog dialog = new ProgressDialog(OrderDishes.this);
+		@Override
+		protected void onPreExecute() {
+			// what to do before background task
+			dialog.setMessage("Validating... ");
+			dialog.setIndeterminate(true);
+			dialog.show();
+		}
 
-			@Override
-			protected void onPreExecute() {
-				// what to do before background task
-				dialog.setMessage("Validating... ");
-				dialog.setIndeterminate(true);
-				dialog.show();
-			}
+		@Override
+		protected Void doInBackground(String... urls) {
 
-			@Override
-			protected Void doInBackground(Void... params) {
+			try {
+				Geocoder geocoder = new Geocoder(OrderDishes.this,
+						Locale.getDefault());
+				List<Address> addresses = geocoder.getFromLocation(latitude,
+						longitude, 1);
+				if (addresses.size() > 0) {
+					Address address1 = addresses.get(0);
 
-				// getting value from MyAdapter
-				Intent in = getIntent();
-				dishname = in.getStringExtra("dish");
-				chkname = in.getStringExtra("chk");
-				price = in.getStringExtra("price");
-				cid = in.getStringExtra("cid");
-				gps = new GPSTracker(OrderDishes.this);
-				if (gps.canGetLocation()) {
+					add = address1.getAddressLine(0);
+					sub1 = address1.getSubAdminArea();
+					sub2 = address1.getSubLocality();
+					city = address1.getLocality();
+					state = address1.getAdminArea();
+					zip = address1.getPostalCode();
+					country = address1.getCountryName();
 
-					latitude = gps.getLatitude();
-					longitude = gps.getLongitude();
-					current_latlng = new LatLng(latitude, longitude);
-					try {
-						Geocoder geocoder;
-						List<Address> addresses;
-						geocoder = new Geocoder(OrderDishes.this, Locale.getDefault());
-						addresses = geocoder.getFromLocation(latitude, longitude, 1);
-
-						add = addresses.get(0).getAddressLine(0);
-						sub1 = addresses.get(0).getSubAdminArea();
-						sub2 = addresses.get(0).getSubLocality();
-						city = addresses.get(0).getLocality();
-						state = addresses.get(0).getAdminArea();
-						zip = addresses.get(0).getPostalCode();
-						country = addresses.get(0).getCountryName();
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-
-					
-				} else {
-
-					gps.showSettingsAlert();
 				}
-				
-				// ...........................address................................
-				
-				
-				return null;
+			} catch (IOException e) {
+				Log.e("tag", e.getMessage());
 			}
 
-			@Override
-			protected void onPostExecute(Void result) {
-				// what to do when background task is completed
-				zipcode.setText(zip);
-				address.setText(add + "," + sub2);
-				area.setText(sub1);
-				mcity.setText(city);
+			return null;
+		}
 
-				// set value
-				dish_name.setText(dishname + "+" + chkname);
-				dish_name.setTypeface(tf2);
-				dish_price.setText("Rs " + price);
-				dish_price.setTypeface(tf2);
-				total_price.setText("Rs " + price);
-				total_price.setTypeface(tf2);
-				supportMap
-				.addMarker(new MarkerOptions()
-						.position(current_latlng)
-						.title(sub2)
-						.icon(BitmapDescriptorFactory
-								.fromResource(R.drawable.location)));
+		@Override
+		protected void onPostExecute(Void resultString) {
+			dialog.dismiss();
 
-		
-				CameraPosition cameraPosition = new CameraPosition.Builder()
-				.target(current_latlng) // Sets the center of the map to
-										// Golden Gate Bridge
-				.zoom(17) // Sets the zoom
-				.bearing(90) // Sets the orientation of the camera to east
-				.tilt(30) // Sets the tilt of the camera to 30 degrees
-				.build(); // Creates a CameraPosition from the builder
-		supportMap.animateCamera(CameraUpdateFactory
-				.newCameraPosition(cameraPosition));
-		
-				dialog.cancel();
-			}
+			zipcode.setText(zip);
+			address.setText(add + "," + sub2);
+			area.setText(sub1);
+			mcity.setText(city);
 
-		};
-		if ((DetectNetwork.hasConnection(getApplicationContext())))
-			updateTask.execute((Void[]) null);
+			// set value
+			dish_name.setText(dishname + "+" + chkname);
+			dish_name.setTypeface(tf2);
+			dish_price.setText("Rs " + price);
+			dish_price.setTypeface(tf2);
+			total_price.setText("Rs " + price);
+			total_price.setTypeface(tf2);
+			supportMap.addMarker(new MarkerOptions()
+					.position(current_latlng)
+					.title(sub2)
+					.icon(BitmapDescriptorFactory
+							.fromResource(R.drawable.location)));
 
+			CameraPosition cameraPosition = new CameraPosition.Builder()
+					.target(current_latlng) // Sets the center of the map to
+											// Golden Gate Bridge
+					.zoom(17) // Sets the zoom
+					.bearing(90) // Sets the orientation of the camera to
+									// east
+					.tilt(30) // Sets the tilt of the camera to 30 degrees
+					.build(); // Creates a CameraPosition from the builder
+			supportMap.animateCamera(CameraUpdateFactory
+					.newCameraPosition(cameraPosition));
+
+			// Log.e("bbbbb", address);
+		}
 	}
 
 	// method for sending user detail on server

@@ -264,9 +264,9 @@ int drawable abc_textfield_searchview_right_holo_dark 0x7f020055
 int drawable abc_textfield_searchview_right_holo_light 0x7f020056
 int drawable addr_input 0x7f020057
 int drawable box 0x7f020058
-int drawable calendar 0x7f020059
-int drawable camera 0x7f02005a
-int drawable cancel_btn 0x7f02005b
+int drawable buttonround 0x7f020059
+int drawable calendar 0x7f02005a
+int drawable camera 0x7f02005b
 int drawable common_signin_btn_icon_dark 0x7f02005c
 int drawable common_signin_btn_icon_disabled_dark 0x7f02005d
 int drawable common_signin_btn_icon_disabled_focus_dark 0x7f02005e

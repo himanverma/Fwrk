@@ -40,7 +40,7 @@ public class PaymentProcess extends Activity{
          * @param toast
          */
         @JavascriptInterface
-        public void showToast(String toast) {
+        public void welcome(String toast) {
            
             Intent in=new Intent(PaymentProcess.this,DishesActivity.class);
             startActivity(in);

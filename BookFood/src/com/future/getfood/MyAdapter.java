@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.future.foodimg.ImageLoader;
+import com.future.foodimg.LetterSpacingTextView;
 import com.future.getfood.R;
 import com.future.listscroll.InfiniteScrollAdapter;
 
@@ -121,6 +122,9 @@ public class MyAdapter extends InfiniteScrollAdapter {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
+		
+		
+		
 	}
 
 	@Override
@@ -149,7 +153,7 @@ public class MyAdapter extends InfiniteScrollAdapter {
 	public View getRealView(LayoutInflater inflater, final int position,
 			View convertView, ViewGroup parent) {
 		View v = inflater.inflate(R.layout.dishes_item, null);
-		TextView dish_name = ((TextView) v.findViewById(R.id.dishname));
+		LetterSpacingTextView  dish_name = ((LetterSpacingTextView) v.findViewById(R.id.dishname));
 		ImageView dish_img = (ImageView) v.findViewById(R.id.imageView1);
 		TextView user_name = ((TextView) v.findViewById(R.id.textView1));
 		RatingBar rb = (RatingBar) v.findViewById(R.id.ratingBar1);
@@ -168,11 +172,11 @@ public class MyAdapter extends InfiniteScrollAdapter {
 		final CheckBox chk3 = (CheckBox) v.findViewById(R.id.checkBox3);
 		chk2.setChecked(true);
 		chk_value = "4 Roti+Rice";
-
 		// set value
 		il.DisplayImage(imglist.get(position), dish_img);
 		dish_name.setText(list.get(position));
 		dish_name.setTypeface(tf3);
+		dish_name.setLetterSpacing(-3); 
 		user_name.setText("By " + namelist.get(position));
 		user_name.setTypeface(tf2);
 		price_dd.setText("Price: Rs " + pricelist.get(position));

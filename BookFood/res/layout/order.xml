@@ -84,8 +84,8 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
@@ -101,14 +101,15 @@
                     android:layout_toRightOf="@+id/imageView3"
                     android:text="Order Confirmation"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FF0000"
+                    android:textColor="#CE464C"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rel2"
                 android:layout_width="fill_parent"
-                android:layout_height="150dp"
+                android:layout_height="130dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/box" >
@@ -116,7 +117,7 @@
                 <RelativeLayout
                     android:id="@+id/nnnn"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_toLeftOf="@+id/mmmm"
@@ -130,6 +131,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
                         android:text="Item(s)"
+                        android:textSize="12dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#000000" />
                 </RelativeLayout>
@@ -137,7 +139,7 @@
                 <RelativeLayout
                     android:id="@+id/mmmm"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="1dp"
@@ -152,6 +154,7 @@
                         android:layout_centerVertical="true"
                         android:gravity="center"
                         android:text="Price"
+                        android:textSize="12dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#000000" />
                 </RelativeLayout>
@@ -166,6 +169,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Dishes name"
+                    android:textSize="12dp"
                     android:textColor="#000000" />
 
                 <TextView
@@ -179,6 +183,7 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:text="Rs 50"
+                    android:textSize="12dp"
                     android:textColor="#000000" />
 
                 <RelativeLayout
@@ -200,6 +205,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Total"
+                    android:textSize="12dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -213,19 +219,22 @@
                     android:layout_toRightOf="@+id/textView5"
                     android:gravity="center"
                     android:text="Rs 50"
+                    android:textSize="12dp"
                     android:textColor="#000000" />
 
-                <ImageView
+                <Button
                     android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/textView8"
-                    android:layout_marginBottom="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/cancel_btn" />
+                    android:background="@drawable/buttonround"
+                    android:text="Cancel"
+                    android:textSize="13dp"
+                    android:textColor="#ffffff" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -235,8 +244,9 @@
 
                 <ImageView
                     android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
                     android:layout_margin="5dp"
                     android:src="@drawable/delivery_addr" />
 
@@ -244,18 +254,21 @@
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_alignTop="@+id/imageView5"
                     android:layout_toRightOf="@+id/imageView5"
+                    android:gravity="center"
                     android:text="Delivery Address"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FF0000"
+                    android:textColor="#CE464C"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rel4"
                 android:layout_width="fill_parent"
-                android:layout_height="590dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -282,7 +295,7 @@
                 <EditText
                     android:id="@+id/editText1"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/textView11"
@@ -291,8 +304,9 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="first name"
+                    android:hint="Firstname"
                     android:inputType="textPersonName"
+                    android:textSize="12dp"
                     android:paddingLeft="7dp"
                     android:textColor="#000000" >
 
@@ -307,6 +321,7 @@
                     android:layout_below="@+id/huy"
                     android:layout_marginLeft="8dp"
                     android:text="First Name"
+                    android:textSize="12dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -319,6 +334,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
                     android:text="Last Name"
+                    android:textSize="12dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -335,16 +351,17 @@
                 <EditText
                     android:id="@+id/editText2"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_alignLeft="@+id/textView13"
                     android:layout_alignRight="@+id/editText1"
                     android:layout_below="@+id/textView13"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="last name"
+                    android:hint="Lastname"
                     android:inputType="textPersonName"
                     android:paddingLeft="7dp"
+                    android:textSize="12dp"
                     android:textColor="#000000" />
 
                 <TextView
@@ -356,6 +373,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
                     android:text="Address"
+                    android:textSize="12dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -372,7 +390,7 @@
                 <EditText
                     android:id="@+id/editText3"
                     android:layout_width="wrap_content"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
                     android:layout_alignLeft="@+id/textView15"
                     android:layout_alignRight="@+id/editText2"
                     android:layout_below="@+id/textView15"
@@ -380,7 +398,8 @@
                     android:background="@drawable/addr_input"
                     android:ems="10"
                     android:gravity="top|left"
-                    android:hint="address"
+                    android:hint="Address"
+                     android:textSize="12dp"
                     android:inputType="textEmailAddress|textMultiLine"
                     android:lines="20"
                     android:paddingLeft="7dp"
@@ -398,6 +417,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
                     android:text="Area"
+                    android:textSize="12dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -414,14 +434,15 @@
                 <EditText
                     android:id="@+id/editText4"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_alignLeft="@+id/textView17"
                     android:layout_alignRight="@+id/editText3"
                     android:layout_below="@+id/textView17"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="area"
+                    android:hint="Area"
+                     android:textSize="12dp"
                     android:inputType="textPersonName"
                     android:paddingLeft="7dp"
                     android:textColor="#000000" />
@@ -435,20 +456,22 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
                     android:text="City"
+                    android:textSize="12dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
                 <EditText
                     android:id="@+id/editText5"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_alignLeft="@+id/textView18"
                     android:layout_alignRight="@+id/editText4"
                     android:layout_below="@+id/textView18"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="city"
+                    android:hint="City"
+                     android:textSize="12dp"
                     android:inputType="textPersonName"
                     android:maxLength="10"
                     android:paddingLeft="7dp"
@@ -472,6 +495,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Zipcode/Pincode"
+                    android:textSize="12dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -488,14 +512,15 @@
                 <EditText
                     android:id="@+id/editText6"
                     android:layout_width="fill_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_below="@+id/textView24"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="zipcode"
+                    android:hint="Zipcode"
+                     android:textSize="12dp"
                     android:inputType="number"
                     android:paddingLeft="7dp"
                     android:textColor="#000000" />
@@ -519,6 +544,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:text="Phone No."
+                    android:textSize="12dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#000000" />
 
@@ -536,16 +562,17 @@
                 <EditText
                     android:id="@+id/editText7"
                     android:layout_width="fill_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/textView27"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/addr_input"
                     android:ems="10"
-                    android:hint="phone no."
+                     android:textSize="12dp"
+                    android:hint="Phone No."
                     android:inputType="phone"
                     android:maxLength="10"
                     android:paddingLeft="7dp"
@@ -559,8 +586,8 @@
 
                 <ImageView
                     android:id="@+id/imageView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="5dp"
@@ -573,8 +600,9 @@
                     android:layout_alignTop="@+id/imageView9"
                     android:layout_toRightOf="@+id/imageView9"
                     android:text="Current Location"
+                    android:textSize="13dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FF0000"
+                    android:textColor="#CE464C"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -609,14 +637,15 @@
                     android:layout_marginTop="5dp"
                     android:layout_toRightOf="@+id/imageView8"
                     android:text="Payment Method"
+                    android:textSize="13dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#FF0000"
+                    android:textColor="#CE464C"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/imageView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="5dp"
@@ -650,6 +679,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="5dp"
                         android:text="Payment"
+                        android:textSize="12dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#000000" />
                 </RelativeLayout>
@@ -662,6 +692,7 @@
                     android:layout_below="@+id/uio"
                     android:layout_marginLeft="5dp"
                     android:text="Cash On Delivery"
+                    android:textSize="12dp"
                     android:textColor="#000000" />
 
                 <CheckBox
@@ -672,6 +703,7 @@
                     android:layout_below="@+id/checkBox1"
                     android:layout_marginLeft="5dp"
                     android:text="Debit card"
+                    android:textSize="12dp"
                     android:textColor="#000000" />
 
                 <CheckBox
@@ -682,6 +714,7 @@
                     android:layout_below="@+id/checkBox2"
                     android:layout_marginLeft="5dp"
                     android:text="Credit Card"
+                    android:textSize="12dp"
                     android:textColor="#000000" />
 
                 <CheckBox
@@ -692,6 +725,7 @@
                     android:layout_below="@+id/checkBox3"
                     android:layout_marginLeft="5dp"
                     android:text="Net Banking"
+                    android:textSize="12dp"
                     android:textColor="#000000" />
             </RelativeLayout>
 
