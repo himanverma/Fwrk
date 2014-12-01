@@ -1,10 +1,77 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="#f2f2f2" >
 
-    <WebView
-        android:id="@+id/webkit"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+
+            <WebView
+                android:id="@+id/webkit"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:visibility="visible" />
+        
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/nnnn"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="78dp"
+            android:gravity="center"
+            android:text="Your order must be delivered within 45 mins "
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/textView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/buttonround"
+            android:text="Go for Next Order"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/nnnj"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/top_strip1" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Order Process"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -19,6 +19,7 @@ import org.json.JSONObject;
 import com.future.foodimg.CircularImageView;
 import com.future.foodimg.DetectNetwork;
 import com.future.foodimg.ImageLoader;
+import com.future.foodimg.LetterSpacingTextView;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -54,7 +55,7 @@ public class ChefProfile extends Activity {
 	String chef_add;
 	String chef_mob;
 	String chef_pho, chef_id, chef_rate;
-	//ImageView chef_photo;
+	// ImageView chef_photo;
 	TextView chefname;
 	TextView chefadd;
 	TextView chefmob;
@@ -94,6 +95,8 @@ public class ChefProfile extends Activity {
 	String userid;
 	float ratevalue;
 	CircularImageView circularImageView;
+	TextView nodata;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -122,15 +125,19 @@ public class ChefProfile extends Activity {
 		chef_id = in.getStringExtra("chefid");
 		chef_rate = in.getStringExtra("rate");
 
+		Log.e("url", img_url);
+
+		nodata = (TextView) findViewById(R.id.textView6);
 		t1 = (TextView) findViewById(R.id.textView1);
 		t1.setTypeface(tf1);
+		nodata.setTypeface(tf1);
 
 		reviewlist = (ListView) findViewById(R.id.listView1);
 		txt = (EditText) findViewById(R.id.editText1);
 		post = (ImageView) findViewById(R.id.imageView5);
 		rateme = (RatingBar) findViewById(R.id.ratingBar3);
 
-		//chef_photo = (ImageView) findViewById(R.id.imageView2);
+		// chef_photo = (ImageView) findViewById(R.id.imageView2);
 		chefname = (TextView) findViewById(R.id.textView2);
 		chefname.setTypeface(tf2);
 		chefadd = (TextView) findViewById(R.id.textView3);
@@ -148,10 +155,10 @@ public class ChefProfile extends Activity {
 		rel_list = (RelativeLayout) findViewById(R.id.List_btn);
 		rel_review = (RelativeLayout) findViewById(R.id.review);
 
-		circularImageView = (CircularImageView)findViewById(R.id.imageView2);
+		circularImageView = (CircularImageView) findViewById(R.id.imageView2);
 		circularImageView.setBorderColor(Color.GRAY);
-	    circularImageView.setBorderWidth(5);
-	    
+		circularImageView.setBorderWidth(5);
+
 		post.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -177,7 +184,7 @@ public class ChefProfile extends Activity {
 				// TODO Auto-generated method stub
 
 				ratevalue = rating;
-				
+
 			}
 		});
 
@@ -214,14 +221,8 @@ public class ChefProfile extends Activity {
 		getdish();
 
 		bar.setRating(Float.parseFloat(chef_rate));
-		il.DisplayImage(img_url, circularImageView);
-//		if (img_url.equals(null)) {
-//
-//			chef_photo.setImageResource(R.drawable.ic_launcher);
-//		} else {
-//
-//			il.DisplayImage(img_url, chef_photo);
-//		}
+
+		il.DisplayImage1(img_url, circularImageView);
 
 		if (chef_name.equals(null)) {
 
@@ -251,14 +252,15 @@ public class ChefProfile extends Activity {
 		}
 
 		back = (ImageView) findViewById(R.id.imageView1);
-		((RelativeLayout)findViewById(R.id.kkkk)).setOnClickListener(new View.OnClickListener() {
+		((RelativeLayout) findViewById(R.id.kkkk))
+				.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		});
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						finish();
+					}
+				});
 
 	}
 
@@ -311,7 +313,7 @@ public class ChefProfile extends Activity {
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					//Log.e("fhgfhj", s);
+					// Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -352,7 +354,7 @@ public class ChefProfile extends Activity {
 
 					dishlist.setAdapter(adapter);
 					adapter.notifyDataSetChanged();
-					
+
 				} catch (Exception e) {
 
 					e.printStackTrace();
@@ -412,7 +414,7 @@ public class ChefProfile extends Activity {
 		}
 
 		public class Holder {
-			TextView dish_name;
+			LetterSpacingTextView dish_name;
 			TextView chef_name;
 			TextView price;
 			TextView rate;
@@ -428,7 +430,8 @@ public class ChefProfile extends Activity {
 			View rowView = arg1;
 
 			rowView = inflater.inflate(R.layout.chef_dish_items, null);
-			holder.dish_name = (TextView) rowView.findViewById(R.id.dishname);
+			holder.dish_name = (LetterSpacingTextView) rowView
+					.findViewById(R.id.dishname);
 			holder.chef_name = (TextView) rowView.findViewById(R.id.textView1);
 			holder.price = (TextView) rowView.findViewById(R.id.textView4);
 			holder.rate = (TextView) rowView.findViewById(R.id.textView2);
@@ -436,7 +439,8 @@ public class ChefProfile extends Activity {
 			holder.bar = (RatingBar) rowView.findViewById(R.id.ratingBar1);
 
 			holder.dish_name.setText(dishnamelist.get(arg0));
-			holder.dish_name.setTypeface(tf1);
+			holder.dish_name.setTypeface(tf3);
+			holder.dish_name.setLetterSpacing(-3);
 			holder.chef_name.setText(chef_name);
 			holder.chef_name.setTypeface(tf3);
 			holder.rate.setText("(" + chef_rate + ")");
@@ -494,7 +498,7 @@ public class ChefProfile extends Activity {
 					httppost.setEntity(entity);
 					response = httpclient.execute(httppost);
 					s = EntityUtils.toString(response.getEntity());
-					//Log.e("fhgfhj", s);
+					// Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -519,10 +523,10 @@ public class ChefProfile extends Activity {
 					String msg = obj1.getString("msg");
 
 					if (msg.equals("success")) {
-                         txt.setText("");
-                         rateme.setRating((float) 0.0);
+						txt.setText("");
+						rateme.setRating((float) 0.0);
 						getReview();
- 
+
 					} else {
 
 						Toast.makeText(getApplicationContext(), msg, 5000)
@@ -568,11 +572,11 @@ public class ChefProfile extends Activity {
 				rid.clear();
 				rvid.clear();
 				rtime.clear();
-				
+
 				try {
 					long milli = System.currentTimeMillis();
 					String url = getResources().getString(R.string.url)
-							+ "api/vendors/view/" + chef_id +".json?a="
+							+ "api/vendors/view/" + chef_id + ".json?a="
 							+ milli;
 
 					MultipartEntity entity = new MultipartEntity(
@@ -586,7 +590,7 @@ public class ChefProfile extends Activity {
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					//Log.e("fhgfhj", s);
+					// Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -612,54 +616,62 @@ public class ChefProfile extends Activity {
 
 					JSONObject obj = new JSONObject(s);
 					JSONObject obj1 = obj.getJSONObject("data");
-					JSONObject obj3=obj1.getJSONObject("Vendor");
-					String vnd_name=obj3.getString("name");
-					String vnd_photo=obj3.getString("photo");
-					String vnd_star=obj3.getString("ratings");
-					String vnd_add=obj3.getString("address");
-					String vnd_mob=obj3.getString("mobile_number");
-					//set vlaue
+					JSONObject obj3 = obj1.getJSONObject("Vendor");
+					String vnd_name = obj3.getString("name");
+					String vnd_photo = obj3.getString("photo");
+					String vnd_star = obj3.getString("ratings");
+					String vnd_add = obj3.getString("address");
+					String vnd_mob = obj3.getString("mobile_number");
+					// set vlaue
 					chefname.setText(vnd_name);
 					chefadd.setText(vnd_add);
 					chefmob.setText(vnd_mob);
 					il.DisplayImage(vnd_photo, circularImageView);
 					bar.setRating(Float.parseFloat(vnd_star));
 					JSONArray arr = obj1.getJSONArray("VendorReview");
-					
-					for (int i = 0; i < arr.length(); i++) {
+					if (arr.length() <= 0) {
 
-						JSONObject obj2 = arr.getJSONObject(i);
-						String id = obj2.getString("id");
-						String customer_id = obj2.getString("customer_id");
-						String vendor_id = obj2.getString("vendor_id");
-						String review = obj2.getString("review");
-						String ratings = obj2.getString("ratings");
-						String time = obj2.getString("created");
+						nodata.setVisibility(View.VISIBLE);
+						reviewlist.setVisibility(View.GONE);
 
-						JSONObject obj4 = obj2.getJSONObject("Customer");
+					} else {
+						for (int i = 0; i < arr.length(); i++) {
 
-						String c_id = obj4.getString("id");
-						String name = obj4.getString("name");
-						String image = obj4.getString("image");
+							JSONObject obj2 = arr.getJSONObject(i);
+							String id = obj2.getString("id");
+							String customer_id = obj2.getString("customer_id");
+							String vendor_id = obj2.getString("vendor_id");
+							String review = obj2.getString("review");
+							String ratings = obj2.getString("ratings");
+							String time = obj2.getString("created");
 
-						rcustmerid.add(customer_id);
-						rcustmername.add(name);
-						rcustmerimg.add(image);
-						rcustmerreview.add(review);
-						rcustmerrate.add(ratings);
-						rid.add(id);
-						rvid.add(vendor_id);
-						rtime.add(time);
-						
-						
+							JSONObject obj4 = obj2.getJSONObject("Customer");
+
+							String c_id = obj4.getString("id");
+							String name = obj4.getString("name");
+							String image = obj4.getString("image");
+
+							rcustmerid.add(customer_id);
+							rcustmername.add(name);
+							rcustmerimg.add(image);
+							rcustmerreview.add(review);
+							rcustmerrate.add(ratings);
+							rid.add(id);
+							rvid.add(vendor_id);
+							rtime.add(time);
+
+						}
+
+						adp = new Reviewadapter(getApplicationContext(), rid,
+								rvid, rcustmerid, rcustmername, rcustmerimg,
+								rcustmerreview, rcustmerrate, rtime);
+						reviewlist.setAdapter(adp);
+						adp.notifyDataSetChanged();
+
+						nodata.setVisibility(View.GONE);
+						reviewlist.setVisibility(View.VISIBLE);
+
 					}
-
-					adp=new Reviewadapter(getApplicationContext(), rid, rvid,
-							rcustmerid, rcustmername, rcustmerimg, rcustmerreview,
-							rcustmerrate, rtime);
-					reviewlist.setAdapter(adp);
-					adp.notifyDataSetChanged();
-					
 				} catch (Exception e) {
 
 					e.printStackTrace();
@@ -689,16 +701,16 @@ public class ChefProfile extends Activity {
 		public Reviewadapter(Context context, ArrayList<String> l1,
 				ArrayList<String> l2, ArrayList<String> l3,
 				ArrayList<String> l4, ArrayList<String> l5,
-				ArrayList<String> l6, ArrayList<String> l7,ArrayList<String> l8) {
+				ArrayList<String> l6, ArrayList<String> l7, ArrayList<String> l8) {
 			ctx = context;
 			rid = l1;
 			rvid = l2;
 			rcustmerid = l3;
 			rcustmername = l4;
 			rcustmerimg = l5;
-			rcustmerreview=l6;
-			rcustmerrate=l7;
-			rtime=l8;
+			rcustmerreview = l6;
+			rcustmerrate = l7;
+			rtime = l8;
 			il = new ImageLoader(ctx);
 			inflater = (LayoutInflater) ctx
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -731,7 +743,7 @@ public class ChefProfile extends Activity {
 			CircularImageView circularImageView;
 			RatingBar bar;
 			ScrollView sc;
-			
+
 		}
 
 		@Override
@@ -740,16 +752,18 @@ public class ChefProfile extends Activity {
 
 			Holder holder = new Holder();
 			View rowView = arg1;
-			
+
 			rowView = inflater.inflate(R.layout.chef_profile_review_item, null);
 			holder.chef_name = (TextView) rowView.findViewById(R.id.textView1);
-			holder.chef_review = (TextView) rowView.findViewById(R.id.textView3);
+			holder.chef_review = (TextView) rowView
+					.findViewById(R.id.textView3);
 			holder.time = (TextView) rowView.findViewById(R.id.textView4);
 			holder.rate = (TextView) rowView.findViewById(R.id.textView2);
-			holder.circularImageView = (CircularImageView)rowView.findViewById(R.id.imageView1);
+			holder.circularImageView = (CircularImageView) rowView
+					.findViewById(R.id.imageView1);
 			holder.circularImageView.setBorderColor(Color.GRAY);
 			holder.circularImageView.setBorderWidth(5);
-		    
+
 			holder.bar = (RatingBar) rowView.findViewById(R.id.ratingBar1);
 			holder.sc = (ScrollView) rowView.findViewById(R.id.scrollView1);
 			holder.chef_name.setText(rcustmername.get(arg0));

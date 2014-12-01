@@ -213,6 +213,22 @@ public class ImageLoader {
 		}
 	}
 
+	public void DisplayImage1(String url, ImageView imageView) {
+		type = 0;
+		imageViews.put(imageView, url);
+		Bitmap bitmap = memoryCache.get(url);
+
+		stub_id = R.drawable.im1;
+
+		if (bitmap != null)
+			imageView.setImageBitmap(bitmap);
+
+		else {
+			queuePhoto(url, imageView);
+			imageView.setImageResource(stub_id);
+		}
+	}
+
 	public void DisplayImageC(String url, ImageView imageView, int a) {
 		// stub_id=R.drawable.placeholder;
 		ischat = 1;

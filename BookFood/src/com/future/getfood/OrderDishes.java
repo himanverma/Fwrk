@@ -38,6 +38,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -62,7 +64,7 @@ public class OrderDishes extends FragmentActivity {
 	Fragment fragment;
 	SupportMapFragment supportmapfragment;
 	GoogleMap supportMap;
-
+	ImageView location_finder;
 	TextView dish_name;
 	TextView dish_price;
 	TextView total_price;
@@ -70,9 +72,9 @@ public class OrderDishes extends FragmentActivity {
 	GPSTracker gps;
 	double latitude, longitude;
 	String add, city, country, sub1, sub2, state, zip;
-	Button cls;
+
 	EditText fname, lname, address, area, zipcode, mcity, phone_num;
-	CheckBox cod, debit, credit, netb;
+	CheckBox cod, debit;
 	String chk_value = "na";
 	Button save;
 	SessionManager sess;
@@ -81,6 +83,7 @@ public class OrderDishes extends FragmentActivity {
 	protected String s;
 	private Typeface tf1, tf2, tf3, tf4;
 	RelativeLayout rel6;
+	String f_name, l_name, address1, area1, zipcode1, mcity1, phonenum;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -99,6 +102,15 @@ public class OrderDishes extends FragmentActivity {
 		sess = new SessionManager(this);
 		HashMap<String, String> map = sess.getUserDetails();
 		user_id = map.get(SessionManager.KEY_ID);
+
+		HashMap<String, String> umap = sess.getUserAddress();
+		f_name = umap.get(SessionManager.KEY_FNAME);
+		l_name = umap.get(SessionManager.KEY_LNAME);
+		address1 = umap.get(SessionManager.KEY_ADDRESS);
+		area1 = umap.get(SessionManager.KEY_AREA);
+		zipcode1 = umap.get(SessionManager.KEY_ZIPCODE);
+		mcity1 = umap.get(SessionManager.KEY_CITY);
+		phonenum = umap.get(SessionManager.KEY_PHONEMOB);
 
 		// getting value from MyAdapter
 		Intent in = getIntent();
@@ -120,22 +132,193 @@ public class OrderDishes extends FragmentActivity {
 		zipcode = (EditText) findViewById(R.id.editText6);
 		phone_num = (EditText) findViewById(R.id.editText7);
 
-		cls = (Button) findViewById(R.id.imageView4);
+		fname.setText(f_name);
+		lname.setText(l_name);
+		address.setText(address1);
+		area.setText(area1);
+		mcity.setText(mcity1);
+		zipcode.setText(zipcode1);
+		phone_num.setText(phonenum);
+		location_finder = (ImageView) findViewById(R.id.imageView4);
+
+		phone_num.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (phone_num.getText().length() > 0) {
+					phone_num.setError(null);
+				}
+			}
+		});
+
+		zipcode.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (zipcode.getText().length() > 0) {
+					zipcode.setError(null);
+				}
+			}
+		});
+
+		mcity.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (mcity.getText().length() > 0) {
+					mcity.setError(null);
+				}
+			}
+		});
+
+		area.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (area.getText().length() > 0) {
+					area.setError(null);
+				}
+			}
+		});
+
+		address.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (address.getText().length() > 0) {
+					address.setError(null);
+				}
+			}
+		});
+
+		fname.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (fname.getText().length() > 0) {
+					fname.setError(null);
+				}
+			}
+		});
+
+		lname.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (lname.getText().length() > 0) {
+					lname.setError(null);
+				}
+			}
+		});
+
+		// cls = (Button) findViewById(R.id.imageView4);
 
 		save = (Button) findViewById(R.id.button1);
-
-		// zipcode.setText(zip);
-		// address.setText(add + "," + sub2);
-		// area.setText(sub1);
-		// mcity.setText(city);
-		//
-		// // set value
-		// dish_name.setText(dishname + "+" + chkname);
-		// dish_name.setTypeface(tf2);
-		// dish_price.setText("Rs " + price);
-		// dish_price.setTypeface(tf2);
-		// total_price.setText("Rs " + price);
-		// total_price.setTypeface(tf2);
 		((TextView) findViewById(R.id.textView5)).setTypeface(tf1);
 		((TextView) findViewById(R.id.textView7)).setTypeface(tf1);
 		((TextView) findViewById(R.id.textView2)).setTypeface(tf1);
@@ -155,15 +338,11 @@ public class OrderDishes extends FragmentActivity {
 
 		cod = (CheckBox) findViewById(R.id.checkBox1);
 		debit = (CheckBox) findViewById(R.id.checkBox2);
-		credit = (CheckBox) findViewById(R.id.checkBox3);
-		netb = (CheckBox) findViewById(R.id.checkBox4);
+
 		cod.setTypeface(tf2);
 		debit.setTypeface(tf2);
-		credit.setTypeface(tf2);
-		netb.setTypeface(tf2);
 
 		rel6 = (RelativeLayout) findViewById(R.id.rel6);
-		// getting current latlng
 
 		((RelativeLayout) findViewById(R.id.nnn2))
 				.setOnClickListener(new View.OnClickListener() {
@@ -186,8 +365,6 @@ public class OrderDishes extends FragmentActivity {
 		// set map position
 
 		gps = new GPSTracker(OrderDishes.this);
-		// getdetail();
-
 		if (gps.canGetLocation()) {
 
 			latitude = gps.getLatitude();
@@ -198,49 +375,46 @@ public class OrderDishes extends FragmentActivity {
 
 			gps.showSettingsAlert();
 		}
+
 		fmanager = getSupportFragmentManager();
 		fragment = fmanager.findFragmentById(R.id.map);
 		supportmapfragment = (SupportMapFragment) fragment;
 		supportMap = supportmapfragment.getMap();
 
-		GetCurrentAddress currentadd = new GetCurrentAddress();
-		currentadd.execute();
+		// set value
+		dish_name.setText(dishname + "+" + chkname);
+		dish_name.setTypeface(tf1);
+		dish_price.setText("Rs " + price);
+		dish_price.setTypeface(tf1);
+		total_price.setText("Rs " + price);
+		total_price.setTypeface(tf1);
+		supportMap
+				.addMarker(new MarkerOptions()
+						.position(current_latlng)
+						.title(sub2)
+						.icon(BitmapDescriptorFactory
+								.fromResource(R.drawable.location)));
 
-		// CameraPosition cameraPosition = new CameraPosition.Builder()
-		// .target(current_latlng) // Sets the center of the map to
-		// // Golden Gate Bridge
-		// .zoom(17) // Sets the zoom
-		// .bearing(90) // Sets the orientation of the camera to east
-		// .tilt(30) // Sets the tilt of the camera to 30 degrees
-		// .build(); // Creates a CameraPosition from the builder
-		// supportMap.animateCamera(CameraUpdateFactory
-		// .newCameraPosition(cameraPosition));
+		CameraPosition cameraPosition = new CameraPosition.Builder()
+				.target(current_latlng) // Sets the center of the map to
+										// Golden Gate Bridge
+				.zoom(17) // Sets the zoom
+				.bearing(90) // Sets the orientation of the camera to
+								// east
+				.tilt(30) // Sets the tilt of the camera to 30 degrees
+				.build(); // Creates a CameraPosition from the builder
+		supportMap.animateCamera(CameraUpdateFactory
+				.newCameraPosition(cameraPosition));
 
-		// // ...........................address................................
-		// try {
-		// Geocoder geocoder;
-		// List<Address> addresses;
-		// geocoder = new Geocoder(this, Locale.getDefault());
-		// addresses = geocoder.getFromLocation(latitude, longitude, 1);
-		//
-		// add = addresses.get(0).getAddressLine(0);
-		// sub1 = addresses.get(0).getSubAdminArea();
-		// sub2 = addresses.get(0).getSubLocality();
-		// city = addresses.get(0).getLocality();
-		// state = addresses.get(0).getAdminArea();
-		// zip = addresses.get(0).getPostalCode();
-		// country = addresses.get(0).getCountryName();
-		//
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		//
-		// supportMap
-		// .addMarker(new MarkerOptions()
-		// .position(current_latlng)
-		// .title(sub2)
-		// .icon(BitmapDescriptorFactory
-		// .fromResource(R.drawable.location)));
+		location_finder.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				GetCurrentAddress currentadd = new GetCurrentAddress();
+				currentadd.execute();
+			}
+		});
 
 		cod.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -252,8 +426,6 @@ public class OrderDishes extends FragmentActivity {
 				if (cod.isChecked()) {
 
 					debit.setChecked(false);
-					credit.setChecked(false);
-					netb.setChecked(false);
 					chk_value = "Cash on Delivery";
 				}
 			}
@@ -269,52 +441,8 @@ public class OrderDishes extends FragmentActivity {
 				if (debit.isChecked()) {
 
 					cod.setChecked(false);
-					credit.setChecked(false);
-					netb.setChecked(false);
-					chk_value = "Debit Card";
+					chk_value = "Online Payment";
 				}
-			}
-		});
-
-		credit.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				// TODO Auto-generated method stub
-
-				if (credit.isChecked()) {
-
-					debit.setChecked(false);
-					cod.setChecked(false);
-					netb.setChecked(false);
-					chk_value = "Credit Card";
-				}
-			}
-		});
-
-		netb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				// TODO Auto-generated method stub
-
-				if (netb.isChecked()) {
-
-					debit.setChecked(false);
-					credit.setChecked(false);
-					cod.setChecked(false);
-					chk_value = "Net Banking";
-				}
-			}
-		});
-		cls.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
 			}
 		});
 
@@ -340,18 +468,18 @@ public class OrderDishes extends FragmentActivity {
 						+ phone_num.getText().toString();
 				if (fname.getText().toString().equals("")) {
 
-					fname.setError("Please fill street name!");
+					fname.setError("Please fill first name!");
 					fname.requestFocus();
 				} else {
 					if (lname.getText().toString().equals("")) {
 
-						lname.setError("Please fill street name!");
+						lname.setError("Please fill last name!");
 						lname.requestFocus();
 					} else {
 
 						if (address.getText().toString().equals("")) {
 
-							address.setError("Please fill street name!");
+							address.setError("Please fill address!");
 							address.requestFocus();
 						} else {
 
@@ -363,7 +491,7 @@ public class OrderDishes extends FragmentActivity {
 
 								if (mcity.getText().toString().equals("")) {
 
-									mcity.setError("Please fill pincode!");
+									mcity.setError("Please fill city name!");
 									mcity.requestFocus();
 
 								} else {
@@ -393,6 +521,23 @@ public class OrderDishes extends FragmentActivity {
 															"Please select payment type",
 															5000).show();
 												} else {
+
+													sess.setUserDetail(
+															fname.getText()
+																	.toString(),
+															lname.getText()
+																	.toString(),
+															address.getText()
+																	.toString(),
+															area.getText()
+																	.toString(),
+															mcity.getText()
+																	.toString(),
+															zipcode.getText()
+																	.toString(),
+															phone_num.getText()
+																	.toString());
+
 													userdetail();
 												}
 											}
@@ -458,31 +603,10 @@ public class OrderDishes extends FragmentActivity {
 			area.setText(sub1);
 			mcity.setText(city);
 
-			// set value
-			dish_name.setText(dishname + "+" + chkname);
-			dish_name.setTypeface(tf2);
-			dish_price.setText("Rs " + price);
-			dish_price.setTypeface(tf2);
-			total_price.setText("Rs " + price);
-			total_price.setTypeface(tf2);
-			supportMap.addMarker(new MarkerOptions()
-					.position(current_latlng)
-					.title(sub2)
-					.icon(BitmapDescriptorFactory
-							.fromResource(R.drawable.location)));
-
-			CameraPosition cameraPosition = new CameraPosition.Builder()
-					.target(current_latlng) // Sets the center of the map to
-											// Golden Gate Bridge
-					.zoom(17) // Sets the zoom
-					.bearing(90) // Sets the orientation of the camera to
-									// east
-					.tilt(30) // Sets the tilt of the camera to 30 degrees
-					.build(); // Creates a CameraPosition from the builder
-			supportMap.animateCamera(CameraUpdateFactory
-					.newCameraPosition(cameraPosition));
-
-			// Log.e("bbbbb", address);
+			sess.setUserDetail(fname.getText().toString(), lname.getText()
+					.toString(), address.getText().toString(), area.getText()
+					.toString(), mcity.getText().toString(), zipcode.getText()
+					.toString(), phone_num.getText().toString());
 		}
 	}
 
@@ -566,7 +690,7 @@ public class OrderDishes extends FragmentActivity {
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					Log.e("fhgfhj", s);
+					// Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -612,9 +736,12 @@ public class OrderDishes extends FragmentActivity {
 		final Dialog d = new Dialog(this);
 		d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		d.setContentView(R.layout.confirmation_dialog);
+		d.setCanceledOnTouchOutside(false);
 		TextView dish_name = (TextView) d.findViewById(R.id.textView4);
 		TextView dish_price = (TextView) d.findViewById(R.id.textView3);
-		TextView dish_add = (TextView) d.findViewById(R.id.textView5);
+		TextView dish_user = (TextView) d.findViewById(R.id.textView5);
+		TextView dish_mob = (TextView) d.findViewById(R.id.textView9);
+		TextView dish_add = (TextView) d.findViewById(R.id.textView10);
 		TextView payment_type = (TextView) d.findViewById(R.id.textView8);
 		Button cls = (Button) d.findViewById(R.id.button1);
 		Button confirm = (Button) d.findViewById(R.id.button2);
@@ -622,6 +749,10 @@ public class OrderDishes extends FragmentActivity {
 
 		dish_name.setText(dishname + "+" + chkname);
 		dish_price.setText("Rs " + price);
+		
+		dish_user.setText(fname.getText().toString() + " " +lname.getText().toString());
+		dish_mob.setText(phone_num.getText().toString());
+		
 		dish_add.setText(addss);
 		payment_type.setText(chk_value);
 
@@ -640,7 +771,17 @@ public class OrderDishes extends FragmentActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				d.cancel();
-				orderProcess(addid);
+				if (chk_value.equals("Cash on Delivery")) {
+
+					Intent in = new Intent(OrderDishes.this,
+							PaymentProcess.class);
+					in.putExtra("url", "cod");
+					startActivity(in);
+
+				} else {
+
+					orderProcess(addid);
+				}
 
 			}
 		});
@@ -680,6 +821,9 @@ public class OrderDishes extends FragmentActivity {
 
 					entity.addPart("data[Order][customer_id]", new StringBody(
 							user_id));
+
+					entity.addPart("data[Order][price]", new StringBody(price));
+
 					entity.addPart("data[Order][combination_id]",
 							new StringBody(cid));
 					// mmmmmmmm
@@ -703,7 +847,7 @@ public class OrderDishes extends FragmentActivity {
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					Log.e("fhgfhj", s);
+					// Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -723,10 +867,13 @@ public class OrderDishes extends FragmentActivity {
 				dialog.cancel();
 				try {
 					JSONObject obj = new JSONObject(s);
-					String st = obj.getString("data");
-					if (st.equals("Success")) {
+					JSONObject obj1 = obj.getJSONObject("data");
+					String st = obj1.getString("msg");
+					String url = obj1.getString("url");
+					if (st.equals("success")) {
 						Intent in = new Intent(OrderDishes.this,
 								PaymentProcess.class);
+						in.putExtra("url", url);
 						startActivity(in);
 					}
 				} catch (JSONException e) {

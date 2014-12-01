@@ -214,8 +214,22 @@
             android:fadingEdge="none"
             android:scrollbars="none"
             android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll" >
+            android:transcriptMode="alwaysScroll"
+            android:visibility="visible" >
         </ListView>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="66dp"
+            android:text="No Review found."
+            android:textColor="#000000"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
     </RelativeLayout>
 
     <LinearLayout

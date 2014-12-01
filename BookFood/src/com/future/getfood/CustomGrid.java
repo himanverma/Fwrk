@@ -33,7 +33,7 @@ public class CustomGrid extends BaseAdapter {
 		this.dishname = name;
         dishname1.addAll(dishname);
 		il = new ImageLoader(mContext);
-		tf1 = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Bold.ttf");
+		tf1 = Typeface.createFromAsset(mContext.getAssets(), "Roboto-Regular.ttf");
 		inflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -93,7 +93,7 @@ public class CustomGrid extends BaseAdapter {
 
 		holder.circularImageView = (CircularImageView)rowView.findViewById(R.id.imageViewCircular);
 		holder.circularImageView.setBorderColor(Color.GRAY);
-		holder.circularImageView.setBorderWidth(5);
+		holder.circularImageView.setBorderWidth(2);
 		//holder.circularImageView.addShadow();
 		
 		holder.tv.setText(dishname.get(position));

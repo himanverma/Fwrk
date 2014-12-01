@@ -95,6 +95,9 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 	AlertDialogManager alert = new AlertDialogManager();
 	AsyncTask<Void, Void, Void> mRegisterTask;
 
+	 Boolean isInternetPresent = false;
+    
+	    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,12 +111,7 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 
 		// Check if Internet present
 		if (!cd.isConnectingToInternet()) {
-			// Internet Connection is not present
-			alert.showAlertDialog(DishesActivity.this,
-					"Internet Connection Error",
-					"Please connect to working Internet connection", false);
-			// stop executing code by return
-			finish();
+			alert("No Internet connection found.");
 		} else {
 			try {
 				// dialog = new ProgressDialog(RegistrationType.this);
@@ -184,95 +182,106 @@ public class DishesActivity extends Activity implements IInfiniteScrollListener 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		// -----------------------------------------------------------------------------
-
-		sess = new SessionManager(this);
-		HashMap<String, String> map = sess.getUserDetails();
-		userid = map.get(SessionManager.KEY_ID);
-
-		listView = (InfiniteScrollListView) findViewById(R.id.list_view);
-		search = (EditText) findViewById(R.id.editText1);
-		scrollListener = new InfiniteScrollOnScrollListener(this);
-
-		profile = (ImageView) findViewById(R.id.imageView2);
-		((RelativeLayout)findViewById(R.id.nn2)).setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (userid.equals("0")) {
-					Toast.makeText(getApplicationContext(),
-							"Make your profile first.", 5000).show();
-				} else {
-
-					Intent in = new Intent(DishesActivity.this,
-							UserProfile.class);
-					startActivity(in);
-				}
-			}
-		});
-		// listView.setListener(scrollListener);
-
-		// getting current latlng
-		gps = new GPSTracker(DishesActivity.this);
-		if (gps.canGetLocation()) {
-
-			latitude = gps.getLatitude();
-			longitude = gps.getLongitude();
 			
-			getdetail(1);
 			
-		} else {
+			
+			
+			// -----------------------------------------------------------------------------
 
-			gps.showSettingsAlert();
-		}
+			sess = new SessionManager(this);
+			HashMap<String, String> map = sess.getUserDetails();
+			userid = map.get(SessionManager.KEY_ID);
 
-	
-		search.addTextChangedListener(new TextWatcher() {
+			listView = (InfiniteScrollListView) findViewById(R.id.list_view);
+			search = (EditText) findViewById(R.id.editText1);
+			scrollListener = new InfiniteScrollOnScrollListener(this);
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
+			profile = (ImageView) findViewById(R.id.imageView2);
+			((RelativeLayout)findViewById(R.id.nn2)).setOnClickListener(new View.OnClickListener() {
 
-			}
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if (userid.equals("0")) {
+						Toast.makeText(getApplicationContext(),
+								"Make your profile first.", 5000).show();
+					} else {
 
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				String text = search.getText().toString()
-						.toLowerCase(Locale.getDefault());
-
-				try {
-					adapter.filter(text);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-		((RelativeLayout) findViewById(R.id.nn1))
-				.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
 						Intent in = new Intent(DishesActivity.this,
-								DishesList.class);
+								UserProfile.class);
 						startActivity(in);
 					}
-				});
+				}
+			});
+			// listView.setListener(scrollListener);
 
+			// getting current latlng
+			gps = new GPSTracker(DishesActivity.this);
+			if (gps.canGetLocation()) {
+
+				latitude = gps.getLatitude();
+				longitude = gps.getLongitude();
+				
+				getdetail(1);
+				
+			} else {
+
+				gps.showSettingsAlert();
+			}
+
+		
+			search.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before,
+						int count) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count,
+						int after) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+					// TODO Auto-generated method stub
+					String text = search.getText().toString()
+							.toLowerCase(Locale.getDefault());
+
+					try {
+						adapter.filter(text);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+
+			((RelativeLayout) findViewById(R.id.nn1))
+					.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Intent in = new Intent(DishesActivity.this,
+									DishesList.class);
+							startActivity(in);
+						}
+					});
+
+			
+			
+		}
+		
 	}
 
+	
+	
+	
+	
 	private final BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {

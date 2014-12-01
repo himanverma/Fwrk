@@ -20,6 +20,7 @@
             android:layout_centerVertical="true"
             android:text="Create Profile"
             android:textColor="#ffffff"
+            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
@@ -102,8 +103,8 @@
 
         <Button
             android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
             android:layout_below="@+id/editText2"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="58dp"
@@ -111,7 +112,7 @@
             android:textColor="#ffffff"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:background="@drawable/save_btn" />
+            android:background="@drawable/buttonround" />
 
         <TextView
             android:id="@+id/textView5"

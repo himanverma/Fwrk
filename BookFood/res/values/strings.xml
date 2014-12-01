@@ -9,7 +9,6 @@
     <string name="url">http://uneekarts.com/office/ofood/</string>
     <string name="fbid">281129088678615</string>
 
-    
     <string name="title_activity_main">Push Notifications</string>
     <string name="error_config">Please set the %1$s constant and recompile the app.</string>
     <string name="already_registered">Device is already registered on server.</string>
