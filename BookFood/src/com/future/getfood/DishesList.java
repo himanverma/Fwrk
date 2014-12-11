@@ -19,6 +19,10 @@ import org.json.JSONObject;
 
 import com.future.foodimg.DetectNetwork;
 import com.future.foodimg.ImageLoader;
+import com.future.getfood.AnalyticsSampleApp.TrackerName;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -67,9 +71,10 @@ public class DishesList extends Activity {
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.dishlist);
 
-//		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-//				.permitAll().build();
-//		StrictMode.setThreadPolicy(policy);
+		Tracker t = ((AnalyticsSampleApp) DishesList.this.getApplication()).getTracker(
+                TrackerName.APP_TRACKER);
+        t.setScreenName("DishesList for filter dishes Check");
+        t.send(new HitBuilders.AppViewBuilder().build());
 
 		sess = new SessionManager(this);
 		HashMap<String, String> map = sess.getUserDetails();
@@ -92,7 +97,15 @@ public class DishesList extends Activity {
 					Toast.makeText(getApplicationContext(),
 							"Make your profile first.", 5000).show();
 				} else {
-
+					Tracker t = ((AnalyticsSampleApp) DishesList.this.getApplication()).getTracker(
+	                        TrackerName.APP_TRACKER);
+					 // Build and send an Event.
+					t.send(new HitBuilders.EventBuilder()
+					    .setCategory("User Profile")  // category i.e. Player Buttons
+					    .setAction("Check own profile")    // action i.e.  Play
+					    .setLabel("clicked")    // label i.e.  any meta-data
+					    .build());
+					
 					Intent in = new Intent(DishesList.this,
 							UserProfile.class);
 					startActivity(in);
@@ -108,6 +121,19 @@ public class DishesList extends Activity {
 				// Toast.makeText(getApplication(),
 				// dishname.get(position),5000).show();
 
+				Tracker t = ((AnalyticsSampleApp) DishesList.this.getApplication()).getTracker(
+                        TrackerName.APP_TRACKER);
+                t.setScreenName("DishesList search dishes");
+                t.send(new HitBuilders.AppViewBuilder().build());
+                
+                // Build and send an Event.
+				t.send(new HitBuilders.EventBuilder()
+				    .setCategory("Chef dishes")  // category i.e. Player Buttons
+				    .setAction("search dishes")    // action i.e.  Play
+				    .setLabel("clicked")    // label i.e.  any meta-data
+				    .build());
+				
+                
 				Intent in = new Intent(DishesList.this, DishSearchList.class);
 				in.putExtra("search", dishname.get(position));
 				startActivity(in);
@@ -120,6 +146,8 @@ public class DishesList extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+//				Intent in = new Intent(DishesList.this, DishesActivity.class);
+//				startActivity(in);
 				finish();
 			}
 		});
@@ -155,6 +183,31 @@ public class DishesList extends Activity {
 
 	}
 
+//	@Override
+//	protected void onResume() {
+//		// TODO Auto-generated method stub
+//		super.onResume();
+//		
+//		sess = new SessionManager(this);
+//		HashMap<String, String> map = sess.getUserDetails();
+//		userid = map.get(SessionManager.KEY_ID);
+//	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+
+	}
+	
+	
 	// method for sending user detail on server
 	protected void getdish() {
 		// TODO Auto-generated method stub
@@ -167,6 +220,7 @@ public class DishesList extends Activity {
 				// what to do before background task
 				dialog.setMessage("Validating... ");
 				dialog.setIndeterminate(true);
+				dialog.setCancelable(false);
 				dialog.show();
 			}
 
@@ -200,13 +254,7 @@ public class DishesList extends Activity {
 					e.printStackTrace();
 				}
 
-				return null;
-			}
-
-			@Override
-			protected void onPostExecute(Void result) {
-				// what to do when background task is completed
-
+				
 				try {
 
 					JSONObject obj = new JSONObject(s);
@@ -224,14 +272,23 @@ public class DishesList extends Activity {
 						// Log.e("hhhh", dish_name);
 
 					}
-					adapter = new CustomGrid(DishesList.this, dishname, dishimg);
-					grid.setAdapter(adapter);// (new CustomGrid(DishesList.this,
-												// dishname,dishimg));
-					// adapter.notifyDataSetChanged();
+					
 				} catch (Exception e) {
 
 					e.printStackTrace();
 				}
+				
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				// what to do when background task is completed
+				adapter = new CustomGrid(DishesList.this, dishname, dishimg);
+				grid.setAdapter(adapter);// (new CustomGrid(DishesList.this,
+											// dishname,dishimg));
+				// adapter.notifyDataSetChanged();
+				
 				dialog.cancel();
 			}
 

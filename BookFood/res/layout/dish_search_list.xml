@@ -82,13 +82,16 @@
 
     </RelativeLayout>
 
-    <com.future.listscroll.InfiniteScrollListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#ffffff"
-        android:dividerHeight="1dp"
-        android:fadingEdge="none"
-        android:scrollbars="none" />
+    <ExpandableListView
+                android:id="@+id/lvExp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:cacheColorHint="#00000000"
+                android:groupIndicator="@null"
+                android:scrollbars="none"
+                 android:background="#f2f2f2"
+                 android:divider="@android:color/transparent"
+                android:childDivider="@android:color/transparent"
+                android:listSelector="@android:color/transparent"/>
 
 </LinearLayout>

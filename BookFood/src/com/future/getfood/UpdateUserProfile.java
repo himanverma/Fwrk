@@ -20,6 +20,10 @@ import org.json.JSONObject;
 
 import com.future.foodimg.DetectNetwork;
 import com.future.foodimg.ImageLoader;
+import com.future.getfood.AnalyticsSampleApp.TrackerName;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -109,18 +113,29 @@ public class UpdateUserProfile extends Activity {
 		user_email = (EditText) findViewById(R.id.editText2);
 		user_mob = (EditText) findViewById(R.id.editText3);
 
-		
-		 
 		user_name.setText(name);
 		Editable etext = user_name.getText();
-		 Selection.setSelection(etext, etext.length());
+		Selection.setSelection(etext, etext.length());
 		user_email.setText(email);
-		user_mob.setText(phonenum);
-        il.DisplayImage(photo, user_img);
-        
-        
+
+		if (phonenum.equals("null")) {
+
+			user_mob.setText("");
+
+		} else {
+
+			user_mob.setText(phonenum);
+
+		}
+		il.DisplayImage(photo, user_img);
+
 		cont = (Button) findViewById(R.id.button1);
 
+		// google analytics
+		Tracker t = ((AnalyticsSampleApp) UpdateUserProfile.this
+				.getApplication()).getTracker(TrackerName.APP_TRACKER);
+		t.setScreenName("UpdateUserProfile");
+		t.send(new HitBuilders.AppViewBuilder().build());
 
 		((RelativeLayout) findViewById(R.id.img))
 				.setOnClickListener(new View.OnClickListener() {
@@ -129,12 +144,12 @@ public class UpdateUserProfile extends Activity {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 
-						Intent in=new Intent(UpdateUserProfile.this,UserProfile.class);
-						startActivity(in);
+//						Intent in = new Intent(UpdateUserProfile.this,
+//								UserProfile.class);
+//						startActivity(in);
 						finish();
 					}
 				});
-
 
 		camera.setOnClickListener(new OnClickListener() {
 
@@ -169,6 +184,22 @@ public class UpdateUserProfile extends Activity {
 
 							if (user_mob.getText().toString().length() > 9) {
 
+								Tracker t = ((AnalyticsSampleApp) UpdateUserProfile.this
+										.getApplication())
+										.getTracker(TrackerName.APP_TRACKER);
+								// Build and send an Event.
+								t.send(new HitBuilders.EventBuilder()
+										.setCategory("Update Own Profile") // category
+																			// i.e.
+																			// Player
+																			// Buttons
+										.setAction("Update Profile") // action
+																		// i.e.
+																		// Play
+										.setLabel("clicked") // label i.e. any
+																// meta-data
+										.build());
+
 								senddetail();
 							} else {
 
@@ -182,16 +213,47 @@ public class UpdateUserProfile extends Activity {
 		});
 	}
 
-	
+	// @Override
+	// protected void onResume() {
+	// // TODO Auto-generated method stub
+	// super.onResume();
+	//
+	// sess = new SessionManager(this);
+	//
+	// HashMap<String, String> map = sess.getGCMID();
+	// gcmid = map.get(SessionManager.KEY_GCMID);
+	// HashMap<String, String> map1 = sess.getUserDetails();
+	// userid = map1.get(SessionManager.KEY_ID);
+	// phonenum = map1.get(SessionManager.KEY_PHONE);
+	// name = map1.get(SessionManager.KEY_USER);
+	// photo = map1.get(SessionManager.KEY_PHOTO);
+	// email = map1.get(SessionManager.KEY_EMAIL);
+	//
+	// }
+	@Override
+	public void onStart() {
+		super.onStart();
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+
+	}
+
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
-		
-		Intent in=new Intent(UpdateUserProfile.this,UserProfile.class);
+
+		Intent in = new Intent(UpdateUserProfile.this, UserProfile.class);
 		startActivity(in);
 		finish();
 	}
+
 	// method for sending user detail on server
 	protected void senddetail() {
 		// TODO Auto-generated method stub
@@ -204,6 +266,7 @@ public class UpdateUserProfile extends Activity {
 				// what to do before background task
 				dialog.setMessage("Validating... ");
 				dialog.setIndeterminate(true);
+				dialog.setCancelable(false);
 				dialog.show();
 			}
 
@@ -269,22 +332,22 @@ public class UpdateUserProfile extends Activity {
 				// what to do when background task is completed
 
 				try {
-					JSONObject obj=new JSONObject(s);
-					JSONObject obj1=obj.getJSONObject("data");
-					JSONObject obj2=obj1.getJSONObject("list");
-					JSONObject obj3=obj2.getJSONObject("Customer");
-					
+					JSONObject obj = new JSONObject(s);
+					JSONObject obj1 = obj.getJSONObject("data");
+					JSONObject obj2 = obj1.getJSONObject("list");
+					JSONObject obj3 = obj2.getJSONObject("Customer");
+
 					String custmor_Id = obj3.getString("id");
 					String custmor_name = obj3.getString("name");
 					String custmor_email = obj3.getString("email");
 					String custmor_img = obj3.getString("image");
 					String custmor_mob = obj3.getString("mobile_number");
-					
+
 					sess.setId(custmor_Id, custmor_name, custmor_email,
 							custmor_img, custmor_mob);
-					
+
 					alert("Profile updated successfully.");
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -318,7 +381,8 @@ public class UpdateUserProfile extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 
 				alertDialog.cancel();
-				Intent in=new Intent(UpdateUserProfile.this,UserProfile.class);
+				Intent in = new Intent(UpdateUserProfile.this,
+						UserProfile.class);
 				startActivity(in);
 				finish();
 			}

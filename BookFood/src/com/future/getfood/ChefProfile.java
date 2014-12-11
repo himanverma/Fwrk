@@ -14,12 +14,18 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.future.foodimg.CircularImageView;
 import com.future.foodimg.DetectNetwork;
 import com.future.foodimg.ImageLoader;
 import com.future.foodimg.LetterSpacingTextView;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.future.getfood.AnalyticsSampleApp;
+import com.future.getfood.AnalyticsSampleApp.TrackerName;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -96,6 +102,11 @@ public class ChefProfile extends Activity {
 	float ratevalue;
 	CircularImageView circularImageView;
 	TextView nodata;
+	protected String vnd_name;
+	protected String vnd_photo;
+	protected String vnd_star;
+	protected String vnd_add;
+	protected String vnd_mob;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,10 +116,15 @@ public class ChefProfile extends Activity {
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.chef_profile);
-
+		//
 		sess = new SessionManager(this);
 		HashMap<String, String> map = sess.getUserDetails();
 		userid = map.get(SessionManager.KEY_ID);
+
+		Tracker t = ((AnalyticsSampleApp) ChefProfile.this.getApplication())
+				.getTracker(TrackerName.APP_TRACKER);
+		t.setScreenName("ChefProfile Check");
+		t.send(new HitBuilders.AppViewBuilder().build());
 
 		tf1 = Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf");
 		tf2 = Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf");
@@ -125,7 +141,7 @@ public class ChefProfile extends Activity {
 		chef_id = in.getStringExtra("chefid");
 		chef_rate = in.getStringExtra("rate");
 
-		Log.e("url", img_url);
+		
 
 		nodata = (TextView) findViewById(R.id.textView6);
 		t1 = (TextView) findViewById(R.id.textView1);
@@ -172,7 +188,28 @@ public class ChefProfile extends Activity {
 
 				} else {
 
-					sendReview();
+					Tracker t = ((AnalyticsSampleApp) ChefProfile.this
+							.getApplication())
+							.getTracker(TrackerName.APP_TRACKER);
+					// Build and send an Event.
+					t.send(new HitBuilders.EventBuilder().setCategory("Review") // category
+																				// i.e.
+																				// Player
+																				// Buttons
+							.setAction("Post review for chef dish") // action
+																	// i.e. Play
+							.setLabel("clicked") // label i.e. any meta-data
+							.build());
+
+					if (userid.equals("0")) {
+
+						Toast.makeText(
+								getApplicationContext(),
+								"Your are not a Authorised user for making comments",
+								5000).show();
+					} else {
+						sendReview();
+					}
 				}
 			}
 		});
@@ -198,6 +235,17 @@ public class ChefProfile extends Activity {
 
 				dish_list.setVisibility(View.VISIBLE);
 				dish_review.setVisibility(View.GONE);
+				Tracker t = ((AnalyticsSampleApp) ChefProfile.this
+						.getApplication()).getTracker(TrackerName.APP_TRACKER);
+
+				// Build and send an Event.
+				t.send(new HitBuilders.EventBuilder()
+						.setCategory("Chef dishes") // category i.e. Player
+													// Buttons
+						.setAction("ChefProfile get chef dishes") // action i.e.
+																	// Play
+						.setLabel("clicked") // label i.e. any meta-data
+						.build());
 
 				getdish();
 			}
@@ -213,6 +261,19 @@ public class ChefProfile extends Activity {
 
 				dish_list.setVisibility(View.GONE);
 				dish_review.setVisibility(View.VISIBLE);
+
+				Tracker t = ((AnalyticsSampleApp) ChefProfile.this
+						.getApplication()).getTracker(TrackerName.APP_TRACKER);
+
+				// Build and send an Event.
+				t.send(new HitBuilders.EventBuilder()
+						.setCategory("Chef review") // category i.e. Player
+													// Buttons
+						.setAction("ChefProfile get chef review") // action i.e.
+																	// Play
+						.setLabel("clicked") // label i.e. any meta-data
+						.build());
+
 				getReview();
 			}
 		});
@@ -258,9 +319,37 @@ public class ChefProfile extends Activity {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
+
+						// Intent in=new
+						// Intent(ChefProfile.this,DishesActivity.class);
+						// startActivity(in);
 						finish();
 					}
 				});
+
+	}
+
+	// @Override
+	// protected void onResume() {
+	// // TODO Auto-generated method stub
+	// super.onResume();
+	//
+	// sess = new SessionManager(this);
+	// HashMap<String, String> map = sess.getUserDetails();
+	// userid = map.get(SessionManager.KEY_ID);
+	// }
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
 
 	}
 
@@ -282,6 +371,7 @@ public class ChefProfile extends Activity {
 				// what to do before background task
 				dialog.setMessage("Validating... ");
 				dialog.setIndeterminate(true);
+				dialog.setCancelable(false);
 				dialog.show();
 			}
 
@@ -323,13 +413,6 @@ public class ChefProfile extends Activity {
 					e.printStackTrace();
 				}
 
-				return null;
-			}
-
-			@Override
-			protected void onPostExecute(Void result) {
-				// what to do when background task is completed
-
 				try {
 
 					JSONObject obj = new JSONObject(s);
@@ -349,16 +432,23 @@ public class ChefProfile extends Activity {
 						dishprice.add(price);
 					}
 
-					adapter = new MyAdapter(getApplicationContext(), chefid,
-							dishnamelist, dishimg, dishprice, vidlist);
-
-					dishlist.setAdapter(adapter);
-					adapter.notifyDataSetChanged();
-
 				} catch (Exception e) {
 
 					e.printStackTrace();
 				}
+
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Void result) {
+				// what to do when background task is completed
+
+				adapter = new MyAdapter(getApplicationContext(), chefid,
+						dishnamelist, dishimg, dishprice, vidlist);
+
+				dishlist.setAdapter(adapter);
+				adapter.notifyDataSetChanged();
 				dialog.cancel();
 			}
 
@@ -467,6 +557,7 @@ public class ChefProfile extends Activity {
 				// what to do before background task
 				dialog.setMessage("Validating... ");
 				dialog.setIndeterminate(true);
+				dialog.setCancelable(false);
 				dialog.show();
 			}
 
@@ -556,6 +647,7 @@ public class ChefProfile extends Activity {
 				// what to do before background task
 				dialog.setMessage("Validating... ");
 				dialog.setIndeterminate(true);
+				dialog.setCancelable(false);
 				dialog.show();
 			}
 
@@ -573,6 +665,7 @@ public class ChefProfile extends Activity {
 				rvid.clear();
 				rtime.clear();
 
+				bar.setRating(Float.parseFloat("0.0"));
 				try {
 					long milli = System.currentTimeMillis();
 					String url = getResources().getString(R.string.url)
@@ -606,28 +699,23 @@ public class ChefProfile extends Activity {
 			@Override
 			protected void onPostExecute(Void result) {
 				// what to do when background task is completed
+				// set vlaue
+				// chefname.setText("");
+				// chefadd.setText("");
+				// chefmob.setText("");
+				// circularImageView.setImageBitmap(null);
 
-				chefname.setText("");
-				chefadd.setText("");
-				chefmob.setText("");
-				circularImageView.setImageBitmap(null);
-				bar.setRating(Float.parseFloat("0.0"));
 				try {
 
 					JSONObject obj = new JSONObject(s);
 					JSONObject obj1 = obj.getJSONObject("data");
 					JSONObject obj3 = obj1.getJSONObject("Vendor");
-					String vnd_name = obj3.getString("name");
-					String vnd_photo = obj3.getString("photo");
-					String vnd_star = obj3.getString("ratings");
-					String vnd_add = obj3.getString("address");
-					String vnd_mob = obj3.getString("mobile_number");
-					// set vlaue
-					chefname.setText(vnd_name);
-					chefadd.setText(vnd_add);
-					chefmob.setText(vnd_mob);
-					il.DisplayImage(vnd_photo, circularImageView);
-					bar.setRating(Float.parseFloat(vnd_star));
+					vnd_name = obj3.getString("name");
+					vnd_photo = obj3.getString("photo");
+					vnd_star = obj3.getString("ratings");
+					vnd_add = obj3.getString("address");
+					vnd_mob = obj3.getString("mobile_number");
+
 					JSONArray arr = obj1.getJSONArray("VendorReview");
 					if (arr.length() <= 0) {
 
@@ -635,9 +723,12 @@ public class ChefProfile extends Activity {
 						reviewlist.setVisibility(View.GONE);
 
 					} else {
+
+						// Log.e("mmmm", arr + "");
 						for (int i = 0; i < arr.length(); i++) {
 
 							JSONObject obj2 = arr.getJSONObject(i);
+
 							String id = obj2.getString("id");
 							String customer_id = obj2.getString("customer_id");
 							String vendor_id = obj2.getString("vendor_id");
@@ -646,7 +737,6 @@ public class ChefProfile extends Activity {
 							String time = obj2.getString("created");
 
 							JSONObject obj4 = obj2.getJSONObject("Customer");
-
 							String c_id = obj4.getString("id");
 							String name = obj4.getString("name");
 							String image = obj4.getString("image");
@@ -660,8 +750,14 @@ public class ChefProfile extends Activity {
 							rvid.add(vendor_id);
 							rtime.add(time);
 
+							chefname.setText(vnd_name);
+							chefadd.setText(vnd_add);
+							chefmob.setText(vnd_mob);
+							il.DisplayImage1(vnd_photo, circularImageView);
+							bar.setRating(Float.parseFloat(vnd_star));
 						}
 
+						Log.e("hhhh", "hhhdhdh");
 						adp = new Reviewadapter(getApplicationContext(), rid,
 								rvid, rcustmerid, rcustmername, rcustmerimg,
 								rcustmerreview, rcustmerrate, rtime);
@@ -676,6 +772,7 @@ public class ChefProfile extends Activity {
 
 					e.printStackTrace();
 				}
+
 				dialog.cancel();
 			}
 
@@ -752,7 +849,7 @@ public class ChefProfile extends Activity {
 
 			Holder holder = new Holder();
 			View rowView = arg1;
-
+			Log.e("nnnnnnn", "jkkskkksk");
 			rowView = inflater.inflate(R.layout.chef_profile_review_item, null);
 			holder.chef_name = (TextView) rowView.findViewById(R.id.textView1);
 			holder.chef_review = (TextView) rowView

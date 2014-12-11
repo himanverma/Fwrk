@@ -126,13 +126,13 @@
     <RelativeLayout
         android:id="@+id/rel22"
         android:layout_width="fill_parent"
-        android:layout_height="120dp"
+        android:layout_height="140dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/rr2"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:background="#f2f2f2"
-        android:visibility="gone" >
+        android:visibility="visible" >
 
         <CheckBox
             android:id="@+id/checkBox1"
@@ -167,7 +167,7 @@
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="95dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/checkBox2"
             android:layout_alignParentRight="true"

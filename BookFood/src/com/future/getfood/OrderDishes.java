@@ -18,6 +18,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.future.foodimg.DetectNetwork;
+import com.future.getfood.AnalyticsSampleApp.TrackerName;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -84,6 +88,7 @@ public class OrderDishes extends FragmentActivity {
 	private Typeface tf1, tf2, tf3, tf4;
 	RelativeLayout rel6;
 	String f_name, l_name, address1, area1, zipcode1, mcity1, phonenum;
+	String chk;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -118,6 +123,7 @@ public class OrderDishes extends FragmentActivity {
 		chkname = in.getStringExtra("chk");
 		price = in.getStringExtra("price");
 		cid = in.getStringExtra("cid");
+		chk = in.getStringExtra("chkk");
 
 		// view object creation
 		dish_name = (TextView) findViewById(R.id.textView5);
@@ -316,6 +322,12 @@ public class OrderDishes extends FragmentActivity {
 			}
 		});
 
+		// google analytics
+		Tracker t = ((AnalyticsSampleApp) OrderDishes.this.getApplication())
+				.getTracker(TrackerName.APP_TRACKER);
+		t.setScreenName("OrderDishes");
+		t.send(new HitBuilders.AppViewBuilder().build());
+
 		// cls = (Button) findViewById(R.id.imageView4);
 
 		save = (Button) findViewById(R.id.button1);
@@ -354,6 +366,21 @@ public class OrderDishes extends FragmentActivity {
 							Toast.makeText(getApplicationContext(),
 									"Make your profile first.", 5000).show();
 						} else {
+
+							Tracker t = ((AnalyticsSampleApp) OrderDishes.this
+									.getApplication())
+									.getTracker(TrackerName.APP_TRACKER);
+							// Build and send an Event.
+							t.send(new HitBuilders.EventBuilder()
+									.setCategory("User Profile") // category
+																	// i.e.
+																	// Player
+																	// Buttons
+									.setAction("Check own profile") // action
+																	// i.e. Play
+									.setLabel("clicked") // label i.e. any
+															// meta-data
+									.build());
 
 							Intent in = new Intent(OrderDishes.this,
 									UserProfile.class);
@@ -411,6 +438,18 @@ public class OrderDishes extends FragmentActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+
+				Tracker t = ((AnalyticsSampleApp) OrderDishes.this
+						.getApplication()).getTracker(TrackerName.APP_TRACKER);
+				// Build and send an Event.
+				t.send(new HitBuilders.EventBuilder()
+						.setCategory("Getting Location") // category i.e. Player
+															// Buttons
+						.setAction("Getting own current location") // action
+																	// i.e. Play
+						.setLabel("clicked") // label i.e. any meta-data
+						.build());
+
 				GetCurrentAddress currentadd = new GetCurrentAddress();
 				currentadd.execute();
 			}
@@ -452,6 +491,18 @@ public class OrderDishes extends FragmentActivity {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
+
+//						if (chk.equals("notsearchlist")) {
+//							// Intent in=new
+//							// Intent(OrderDishes.this,DishHome.class);
+//							// startActivity(in);
+//
+//							finish();
+//						} else {
+//
+//							finish();
+//						}
+						
 						finish();
 					}
 				});
@@ -522,6 +573,14 @@ public class OrderDishes extends FragmentActivity {
 															5000).show();
 												} else {
 
+													// Tracker t =
+													// ((AnalyticsSampleApp)
+													// getApplicationContext()).getTracker(
+													// TrackerName.APP_TRACKER);
+													// t.setScreenName("OrderDishes make order");
+													// t.send(new
+													// HitBuilders.AppViewBuilder().build());
+
 													sess.setUserDetail(
 															fname.getText()
 																	.toString(),
@@ -538,7 +597,61 @@ public class OrderDishes extends FragmentActivity {
 															phone_num.getText()
 																	.toString());
 
+													Tracker t = ((AnalyticsSampleApp) OrderDishes.this
+															.getApplication())
+															.getTracker(TrackerName.APP_TRACKER);
+													// Build and send an Event.
+													t.send(new HitBuilders.EventBuilder()
+															.setCategory(
+																	"Order process") // category
+																						// i.e.
+																						// Player
+																						// Buttons
+															.setAction(
+																	"Go for order") // action
+																					// i.e.
+																					// Play
+															.setLabel("clicked") // label
+																					// i.e.
+																					// any
+																					// meta-data
+															.build());
+
+												if(user_id.equals("0")){
+													
+													Intent in = new Intent(OrderDishes.this,
+															UserLogin.class);
+													in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+													in.putExtra("dish", dishname);
+													in.putExtra("chk", chkname);
+													in.putExtra("price",price);
+													in.putExtra("cid", cid);
+													
+													in.putExtra("fname", fname.getText()
+															.toString());
+													in.putExtra("lname", lname.getText()
+															.toString());
+													in.putExtra("address",address.getText()
+															.toString());
+													in.putExtra("area", area.getText()
+															.toString());
+													
+													in.putExtra("mcity", mcity.getText()
+															.toString());
+													in.putExtra("zipcode", zipcode.getText()
+															.toString());
+													in.putExtra("phone_num",phone_num.getText()
+															.toString());
+													
+													in.putExtra("chk_value",chk_value);
+													
+													startActivity(in);
+												}else{
+													
 													userdetail();
+													
+												}
+													
 												}
 											}
 										}
@@ -554,6 +667,57 @@ public class OrderDishes extends FragmentActivity {
 
 			}
 		});
+	}
+
+	
+	
+//	@Override
+//	protected void onResume() {
+//		// TODO Auto-generated method stub
+//		super.onResume();
+//		
+//		sess = new SessionManager(this);
+//		HashMap<String, String> map = sess.getUserDetails();
+//		user_id = map.get(SessionManager.KEY_ID);
+//		
+//		HashMap<String, String> umap = sess.getUserAddress();
+//		f_name = umap.get(SessionManager.KEY_FNAME);
+//		l_name = umap.get(SessionManager.KEY_LNAME);
+//		address1 = umap.get(SessionManager.KEY_ADDRESS);
+//		area1 = umap.get(SessionManager.KEY_AREA);
+//		zipcode1 = umap.get(SessionManager.KEY_ZIPCODE);
+//		mcity1 = umap.get(SessionManager.KEY_CITY);
+//		phonenum = umap.get(SessionManager.KEY_PHONEMOB);
+//
+//	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+//
+//		if (chk.equals("notsearchlist")) {
+//			Intent in = new Intent(OrderDishes.this, DishHome.class);
+//			startActivity(in);
+//			finish();
+//		} else {
+
+			finish();
+		//}
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+
 	}
 
 	private class GetCurrentAddress extends AsyncTask<String, String, Void> {
@@ -622,6 +786,7 @@ public class OrderDishes extends FragmentActivity {
 				// what to do before background task
 				dialog.setMessage("Validating... ");
 				dialog.setIndeterminate(true);
+				dialog.setCancelable(false);
 				dialog.show();
 			}
 
@@ -632,8 +797,8 @@ public class OrderDishes extends FragmentActivity {
 
 				JSONObject obj = new JSONObject();
 				try {
-					obj.put("firstname", "dharam");
-					obj.put("lastname", "Singh");
+					obj.put("firstname", fname.getText().toString());
+					obj.put("lastname", lname.getText().toString());
 					obj.put("address", address.getText().toString());
 					obj.put("area", area.getText().toString());
 					obj.put("city", mcity.getText().toString());
@@ -749,10 +914,11 @@ public class OrderDishes extends FragmentActivity {
 
 		dish_name.setText(dishname + "+" + chkname);
 		dish_price.setText("Rs " + price);
-		
-		dish_user.setText(fname.getText().toString() + " " +lname.getText().toString());
+
+		dish_user.setText(fname.getText().toString() + " "
+				+ lname.getText().toString());
 		dish_mob.setText(phone_num.getText().toString());
-		
+
 		dish_add.setText(addss);
 		payment_type.setText(chk_value);
 
@@ -800,6 +966,7 @@ public class OrderDishes extends FragmentActivity {
 				// what to do before background task
 				dialog.setMessage("Validating... ");
 				dialog.setIndeterminate(true);
+				dialog.setCancelable(false);
 				dialog.show();
 			}
 
@@ -847,7 +1014,7 @@ public class OrderDishes extends FragmentActivity {
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					// Log.e("fhgfhj", s);
+					Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -870,12 +1037,12 @@ public class OrderDishes extends FragmentActivity {
 					JSONObject obj1 = obj.getJSONObject("data");
 					String st = obj1.getString("msg");
 					String url = obj1.getString("url");
-					if (st.equals("success")) {
-						Intent in = new Intent(OrderDishes.this,
-								PaymentProcess.class);
-						in.putExtra("url", url);
-						startActivity(in);
-					}
+
+					Intent in = new Intent(OrderDishes.this,
+							PaymentProcess.class);
+					in.putExtra("url", url);
+					startActivity(in);
+
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

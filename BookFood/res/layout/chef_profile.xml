@@ -148,7 +148,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:fadingEdge="none"
-            android:scrollbars="none" >
+            android:scrollbars="none"
+            android:divider="@null" >
         </ListView>
     </RelativeLayout>
 
@@ -213,6 +214,7 @@
             android:layout_alignParentTop="true"
             android:fadingEdge="none"
             android:scrollbars="none"
+             android:divider="@null"
             android:stackFromBottom="true"
             android:transcriptMode="alwaysScroll"
             android:visibility="visible" >

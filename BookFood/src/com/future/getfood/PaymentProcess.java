@@ -1,5 +1,10 @@
 package com.future.getfood;
 
+import com.future.getfood.AnalyticsSampleApp.TrackerName;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +38,12 @@ public class PaymentProcess extends Activity {
 
 		btn = (Button) findViewById(R.id.button1);
 
+		
+		 Tracker t = ((AnalyticsSampleApp) getApplicationContext()).getTracker(
+	               TrackerName.APP_TRACKER);
+	       t.setScreenName("Payment Process Make payment");
+	       t.send(new HitBuilders.AppViewBuilder().build());
+	       
 		if (url.equals("cod")) {
 			rel.setVisibility(View.VISIBLE);
 			myWebView.setVisibility(View.GONE);
@@ -42,7 +53,7 @@ public class PaymentProcess extends Activity {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					Intent in = new Intent(PaymentProcess.this,
-							DishesActivity.class);
+							DishHome.class);
 					startActivity(in);
 					finish();
 				}
@@ -59,6 +70,19 @@ public class PaymentProcess extends Activity {
 		}
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+
+	}
 	
 
 	private class MyWebViewClient extends WebViewClient {
@@ -84,7 +108,7 @@ public class PaymentProcess extends Activity {
 		@JavascriptInterface
 		public void welcome(String toast) {
 
-			Intent in = new Intent(PaymentProcess.this, DishesActivity.class);
+			Intent in = new Intent(PaymentProcess.this, DishHome.class);
 			startActivity(in);
 			finish();
 		}

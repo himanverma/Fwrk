@@ -19,8 +19,12 @@ import org.json.JSONObject;
 import com.future.foodimg.CircularImageView;
 import com.future.foodimg.DetectNetwork;
 import com.future.foodimg.ImageLoader;
+import com.future.getfood.AnalyticsSampleApp.TrackerName;
 import com.future.getfood.ChefProfile.Reviewadapter;
 import com.future.getfood.ChefProfile.Reviewadapter.Holder;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -77,6 +81,14 @@ public class UserProfile extends Activity {
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.user_profile);
 
+		
+		
+		//google analytics
+		Tracker t = ((AnalyticsSampleApp) UserProfile.this.getApplication()).getTracker(
+                TrackerName.APP_TRACKER);
+        t.setScreenName("UserProfile");
+        t.send(new HitBuilders.AppViewBuilder().build());
+        
 		tf1 = Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf");
 		tf2 = Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf");
 		tf3 = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
@@ -89,7 +101,9 @@ public class UserProfile extends Activity {
 		mobuser = map.get(SessionManager.KEY_PHONE);
 		euser = map.get(SessionManager.KEY_EMAIL);
 		imguser = map.get(SessionManager.KEY_PHOTO);
-
+    
+		Log.e("mmmm", mobuser);
+		
 		username = (TextView) findViewById(R.id.textView2);
 		useremail = (TextView) findViewById(R.id.textView3);
 		usermob = (TextView) findViewById(R.id.textView4);
@@ -116,8 +130,12 @@ public class UserProfile extends Activity {
 			useremail.setTypeface(tf3);
 		}
 
-		if (mobuser.equals("0")) {
-			usermob.setVisibility(View.GONE);
+		if (mobuser.equals("null")) {
+			
+			usermob.setVisibility(View.VISIBLE);
+			usermob.setText("No. not set");
+			usermob.setTypeface(tf3);
+			
 		} else {
 
 			usermob.setVisibility(View.VISIBLE);
@@ -137,10 +155,20 @@ public class UserProfile extends Activity {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 
+					       
+					       Tracker t = ((AnalyticsSampleApp) UserProfile.this.getApplication()).getTracker(
+			                        TrackerName.APP_TRACKER);
+							 // Build and send an Event.
+							t.send(new HitBuilders.EventBuilder()
+							    .setCategory("User profile")  // category i.e. Player Buttons
+							    .setAction("UserProfile Go fo update user profiler")    // action i.e.  Play
+							    .setLabel("clicked")    // label i.e.  any meta-data
+							    .build());
+							
 						Intent in = new Intent(UserProfile.this,
 								UpdateUserProfile.class);
 						startActivity(in);
-						finish();
+						//finish();
 					}
 				});
 		((RelativeLayout) findViewById(R.id.jkl))
@@ -154,6 +182,34 @@ public class UserProfile extends Activity {
 				});
 	}
 
+//	@Override
+//	protected void onResume() {
+//		// TODO Auto-generated method stub
+//		super.onResume();
+//		
+//		sess = new SessionManager(this);
+//		HashMap<String, String> map = sess.getUserDetails();
+//		userid = map.get(SessionManager.KEY_ID);
+//		nuser = map.get(SessionManager.KEY_USER);
+//		mobuser = map.get(SessionManager.KEY_PHONE);
+//		euser = map.get(SessionManager.KEY_EMAIL);
+//		imguser = map.get(SessionManager.KEY_PHOTO);
+//	}
+	@Override
+	public void onStart() {
+		super.onStart();
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+
+	}
+	
+	
 	// method for sending user detail on server
 	protected void orderHistory() {
 		// TODO Auto-generated method stub
@@ -166,6 +222,7 @@ public class UserProfile extends Activity {
 				// what to do before background task
 				dialog.setMessage("Validating... ");
 				dialog.setIndeterminate(true);
+				dialog.setCancelable(false);
 				dialog.show();
 			}
 
@@ -196,7 +253,7 @@ public class UserProfile extends Activity {
 					response = httpclient.execute(httppost);
 
 					s = EntityUtils.toString(response.getEntity());
-					Log.e("fhgfhj", s);
+					//Log.e("fhgfhj", s);
 
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block

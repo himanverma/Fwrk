@@ -161,8 +161,10 @@
                     android:layout_marginLeft="3dp"
                     android:layout_toRightOf="@+id/imageView3"
                     android:gravity="center"
+                    android:singleLine="true"
                     android:text="Karanshah@gmail.com"
                     android:textColor="#ffffff"
+                   
                     android:textSize="12dp" />
 
             </RelativeLayout>
@@ -194,6 +196,7 @@
                     android:layout_toRightOf="@+id/imageView4"
                     android:gravity="center"
                     android:text="9014326758"
+                    android:singleLine="true"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#ffffff"
                     android:textSize="12dp" />

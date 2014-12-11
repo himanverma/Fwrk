@@ -101,7 +101,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         
         String title = context.getString(R.string.app_name);
         
-        Intent notificationIntent = new Intent(context, DishesActivity.class);
+        Intent notificationIntent = new Intent(context, DishHome.class);
         // set intent so it does not start a new activity
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);

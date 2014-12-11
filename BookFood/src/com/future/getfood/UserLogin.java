@@ -1,14 +1,26 @@
 package com.future.getfood;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+
 import org.apache.http.HttpResponse;
+
+import com.future.getfood.AnalyticsSampleApp.TrackerName;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.service.textservice.SpellCheckerService.Session;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,19 +29,20 @@ import android.widget.Toast;
 
 public class UserLogin extends Activity {
 
-	ImageView fb;
+	private Button fb;
 	protected HttpResponse response;
 	protected String s;
 	EditText pho_num;
-	ImageView placeorder;
+	Button placeorder;
 	SessionManager sess;
 	String dishname;
 	String chkname;
 	String price;
 	private Typeface tf1;
 	TextView t1, t2;
-	private String userid;
-    
+	private String userid, cid, chkk;
+	String fname, lname, address, area, city, zipcode, mobile,chk_value;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -42,7 +55,7 @@ public class UserLogin extends Activity {
 		sess = new SessionManager(this);
 		HashMap<String, String> map = sess.getUserDetails();
 		userid = map.get(SessionManager.KEY_ID);
-		
+
 		tf1 = Typeface.createFromAsset(getAssets(), "Roboto-Bold.ttf");
 
 		t1 = (TextView) findViewById(R.id.textView1);
@@ -50,15 +63,33 @@ public class UserLogin extends Activity {
 
 		t1.setTypeface(tf1);
 		t2.setTypeface(tf1);
-		// getting value from MyAdapter
+
+		// getting value from orderDishes
 		Intent in = getIntent();
 		dishname = in.getStringExtra("dish");
 		chkname = in.getStringExtra("chk");
 		price = in.getStringExtra("price");
+		cid = in.getStringExtra("cid");
+
+		fname = in.getStringExtra("fname");
+		lname = in.getStringExtra("lname");
+		address = in.getStringExtra("address");
+		area = in.getStringExtra("area");
+
+		city = in.getStringExtra("mcity");
+		zipcode = in.getStringExtra("zipcode");
+		mobile = in.getStringExtra("phone_num");
+		chk_value = in.getStringExtra("chk_value");
 
 		sess = new SessionManager(this);
 		pho_num = (EditText) findViewById(R.id.editText1);
-		placeorder = (ImageView) findViewById(R.id.imageView4);
+		placeorder = (Button) findViewById(R.id.imageView4);
+
+		// google analytics
+		Tracker t = ((AnalyticsSampleApp) UserLogin.this.getApplication())
+				.getTracker(TrackerName.APP_TRACKER);
+		t.setScreenName("UserLogin");
+		t.send(new HitBuilders.AppViewBuilder().build());
 
 		((RelativeLayout) findViewById(R.id.bbb))
 				.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +101,20 @@ public class UserLogin extends Activity {
 							Toast.makeText(getApplicationContext(),
 									"Make your profile first.", 5000).show();
 						} else {
+
+							Tracker t = ((AnalyticsSampleApp) UserLogin.this
+									.getApplication())
+									.getTracker(TrackerName.APP_TRACKER);
+							// Build and send an Event.
+							t.send(new HitBuilders.EventBuilder()
+									.setCategory("User Login") // category i.e.
+																// Player
+																// Buttons
+									.setAction("Check own Profile") // action
+																	// i.e. Play
+									.setLabel("clicked") // label i.e. any
+															// meta-data
+									.build());
 
 							Intent in = new Intent(UserLogin.this,
 									UserProfile.class);
@@ -83,18 +128,49 @@ public class UserLogin extends Activity {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
+						// Intent in = new Intent(UserLogin.this,
+						// OrderDishes.class);
+						// startActivity(in);
 						finish();
 					}
 				});
 
-		fb = (ImageView) findViewById(R.id.imageView3);
+		fb = (Button) findViewById(R.id.imageView3);
+
 		fb.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+
+				Tracker t = ((AnalyticsSampleApp) UserLogin.this
+						.getApplication()).getTracker(TrackerName.APP_TRACKER);
+				// Build and send an Event.
+				t.send(new HitBuilders.EventBuilder()
+						.setCategory("User Facebook Login") // category i.e.
+															// Player Buttons
+						.setAction("Facebook Login") // action i.e. Play
+						.setLabel("clicked") // label i.e. any meta-data
+						.build());
+
 				Intent in = new Intent(UserLogin.this, FacebookLogin.class);
+
+				in.putExtra("dish", dishname);
+				in.putExtra("chk", chkname);
+				in.putExtra("price", price);
+				in.putExtra("cid", cid);
+				in.putExtra("fname", fname);
+				in.putExtra("lname", lname);
+				in.putExtra("address", address);
+				in.putExtra("area", area);
+				in.putExtra("mcity", city);
+				in.putExtra("zipcode", zipcode);
+				in.putExtra("phone_num", mobile);
+				in.putExtra("chk_value", chk_value);
 				startActivity(in);
+
+				finish();
+
 			}
 		});
 
@@ -107,11 +183,33 @@ public class UserLogin extends Activity {
 
 				if (txt.length() > 9) {
 
+					Tracker t = ((AnalyticsSampleApp) UserLogin.this
+							.getApplication())
+							.getTracker(TrackerName.APP_TRACKER);
+					// Build and send an Event.
+					t.send(new HitBuilders.EventBuilder()
+							.setCategory("User Login") // category i.e. Player
+														// Buttons
+							.setAction("Make mobile number Registration") // action
+																			// i.e.
+																			// Play
+							.setLabel("clicked") // label i.e. any meta-data
+							.build());
+
 					Intent in = new Intent(UserLogin.this, Registration.class);
 					in.putExtra("dish", dishname);
 					in.putExtra("chk", chkname);
 					in.putExtra("price", price);
 					in.putExtra("phone", pho_num.getText().toString());
+					in.putExtra("cid", cid);
+					in.putExtra("fname", fname);
+					in.putExtra("lname", lname);
+					in.putExtra("address", address);
+					in.putExtra("area", area);
+					in.putExtra("mcity", city);
+					in.putExtra("zipcode", zipcode);
+					in.putExtra("phone_num", mobile);
+					in.putExtra("chk_value", chk_value);
 					startActivity(in);
 					finish();
 
@@ -121,6 +219,20 @@ public class UserLogin extends Activity {
 				}
 			}
 		});
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+
 	}
 
 }
